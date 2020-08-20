@@ -1,0 +1,89 @@
+.nav-bar {
+  height: 100%;
+  width: 100px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  overflow-x: hidden;
+
+  .browser-buttons {
+    width: 100%;
+    height: 21px;
+  }
+  
+  .browser-buttons:hover a {
+    visibility: visible;
+  }
+  
+  .close, .minimize, .zoom {
+    font-size: 9pt;
+    line-height: 13px;
+    margin-left: 14px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .closebutton, .minimizebutton, .zoombutton {
+    visibility: hidden;
+    cursor: default;
+  }
+
+  .close {
+    background: #ff5c5c;
+    border: 1px solid #e33e41;
+
+    .closebutton {
+      color: #820005;
+    }
+
+    &:active {
+      background: #c14645;
+      border: 1px solid #b03537;
+
+      .closebutton {
+        color: #4e0002;
+      }
+    }
+  }
+  
+  .minimize {
+    background: #ffbd4c;
+    border: 1px solid #e09e3e;
+
+    .minimizebutton {
+      color: #9a5518;
+    }
+
+    &:active {
+      background: #c08e38;
+      border: 1px solid #af7c33;
+
+      .minimizebutton {
+        color: #5a2607;
+      }
+    }
+  }
+  
+  .zoom {
+    background: #00ca56;
+    border: 1px solid #14ae46;
+
+    .zoombutton {
+      color: #006519;
+    }
+
+    &:active {
+      background: #029740;
+      border: 1px solid #128435;
+
+      .zoombutton {
+        color: #003107;
+      }
+    } 
+  }
+}
