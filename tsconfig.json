@@ -7,7 +7,7 @@
     "declarationMap": true,
     "noEmit": true,
     "jsx": "react",
-    "strict": true,
+    "strict": false,
     "pretty": true,
     "sourceMap": true,
     /* Additional Checks */
@@ -28,6 +28,7 @@
     "app/main.prod.js",
     "app/renderer.prod.js",
     "app/dist",
-    "dll"
+    "dll",
+    "app"
   ]
 }

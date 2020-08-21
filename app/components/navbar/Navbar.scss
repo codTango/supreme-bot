@@ -11,24 +11,25 @@
   .browser-buttons {
     width: 100%;
     height: 21px;
+    margin-top: 17px;
   }
   
-  .browser-buttons:hover a {
+  .browser-buttons:hover div {
     visibility: visible;
   }
   
   .close, .minimize, .zoom {
-    font-size: 9pt;
-    line-height: 13px;
+    font-size: 11px;
+    line-height: 10px;
     margin-left: 14px;
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     display: inline-block;
     text-align: center;
   }
 
-  .closebutton, .minimizebutton, .zoombutton {
+  .closeButton, .minimizeButton, .zoomButton {
     visibility: hidden;
     cursor: default;
   }
@@ -37,7 +38,7 @@
     background: #ff5c5c;
     border: 1px solid #e33e41;
 
-    .closebutton {
+    .closeButton {
       color: #820005;
     }
 
@@ -45,7 +46,7 @@
       background: #c14645;
       border: 1px solid #b03537;
 
-      .closebutton {
+      .closeButton {
         color: #4e0002;
       }
     }
@@ -55,7 +56,7 @@
     background: #ffbd4c;
     border: 1px solid #e09e3e;
 
-    .minimizebutton {
+    .minimizeButton {
       color: #9a5518;
     }
 
@@ -63,7 +64,7 @@
       background: #c08e38;
       border: 1px solid #af7c33;
 
-      .minimizebutton {
+      .minimizeButton {
         color: #5a2607;
       }
     }
@@ -73,7 +74,7 @@
     background: #00ca56;
     border: 1px solid #14ae46;
 
-    .zoombutton {
+    .zoomButton {
       color: #006519;
     }
 
@@ -81,7 +82,7 @@
       background: #029740;
       border: 1px solid #128435;
 
-      .zoombutton {
+      .zoomButton {
         color: #003107;
       }
     } 
