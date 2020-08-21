@@ -5,6 +5,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'react/jsx-props-no-spreading': 'off',
     'prettier/prettier': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
