@@ -4,6 +4,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PersonIcon from '@material-ui/icons/Person';
 import { remote } from 'electron';
+import { Link } from 'react-router-dom';
 
 export default function Navbar(): JSX.Element {
   const HomeIcon = (props) => {
@@ -88,39 +89,53 @@ export default function Navbar(): JSX.Element {
       </div>
       <div className="menu">
         <div className="menu-item">
-          <IconButton aria-label="delete">
-            <HomeIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/">
+            <IconButton>
+              <HomeIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton style={{width: '44px'}}>
-            <AssignmentIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/task">
+            <IconButton style={{width: '44px'}}>
+              <AssignmentIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton style={{width: '44px'}}>
-            <PersonIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/profile">
+            <IconButton style={{width: '44px'}}>
+              <PersonIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton aria-label="delete">
-            <ProxyIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/proxy">
+            <IconButton>
+              <ProxyIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton aria-label="delete">
-            <CaptchaIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/captcha">
+            <IconButton>
+              <CaptchaIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton aria-label="delete">
-            <AnalyticsIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/analytics">
+            <IconButton>
+              <AnalyticsIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
         <div className="menu-item">
-          <IconButton aria-label="delete">
-            <SettingIcon style={{color: '#444A58'}} />
-          </IconButton>
+          <Link to="/setting">
+            <IconButton>
+              <SettingIcon style={{color: '#444A58'}} />
+            </IconButton>
+          </Link>
         </div>
       </div>
     </div>
