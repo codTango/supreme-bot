@@ -4,7 +4,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PersonIcon from '@material-ui/icons/Person';
 import { remote } from 'electron';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar(): JSX.Element {
   const HomeIcon = (props) => {
@@ -47,6 +47,14 @@ export default function Navbar(): JSX.Element {
     );
   }
 
+  const SelectionBarIcon = (props) => {
+    return (
+      <SvgIcon {...props}>
+        <path id="path-1" d="m 24 0 c -2 0 -4 2 -4 4 l 0 16 c 0 2 2 4 4 4" />
+      </SvgIcon>
+    );
+  }
+
   const handleClose = () => {
     const win = remote.getCurrentWindow();
     win.close();
@@ -73,7 +81,6 @@ export default function Navbar(): JSX.Element {
         <div style={{ display: 'inline-block' }}>
           <div id="close-btn" className="close" role="button" tabIndex={0} onClick={handleClose}>
             <div className="closeButton"><span><strong>x</strong></span></div>
-            {/* <a className="closebutton" href="#"><span><strong>x</strong></span></a> */}
           </div>
         </div>
         <div style={{ display: 'inline-block' }}>
@@ -89,53 +96,60 @@ export default function Navbar(): JSX.Element {
       </div>
       <div className="menu">
         <div className="menu-item">
-          <Link to="/">
+          <NavLink to="/home" activeClassName="selected">
             <IconButton>
-              <HomeIcon style={{color: '#444A58'}} />
+              <HomeIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/task">
+          <NavLink to="/task" activeClassName="selected">
             <IconButton style={{width: '44px'}}>
-              <AssignmentIcon style={{color: '#444A58'}} />
+              <AssignmentIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/profile">
+          <NavLink to="/profile" activeClassName="selected">
             <IconButton style={{width: '44px'}}>
-              <PersonIcon style={{color: '#444A58'}} />
+              <PersonIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/proxy">
+          <NavLink to="/proxy" activeClassName="selected">
             <IconButton>
-              <ProxyIcon style={{color: '#444A58'}} />
+              <ProxyIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/captcha">
+          <NavLink to="/captcha" activeClassName="selected">
             <IconButton>
-              <CaptchaIcon style={{color: '#444A58'}} />
+              <CaptchaIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/analytics">
+          <NavLink to="/analytics" activeClassName="selected">
             <IconButton>
-              <AnalyticsIcon style={{color: '#444A58'}} />
+              <AnalyticsIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
         <div className="menu-item">
-          <Link to="/setting">
+          <NavLink to="/setting" activeClassName="selected">
             <IconButton>
-              <SettingIcon style={{color: '#444A58'}} />
+              <SettingIcon className="menu-item-icon" />
             </IconButton>
-          </Link>
+            <SelectionBarIcon className="selectionBar" />
+          </NavLink>
         </div>
       </div>
     </div>

@@ -19,6 +19,10 @@ const TaskPage = (props: Record<string, any>) => (
 
 const routes = [
   {
+    path: "/home",
+    component: HomePage
+  },
+  {
     path: "/task",
     component: TaskPage
   },
@@ -31,20 +35,16 @@ const routes = [
     component: ProxyPage
   },
   {
+    path: "/captcha",
+    component: CaptchaPage
+  },
+  {
     path: "/analytics",
     component: AnalyticsPage
   },
   {
     path: "/setting",
     component: SettingPage
-  },
-  {
-    path: "/captcha",
-    component: CaptchaPage
-  },
-  {
-    path: "/",
-    component: HomePage
   }
 ];
 

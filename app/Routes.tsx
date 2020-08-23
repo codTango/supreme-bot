@@ -1,6 +1,6 @@
 /* eslint react/jsx-props-no-spreading: off */
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 import routes from './constants/routes';
 import App from './containers/App';
 
@@ -20,6 +20,7 @@ export default function Routes() {
   return (
     <App>
       <Switch>
+        <Redirect exact from="/" to="/home" />
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
