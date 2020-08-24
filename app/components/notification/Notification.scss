@@ -94,6 +94,64 @@
           margin-top: 16px;
         }
       }
+
+      // override material ui snackbar
+      .MuiList-padding {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .MuiSnackbar-root.MuiSnackbar-anchorOriginBottomCenter {
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        position: relative !important;
+        padding-top: 10px;
+
+        .MuiPaper-root.MuiSnackbarContent-root {
+          max-width: 80% !important;
+          min-width: 80% !important;
+          box-shadow: none !important;
+          border-radius: 10px !important;
+          border: 1px solid $color-444450 !important;
+          background-color: $color-23232A !important;
+          margin-left: 8px;
+          margin-right: 8px;
+
+          .MuiSnackbarContent-message {
+            width: 84%;
+
+            .message {
+              display: flex;
+              flex-direction: row;
+
+              .message-icon {
+                flex: 1 1 auto;
+                display: flex;
+                align-items: center;
+
+                svg {
+                  display: block;
+                  margin: 0 auto;
+                }
+              }
+              .message-text {
+                flex: 1 1 auto;
+
+                .message-main {
+                  font-size: 11pt;
+                }
+                .message-secondary {
+                  font-size: 7pt;
+                }
+              }
+            }
+          }
+        }
+
+        .MuiSnackbarContent-action {
+          padding-left: 0;
+        }
+      }
     }
   }
 }
