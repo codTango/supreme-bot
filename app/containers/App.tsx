@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import Navbar from '../components/navbar/Navbar';
+import Titlebar from '../components/titleBar/TitleBar';
+import Notification from '../components/notification/Notification';
 
 type Props = {
   children: ReactNode;
@@ -10,7 +12,9 @@ export default function App(props: Props) {
   return (
     <>
       <Navbar />
-      <div style={{marginLeft: '100px'}}>
+      <Titlebar />
+      <Notification />
+      <div className="main-region">
         {children}
       </div>
     </>

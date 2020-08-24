@@ -2,16 +2,40 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+
+// css variables
+$logoPath: './assets/logo.png';
+$backgroundImgPath: './assets/full-bg.png';
+$notificationBgPath: './assets/notifications-bg.png';
+
+// colors
+$color-C1C1C1: #c1c1c1;
+$color-4E4E4E: #4e4e4e;
+$color-23232A: #23232a;
+$color-000000: #000;
+$color-24242B: #24242b;
+$color-141619: #141619;
+$color-383842: #383842;
+$color-DE2E31: #de2e31;
+
+// import component styles
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import 'components/home/Home.scss';
 @import 'components/navbar/Navbar.scss';
+@import 'components/titleBar/Titlebar.scss';
+@import 'components/notification/Notification.scss';
 
 body {
   position: relative;
-  color: white;
+  color: $color-C1C1C1;
   height: 100vh;
-  background-color: radial-gradient(circle, #24242B 0%, #000000 100%, #000000 100%);
-  background-image: url('./assets/full-bg.png');
+  background: radial-gradient(
+    circle at top,
+    $color-24242B 0%,
+    $color-000000 100%
+  );
+  background-image: url(#{$backgroundImgPath});
+  background-size: cover;
   font-family: Arial, Helvetica, Helvetica Neue, serif;
   overflow-y: hidden;
   margin: 0;
@@ -43,4 +67,21 @@ a:hover {
   opacity: 1;
   text-decoration: none;
   cursor: pointer;
+}
+
+.main-region {
+  margin-left: 100px;
+  margin-top: 120px;
+  margin-right: 20%;
+  width: auto;
+  height: auto;
+}
+
+.window-title {
+  font-size: 9pt;
+  height: 35px;
+  text-align: center;
+  align-items: center;
+  background: #141619;
+  border-bottom: 1px solid $color-23232A;
 }
