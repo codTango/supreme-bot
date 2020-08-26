@@ -1,0 +1,10 @@
+.task-group {
+  position: relative;
+  padding-left: 32px;
+  padding-bottom: 32px;
+  height: 100%;
+
+  .gradient-box {
+    height: calc(100% - 32px);
+  }
+}
