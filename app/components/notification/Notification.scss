@@ -27,44 +27,17 @@
   }
 
   .gradient-box {
-    // display: flex;
-    // flex-direction: column;
-    // height: calc(100% - 60px);
-    // position: relative;
-    // box-sizing: border-box;
-    // $border: 1px;
+    .notification-title {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      text-align: center;
+      align-items: center;
 
-    // background: radial-gradient(
-    //   circle at top center,
-    //   $color-383842 0%,
-    //   $color-0C0D11 100%
-    // );
-    // background-clip: padding-box;
-    // border: solid $border transparent;
-    // border-radius: 14px;
-
-    // &::before {
-    //   content: '';
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   left: 0;
-    //   z-index: -1;
-    //   margin: -$border;
-    //   border-radius: inherit;
-    //   background: linear-gradient(to bottom, $color-383842, $color-DE2E31);
-    // }
-
-    // .notification-title {
-    //   border-top-left-radius: inherit;
-    //   border-top-right-radius: inherit;
-
-    //   span {
-    //     position: relative;
-    //     top: 10px;
-    //   }
-    // }
+      span {
+        position: relative;
+        top: 10px;
+      }
+    }
 
     .info-area {
       width: 100%;
@@ -75,6 +48,7 @@
       background-repeat: no-repeat;
       background-position: 100% 100%;
       background-size: contain;
+      overflow-y: scroll;
 
       .no-data {
         position: relative;
