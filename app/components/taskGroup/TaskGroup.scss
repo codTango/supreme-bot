@@ -1,26 +1,140 @@
-.task-group {
+.no-data-container {
   position: relative;
-  padding-left: 32px;
-  padding-bottom: 32px;
-  height: 100%;
+  margin: auto;
 
-  .gradient-box {
-    height: calc(100% - 32px);
+  .no-data-primary {
+    text-align: center;
+    color: #4E4E4E;
+    font-size: 20px;
+  }
 
-    .task-group-title {
-      border-top-left-radius: inherit;
-      border-top-right-radius: inherit;
-      padding-left: 24px;
+  .no-data-secondary {
+    margin-top: 16px;
+    text-align: center;
+    color: #4E4E4E;
+    font-size: 12px;
+  }
+}
 
-      .title-text {
-        position: relative;
-        top: 5px;
+.group-container {
+  padding-left: 24px;
+  padding-right: 24px;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  height: inherit;
+
+  .group-box {
+    height: 190px;
+    background: radial-gradient(
+      circle at top,
+      #212328 0%,
+      #0A0B0D 100%
+    );
+    background-image: url(#{$backgroundImgPath});
+    background-size: cover;
+    border: 1px solid #444450;
+    border-radius: 14px;
+
+    .group-title {
+      height: 35px;
+      background-color: #000000;
+      border-top-right-radius: 14px;
+      border-top-left-radius: 14px;
+
+      .name-status {
+        display: inline-block;
+        // height: 35px;
+        margin-left: 24px;
+        font-size: 14px;
+        padding-top: 10px;
+
+        .status {
+          display: inline-block;
+
+          .status-node {
+            display: inline-block;
+            position: relative;
+            top: -1px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+          }
+        }
+
+        .group-name {
+          display: inline-block;
+          margin-left: 10px;
+        }
       }
 
-      button {
-        position: relative;
-        top: 2px;
+      .icon-group {
+        float: right;
+        margin-right: 24px;
       }
     }
+
+    .group-content {
+      height: 155px;
+      margin-left: 24px;
+      margin-right: 24px;
+      display: flex;
+
+      .product-img {
+        display: inline-block;
+        width: 100px;
+        height: 100%;
+
+        img {
+          border-radius: 10px;
+          width: 100px;
+          height: 100px;
+          margin-top: 20px;
+        }
+      }
+
+      .half-form-container {
+        display: inline-block;
+        width: calc(100% - 124px);
+        position: relative;
+        top: -46px;
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+
+      .full-form-container {
+        display: inline-block;
+        width: calc(50% - 6px);
+        margin-top: 12px;
+
+        &:nth-child(2) {
+          margin-left: 12px;
+        }
+      }
+
+      .status-group {
+        margin-top: 22px;
+        margin-left: 30px;
+        display: flex;
+
+        @import '../status/Status.scss';
+      }
+
+      .group-actions {
+        margin-left: 30px;
+        margin-top: 17px;
+
+        @import '../groupActionButton/GroupActionButton.scss';
+      }
+
+      // override input label
+      .MuiFormLabel-root {
+        font-size: 10px;
+      }
+      .MuiInputLabel-shrink {
+        transform: translate(0, 1.5px) scale(1);
+      }
+
+    }
+
   }
 }

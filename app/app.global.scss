@@ -26,7 +26,9 @@ $color-0C0D11: #0c0d11;
 @import 'components/navbar/Navbar.scss';
 @import 'components/titleBar/Titlebar.scss';
 @import 'components/notification/Notification.scss';
-@import 'components/taskGroup/TaskGroup.scss';
+
+// import page styles
+@import 'containers/pageStyles/TaskGroupPage.scss';
 
 body {
   position: relative;
@@ -134,5 +136,21 @@ a:hover {
     margin: -$border;
     border-radius: inherit;
     background: linear-gradient(to bottom, $color-383842, $color-DE2E31);
+  }
+}
+
+/* custom style of input */
+// override input
+.MuiFormLabel-root {
+  color: #787878 !important;
+}
+.MuiInputBase-root {
+  color: #C1C1C1 !important;
+
+  &:before {
+    border-color: #787878 !important;
+  }
+  &:after {
+    border-color: #F05458 !important;
   }
 }

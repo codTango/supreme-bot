@@ -1,0 +1,59 @@
+
+.task-group-title-bar {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  padding-left: 24px;
+  border-bottom: none;
+  font-size: 11px;
+  background: #141619;
+
+  .title-area {
+    height: 35px;
+  }
+
+  .title-text {
+    position: relative;
+    top: 5px;
+  }
+
+  button {
+    position: relative;
+    top: 2px;
+  }
+
+  .input-area {
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    .form-container {
+      width: 190px;
+      max-width: 190px;
+      margin-right: 25px;
+      display: inline-block;
+    }
+
+    // /* custom style of input */
+    // // override input
+    // .MuiFormLabel-root {
+    //   color: #787878;
+    // }
+    // .MuiInputBase-root {
+    //   color: #C1C1C1;
+
+    //   &:before {
+    //     border-color: #787878;
+    //   }
+    //   &:after {
+    //     border-color: #F05458;
+    //   }
+    // }
+    
+    // override button
+    .MuiButton-root {
+      border: 1px solid #F05458;
+      color: #C1C1C1;
+      margin-top: 12px;
+      text-transform: none;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.task-group-region {
+  position: relative;
+  padding-left: 32px;
+  padding-bottom: 32px;
+  height: calc(100% - 32px);
+
+  .gradient-box {
+    height: 100%;
+
+    @import '../../components/taskGroupTitle/TaskGroupTitle.scss';
+    @import '../../components//taskGroup/TaskGroup.scss';
+  }
+}
