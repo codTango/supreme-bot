@@ -12,17 +12,36 @@ export default function TaskGroupPage() {
       store: 'testStore',
       status: {
         summary: true,
-        tasks: 0,
-        checkouts: 0,
-        declines: 0
+        tasks: 1000,
+        checkouts: 5,
+        declines: 3
       },
       detail: {
-        monitorDelay: '',
-        checkoutDelay: '',
-        keywords: '',
-        category: '',
-        monitor: '',
-        proxy: ''
+        monitorDelay: '12',
+        checkoutDelay: '100',
+        keywords: 'test keyword',
+        category: 'shoes',
+        monitor: 'tshirt',
+        proxy: 'shoes'
+      }
+    },
+    {
+      id: 11,
+      name: 'test2',
+      store: 'testStore',
+      status: {
+        summary: false,
+        tasks: 500,
+        checkouts: 5,
+        declines: 3
+      },
+      detail: {
+        monitorDelay: '12',
+        checkoutDelay: '100',
+        keywords: 'test keyword',
+        category: 'shoes',
+        monitor: 'tshirt',
+        proxy: 'shoes'
       }
     }
   ]);
@@ -46,12 +65,28 @@ export default function TaskGroupPage() {
     });
     setGroups(groups);
   }
+
+  const handleDeleteGroup = (index) => {
+    setGroups([
+      ...groups.slice(0, index),
+      ...groups.slice(index + 1)
+    ]);
+  }
+
+  const handleAddTasks = (taskInfo) => {
+    console.log(taskInfo);
+  }
   
   return (
     <div className="task-group-region">
       <div className="gradient-box">
         <TaskGroupTitle onAddGroup={handleAddGroup} />
-        <TaskGroup groups={groups} onSave={handleSaveUpdate} />
+        <TaskGroup
+          groups={groups}
+          onSave={handleSaveUpdate}
+          onDeleteGroup={handleDeleteGroup}
+          onAddTasks={handleAddTasks}
+        />
       </div>
     </div>
   );

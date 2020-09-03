@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 export default function Status(props) {
@@ -5,7 +6,7 @@ export default function Status(props) {
 
   return (
     <div className="status">
-      <span className="label">{label}</span>
+      <div className="label">{label}</div>
       <div className="count" style={{ borderColor: color }}>{count}</div>
     </div>
   );

@@ -1,16 +1,17 @@
 .status {
-  color: #C1C1C1;
+  color: #c1c1c1;
   width: 62px;
   text-align: center;
   margin: 0 12px;
 
   .label {
     font-size: 9px;
+    margin-bottom: 5px;
   }
 
   .count {
     width: 42px;
-    border: 1px solid #C1C1C1;
+    border: 1px solid #c1c1c1;
     border-radius: 14px;
     line-height: 27px;
     margin: 0 9px;

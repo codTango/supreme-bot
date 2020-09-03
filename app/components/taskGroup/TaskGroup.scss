@@ -4,14 +4,14 @@
 
   .no-data-primary {
     text-align: center;
-    color: #4E4E4E;
+    color: #4e4e4e;
     font-size: 20px;
   }
 
   .no-data-secondary {
     margin-top: 16px;
     text-align: center;
-    color: #4E4E4E;
+    color: #4e4e4e;
     font-size: 12px;
   }
 }
@@ -22,22 +22,20 @@
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
   height: inherit;
+  overflow: auto;
 
   .group-box {
     height: 190px;
-    background: radial-gradient(
-      circle at top,
-      #212328 0%,
-      #0A0B0D 100%
-    );
+    background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
     background-image: url(#{$backgroundImgPath});
     background-size: cover;
     border: 1px solid #444450;
     border-radius: 14px;
+    margin-top: 15px;
 
     .group-title {
       height: 35px;
-      background-color: #000000;
+      background-color: #000;
       border-top-right-radius: 14px;
       border-top-left-radius: 14px;
 
@@ -133,8 +131,6 @@
       .MuiInputLabel-shrink {
         transform: translate(0, 1.5px) scale(1);
       }
-
     }
-
   }
 }
