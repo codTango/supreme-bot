@@ -7,6 +7,7 @@ import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import GroupContent from '../groupContent/GroupContent';
+import AddTaskPanel from '../addTaskPanel/AddTaskPanel';
 
 export default function TaskGroup(props) {
   const {
@@ -72,7 +73,7 @@ export default function TaskGroup(props) {
           onSave={(groupInfo) => { onSave(groupInfo, i) }}
         />
 
-        {(taskList.length === 0 && expand) && <div>add task here</div>}
+        {(taskList.length === 0 && expand) && <AddTaskPanel name={name} onExpand={() => { handleExpand(expand, id) }} />}
         {(taskList.length > 0 && expand) && <div>task list here</div>}
       </div>
     );
