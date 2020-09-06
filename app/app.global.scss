@@ -154,3 +154,10 @@ a:hover {
     border-color: #F05458 !important;
   }
 }
+
+// override button
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
+  border: 1px solid #F05458;
+  color: #C1C1C1;
+  text-transform: none;
+}

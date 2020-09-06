@@ -1,0 +1,63 @@
+.task-panel {
+  background: #000000;
+  margin: 0 24px;
+  width: auto;
+  height: 200px;
+
+  .title {
+    height: 30px;
+    border-bottom: 1px solid #292929;
+
+    .group-name {
+      display: inline-block;
+      font-size: 11px;
+      margin-top: 9px;
+      margin-left: 16px;
+    }
+    .close-btn {
+      float: right;
+      margin-right: 12px;
+    }
+  }
+
+  .panel-area {
+    padding-top: 15px;
+    height: 155px;
+
+    .row-1, .row-2 {
+      height: 70px;
+    }
+
+    .row-1 {
+      .form-container {
+        display: inline-block;
+        width: 23%;
+        margin-left: 6px;
+        margin-right: 6px;
+      }
+    }
+
+    .row-2 {
+      .form-container {
+        display: inline-block;
+        width: 14%;
+        margin-left: 6px;
+        margin-right: 6px;
+      }
+
+      .MuiFormControlLabel-root {
+        align-items: unset;
+      }
+
+      .MuiTypography-root.MuiFormControlLabel-label {
+        color: #787878;
+        font-size: 12px;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0.00938em;
+      }
+    }
+
+  }
+}

@@ -23,7 +23,8 @@ export default function TaskGroupPage() {
         category: 'shoes',
         monitor: 'tshirt',
         proxy: 'shoes'
-      }
+      },
+      taskList: []
     },
     {
       id: 11,
@@ -42,12 +43,15 @@ export default function TaskGroupPage() {
         category: 'shoes',
         monitor: 'tshirt',
         proxy: 'shoes'
-      }
+      },
+      taskList: [
+        'test'
+      ]
     }
   ]);
   
   const handleAddGroup = (groupInfo) => {
-    setGroups([ ...groups, groupInfo ]);
+    setGroups([ ...groups, { ...groupInfo, taskList: [] } ]);
   }
 
   const handleSaveUpdate = (groupInfo, index) => {
@@ -74,7 +78,31 @@ export default function TaskGroupPage() {
   }
 
   const handleAddTasks = (taskInfo) => {
-    console.log(taskInfo);
+    const {
+      index,
+      groupId,
+      mode,
+      size,
+      color,
+      profile,
+      taskQuantity,
+      itemQuantity,
+      bypass
+    } = taskInfo;
+    const [ selectedGroup ] = groups.filter(group => group.id === groupId);
+
+    for (let i = 0; i < taskQuantity; i++) {
+      selectedGroup.taskList.push({
+        mode,
+        size,
+        color,
+        profile,
+        itemQuantity,
+        bypass
+      })
+    }
+
+    handleSaveUpdate(selectedGroup, index);
   }
   
   return (

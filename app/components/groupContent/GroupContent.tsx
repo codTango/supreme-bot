@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { FormControl, TextField, Select, MenuItem, InputLabel, Grid } from '@material-ui/core';
-import shoe from '../../assets/shoe.png';
 import Status from '../status/Status';
 import GroupActionButton from '../groupActionButton/GroupActionButton';
+import { categoryList } from '../../constants/listValue';
+import shoe from '../../assets/shoe.png';
 
 export default function GroupContent(props) {
-  const { group, onSave } = props;
+  const { group, onSave, onAddTask } = props;
   
   // state of group
   const [ groupInfo, setGroupInfo ] = useState(group);
@@ -88,8 +89,7 @@ export default function GroupContent(props) {
                 onChange={(event) => { handleGroupInfoChange(event, 'category') }}
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
-                <MenuItem value={'shoes'}>Shoes</MenuItem>
-                <MenuItem value={'tshirt'}>T-shirt</MenuItem>
+                {categoryList.map(value => (<MenuItem key={value} value={value}>{value}</MenuItem>))}
               </Select>
             </FormControl>
           </div>
@@ -133,7 +133,7 @@ export default function GroupContent(props) {
             <GroupActionButton icon="save" actionHandler={handleSave} />
             <GroupActionButton icon="trash" actionHandler={() => {console.log('trash action');}} />
             <GroupActionButton icon="play" actionHandler={() => {console.log('play action');}} />
-            <GroupActionButton icon="plus" actionHandler={() => {console.log('plus action');}} />
+            <GroupActionButton icon="plus" actionHandler={onAddTask} />
           </div>
         </Grid>
       </Grid>

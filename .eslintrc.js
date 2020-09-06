@@ -6,6 +6,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'prettier/prettier': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-nested-ternary": 'off'
   },
   parserOptions: {
     ecmaVersion: 2020,

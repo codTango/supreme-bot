@@ -2,7 +2,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
@@ -12,7 +11,6 @@ import AddTaskPanel from '../addTaskPanel/AddTaskPanel';
 export default function TaskGroup(props) {
   const {
     groups = [],
-    taskList = [],
     onSave,
     onDeleteGroup,
     onAddTasks
@@ -21,13 +19,25 @@ export default function TaskGroup(props) {
   // group expand state
   const [ expand, setExpand ] = useState(false);
   const [ openGroupId, setOpenGroupId ] = useState(-1);
-  const handleExpand = (open, id) => {
-    setExpand(!open);
-    setOpenGroupId(!open ? id : -1);
+  const [ addTask, setAddTask ] = useState(false);
+
+  const handleExpand = (open, id, taskList) => {
+    if (taskList.length > 0) {
+      setExpand(!open);
+      setOpenGroupId((!open || addTask) ? id : -1);
+    }
   }
 
-  const handleRemoveGroup = (id) => {
-    console.log('remove: ', id);
+  const handleAddTask = (open, id) => {
+    setAddTask(open);
+    setOpenGroupId((open || expand) ? id : -1);
+  }
+
+  const handleDeleteGroup = (index) => {
+    onDeleteGroup(index);
+    setExpand(false);
+    setAddTask(false);
+    setOpenGroupId(-1);
   }
 
   if (groups.length === 0) {
@@ -39,16 +49,35 @@ export default function TaskGroup(props) {
     );
   }
 
+  const renderContent = (index, id, name, taskList) => {
+    if (addTask) {
+      return (
+        <AddTaskPanel
+          index={index}
+          groupId={id}
+          name={name}
+          onClose={() => { handleAddTask(false, id) }}
+          onAddTasks={onAddTasks}
+        />
+      );
+    }
+
+    if (taskList.length > 0 && expand) {
+        return (<div>{taskList.length}</div>);
+    }
+  }
+
   const render = (group, i) => {
     const {
       id,
       name,
-      status: { summary = false } = {}
+      status: { summary = false } = {},
+      taskList = []
     } = group;
     const groupStatusColor = summary ? '#00A4FF' : '#E03C38';
 
     return (
-      <div key={i} className="group-box" style={{ height: expand ? '400px' : '190px' }}>
+      <div key={i} className="group-box" style={{ height: addTask ? '400px' : ( expand ? '670px' : '190px' ) }}>
 
         <div className="group-title">
           <div className="name-status">
@@ -58,10 +87,10 @@ export default function TaskGroup(props) {
             <div className="group-name">{name}</div>
           </div>
           <div className="icon-group">
-            <IconButton size="small" onClick={() => { handleExpand(expand, id) }}>
+            <IconButton size="small" onClick={() => { handleExpand(expand, id, taskList) }}>
               <KeyboardArrowDown style={{ color: '#DE3E3E' }} />
             </IconButton>
-            <IconButton size="small" onClick={() => { onDeleteGroup(i) }}>
+            <IconButton size="small" onClick={() => { handleDeleteGroup(i) }}>
               <Close style={{ color: '#DE3E3E' }} />
             </IconButton>
           </div>
@@ -71,10 +100,10 @@ export default function TaskGroup(props) {
           key={i}
           group={group}
           onSave={(groupInfo) => { onSave(groupInfo, i) }}
+          onAddTask={() => { handleAddTask(true, id) }}
         />
 
-        {(taskList.length === 0 && expand) && <AddTaskPanel name={name} onExpand={() => { handleExpand(expand, id) }} />}
-        {(taskList.length > 0 && expand) && <div>task list here</div>}
+        {renderContent(i, id, name, taskList)}
       </div>
     );
   }
@@ -83,13 +112,15 @@ export default function TaskGroup(props) {
     <div className="group-container">
       {groups.map((group, i) => {
         const { id } = group;
-        if (openGroupId === -1) {
-          return render(group, i);
+        if (expand || addTask) {
+          if (openGroupId === id) {
+            return render(group, i);
+          } else {
+            return;
+          }
         }
-
-        if (openGroupId !== -1 && openGroupId === id) {
-          return render(group, i);
-        }
+        
+        return render(group, i);
       })}
     </div>
   );

@@ -72,9 +72,9 @@
     }
 
     .group-content {
-      height: 155px;
-      margin-left: 24px;
-      margin-right: 24px;
+      height: 120px;
+      margin: 0 24px;
+      padding: 6px 0 24px 0;
       display: flex;
 
       .product-img {
@@ -132,5 +132,7 @@
         transform: translate(0, 1.5px) scale(1);
       }
     }
+
+    @import '../addTaskPanel/AddTaskPanel.scss';
   }
 }

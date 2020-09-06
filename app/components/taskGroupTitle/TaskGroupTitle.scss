@@ -31,29 +31,10 @@
       margin-right: 25px;
       display: inline-block;
     }
-
-    // /* custom style of input */
-    // // override input
-    // .MuiFormLabel-root {
-    //   color: #787878;
-    // }
-    // .MuiInputBase-root {
-    //   color: #C1C1C1;
-
-    //   &:before {
-    //     border-color: #787878;
-    //   }
-    //   &:after {
-    //     border-color: #F05458;
-    //   }
-    // }
     
     // override button
     .MuiButton-root {
-      border: 1px solid #F05458;
-      color: #C1C1C1;
       margin-top: 12px;
-      text-transform: none;
     }
   }
 }
