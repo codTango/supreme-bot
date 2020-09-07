@@ -7,6 +7,7 @@ import Close from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import GroupContent from '../groupContent/GroupContent';
 import AddTaskPanel from '../addTaskPanel/AddTaskPanel';
+import TaskList from '../taskList/taskList';
 
 export default function TaskGroup(props) {
   const {
@@ -63,7 +64,7 @@ export default function TaskGroup(props) {
     }
 
     if (taskList.length > 0 && expand) {
-        return (<div>{taskList.length}</div>);
+        return (<TaskList taskList={taskList} />);
     }
   }
 
@@ -77,7 +78,7 @@ export default function TaskGroup(props) {
     const groupStatusColor = summary ? '#00A4FF' : '#E03C38';
 
     return (
-      <div key={i} className="group-box" style={{ height: addTask ? '400px' : ( expand ? '670px' : '190px' ) }}>
+      <div key={i} className="group-box" style={{ height: addTask ? '400px' : ( expand ? '95%' : '190px' ) }}>
 
         <div className="group-title">
           <div className="name-status">
@@ -109,15 +110,14 @@ export default function TaskGroup(props) {
   }
 
   return (
-    <div className="group-container">
+    <div className="group-container" style={{ overflow: expand ? 'unset' : 'auto' }}>
       {groups.map((group, i) => {
         const { id } = group;
         if (expand || addTask) {
           if (openGroupId === id) {
             return render(group, i);
-          } else {
-            return;
           }
+          return;
         }
         
         return render(group, i);

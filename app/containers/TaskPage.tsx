@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import TaskGroupTitle from '../components/taskGroupTitle/TaskGroupTitle';
 import TaskGroup from '../components/taskGroup/TaskGroup';
 
+// fake task list
+const taskList = [];
+Array.from(Array(Math.floor(Math.random() * 100) + 1)).forEach((x, i) => {
+  taskList.push({ mode: 'Super', size: 'Random', color: 'Random', profile: 'test', itemQuantity: 10, bypass: true });
+}); 
+
 export default function TaskGroupPage() {
 
   // group list state
@@ -20,7 +26,7 @@ export default function TaskGroupPage() {
         monitorDelay: '12',
         checkoutDelay: '100',
         keywords: 'test keyword',
-        category: 'shoes',
+        category: 'New',
         monitor: 'tshirt',
         proxy: 'shoes'
       },
@@ -40,13 +46,11 @@ export default function TaskGroupPage() {
         monitorDelay: '12',
         checkoutDelay: '100',
         keywords: 'test keyword',
-        category: 'shoes',
+        category: 'Hats',
         monitor: 'tshirt',
         proxy: 'shoes'
       },
-      taskList: [
-        'test'
-      ]
+      taskList
     }
   ]);
   

@@ -3,48 +3,9 @@ import React, { useState } from 'react';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
-import { IconButton, FormControl, TextField, Select, MenuItem, InputLabel, Button, FormControlLabel, Switch } from '@material-ui/core';
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { IconButton, FormControl, TextField, Select, MenuItem, InputLabel, Button, FormControlLabel } from '@material-ui/core';
 import { sizeList, modeList } from '../../constants/listValue';
-
-const AntSwitch = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: 28,
-      height: 18,
-      padding: 0,
-      display: 'flex',
-      marginTop: 20,
-    },
-    switchBase: {
-      padding: 2,
-      color: theme.palette.grey[500],
-      '&$checked': {
-        transform: 'translateX(12px)',
-        color: theme.palette.common.white,
-        '& + $track': {
-          opacity: 1,
-          backgroundColor: '#C1C1C1',
-          borderColor: '#C1C1C1',
-        },
-      },
-    },
-    thumb: {
-      width: 12,
-      height: 12,
-      boxShadow: 'none',
-    },
-    track: {
-      height: 14,
-      border: `1px solid ${theme.palette.grey[500]}`,
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor: '#444444',
-      borderColor: '#444444'
-    },
-    checked: {},
-  }),
-)(Switch);
+import AntSwitch from '../antSwitch/AntSwitch';
 
 export default function AddTaskPanel(props) {
   const { index, groupId, name, onClose, onAddTasks } = props;
@@ -107,7 +68,7 @@ export default function AddTaskPanel(props) {
                 onChange={(event) => { setTaskInfo({ ...taskInfo, size: event.target.value }) }}
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
-                {sizeList.map(value => (<MenuItem key={value} value={value}>{value}</MenuItem>))}
+                {sizeList.map(value => (<MenuItem key={`key-${value}`} value={value}>{value}</MenuItem>))}
               </Select>
             </FormControl>
           </div>
