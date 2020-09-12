@@ -8,7 +8,7 @@ import { sizeList, modeList } from '../../constants/listValue';
 import AntSwitch from '../antSwitch/AntSwitch';
 
 export default function AddTaskPanel(props) {
-  const { index, groupId, name, onClose, onAddTasks } = props;
+  const { index, groupId, name, onClose, onAddTasks, expandTaskList } = props;
 
   const [ taskInfo, setTaskInfo ] = useState({
     mode: '',
@@ -68,7 +68,7 @@ export default function AddTaskPanel(props) {
                 onChange={(event) => { setTaskInfo({ ...taskInfo, size: event.target.value }) }}
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
-                {sizeList.map(value => (<MenuItem key={`key-${value}`} value={value}>{value}</MenuItem>))}
+                {sizeList.map((value, i) => (<MenuItem key={`key-${value}-${i}`} value={value}>{value}</MenuItem>))}
               </Select>
             </FormControl>
           </div>
@@ -136,7 +136,7 @@ export default function AddTaskPanel(props) {
           </div>
           <div className="form-container" style={{ width: '130px', verticalAlign: 'bottom' }}>
             <FormControl fullWidth>
-              <Button variant="outlined" onClick={() => { onAddTasks({ ...taskInfo, index, groupId }) }}>
+              <Button variant="outlined" onClick={() => { onAddTasks({ ...taskInfo, index, groupId }); expandTaskList(); }}>
                 + Add Tasks
               </Button>
             </FormControl>

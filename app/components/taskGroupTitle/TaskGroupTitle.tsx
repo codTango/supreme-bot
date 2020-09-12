@@ -3,7 +3,6 @@ import AddIcon from '@material-ui/icons/Add';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { IconButton, FormControl, TextField, Select, MenuItem, InputLabel, Button } from '@material-ui/core';
-import _ from 'lodash';
 
 export default function TaskGroupTitle(props): JSX.Element {
   const { onAddGroup } = props;
@@ -32,8 +31,7 @@ export default function TaskGroupTitle(props): JSX.Element {
   const handleClick = () => {
     setName('');
     setStore('');
-    onAddGroup({ id: _.uniqueId(), name, store });
-    // setTitleOpen(false);
+    onAddGroup({ name, store });
   }
 
   return (

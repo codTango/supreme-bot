@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
@@ -17,27 +18,27 @@ export default function TaskGroup(props) {
     onAddTasks
   } = props;
 
-  // group expand state
-  const [ expand, setExpand ] = useState(false);
+  // group expandTaskList state
+  const [ expandTaskList, setExpandTaskList ] = useState(false);
   const [ openGroupId, setOpenGroupId ] = useState(-1);
-  const [ addTask, setAddTask ] = useState(false);
+  const [ expandTaskPanel, setExpandTaskPanel ] = useState(false);
 
-  const handleExpand = (open, id, taskList) => {
+  const handleExpandTaskList = (open, id, taskList) => {
     if (taskList.length > 0) {
-      setExpand(!open);
-      setOpenGroupId((!open || addTask) ? id : -1);
+      setExpandTaskList(!open);
+      setOpenGroupId((!open || expandTaskPanel) ? id : -1);
     }
   }
 
-  const handleAddTask = (open, id) => {
-    setAddTask(open);
-    setOpenGroupId((open || expand) ? id : -1);
+  const handleExpandTaskPanel = (open, id) => {
+    setExpandTaskPanel(open);
+    setOpenGroupId((open || expandTaskList) ? id : -1);
   }
 
   const handleDeleteGroup = (index) => {
     onDeleteGroup(index);
-    setExpand(false);
-    setAddTask(false);
+    setExpandTaskList(false);
+    setExpandTaskPanel(false);
     setOpenGroupId(-1);
   }
 
@@ -51,26 +52,27 @@ export default function TaskGroup(props) {
   }
 
   const renderContent = (index, id, name, taskList) => {
-    if (addTask) {
+    if (expandTaskPanel) {
       return (
         <AddTaskPanel
           index={index}
           groupId={id}
           name={name}
-          onClose={() => { handleAddTask(false, id) }}
+          onClose={() => { handleExpandTaskPanel(false, id) }}
           onAddTasks={onAddTasks}
+          expandTaskList={() => { handleExpandTaskPanel(false, id); handleExpandTaskList(false, id, taskList); }}
         />
       );
     }
 
-    if (taskList.length > 0 && expand) {
+    if (taskList.length > 0 && expandTaskList) {
         return (<TaskList taskList={taskList} />);
     }
   }
 
   const render = (group, i) => {
     const {
-      id,
+      _id,
       name,
       status: { summary = false } = {},
       taskList = []
@@ -78,7 +80,7 @@ export default function TaskGroup(props) {
     const groupStatusColor = summary ? '#00A4FF' : '#E03C38';
 
     return (
-      <div key={i} className="group-box" style={{ height: addTask ? '400px' : ( expand ? '95%' : '190px' ) }}>
+      <div key={i} className="group-box" style={{ height: expandTaskPanel ? '400px' : ( expandTaskList ? '95%' : '190px' ) }}>
 
         <div className="group-title">
           <div className="name-status">
@@ -88,7 +90,7 @@ export default function TaskGroup(props) {
             <div className="group-name">{name}</div>
           </div>
           <div className="icon-group">
-            <IconButton size="small" onClick={() => { handleExpand(expand, id, taskList) }}>
+            <IconButton size="small" onClick={() => { handleExpandTaskList(expandTaskList, _id, taskList) }}>
               <KeyboardArrowDown style={{ color: '#DE3E3E' }} />
             </IconButton>
             <IconButton size="small" onClick={() => { handleDeleteGroup(i) }}>
@@ -101,20 +103,20 @@ export default function TaskGroup(props) {
           key={i}
           group={group}
           onSave={(groupInfo) => { onSave(groupInfo, i) }}
-          onAddTask={() => { handleAddTask(true, id) }}
+          onAddTask={() => { handleExpandTaskPanel(true, _id) }}
         />
 
-        {renderContent(i, id, name, taskList)}
+        {renderContent(i, _id, name, taskList)}
       </div>
     );
   }
 
   return (
-    <div className="group-container" style={{ overflow: expand ? 'unset' : 'auto' }}>
+    <div className="group-container" style={{ overflow: expandTaskList ? 'unset' : 'auto' }}>
       {groups.map((group, i) => {
-        const { id } = group;
-        if (expand || addTask) {
-          if (openGroupId === id) {
+        const { _id } = group;
+        if (expandTaskList || expandTaskPanel) {
+          if (openGroupId === _id) {
             return render(group, i);
           }
           return;

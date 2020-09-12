@@ -11,9 +11,10 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import Datastore from 'nedb-promises';
 import MenuBuilder from './menu';
 
 export default class AppUpdater {
@@ -48,6 +49,57 @@ const installExtensions = async () => {
   ).catch(console.log);
 };
 
+/**
+ * database
+ */
+const dbFactory = (fileName) => {
+  return Datastore.create({
+    filename: process.env.NODE_ENV === 'development' ? `./data/${fileName}` : `${app.getPath('userData')}/mekpreme_data/${fileName}`,
+    timestampData: true
+  });
+};
+
+const db = {
+  taskGroups: null
+};
+
+const initDb = () => {
+  db.taskGroups = dbFactory('taskGroups.db');
+};
+
+ipcMain.on('insert', async (event, fileName, data) => {
+  console.log('insert: ', data);
+  const result = await db[fileName].insert(data);
+  event.returnValue = result;
+});
+
+ipcMain.on('find', async (event, fileName, query) => {
+  console.log('find: ', query);
+  const result = await db[fileName].find(query);
+  event.returnValue = result;
+});
+
+ipcMain.on('update', async (event, fileName, query, data, options = {}) => {
+  console.log('update: ', {query, data});
+  const result = await db[fileName].update(query, data, options);
+  event.returnValue = result;
+});
+
+ipcMain.on('count', async (event, fileName, query) => {
+  console.log('count: ', query);
+  const result = await db[fileName].count(query);
+  event.returnValue = result;
+});
+
+ipcMain.on('remove', async (event, fileName, query, options = {}) => {
+  console.log('remove: ', {query, options});
+  const result = await db[fileName].remove(query, options);
+  event.returnValue = result;
+});
+
+/**
+ * create the main window
+ */
 const createWindow = async () => {
   if (
     process.env.NODE_ENV === 'development' ||
@@ -119,11 +171,17 @@ if (process.env.E2E_BUILD === 'true') {
   // eslint-disable-next-line promise/catch-or-return
   app.whenReady().then(createWindow);
 } else {
-  app.on('ready', createWindow);
+  app.on('ready', () => {
+    initDb();
+    createWindow();
+  });
 }
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) createWindow();
+  if (mainWindow === null) {
+    initDb();
+    createWindow();
+  }
 });
