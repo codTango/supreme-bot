@@ -70,7 +70,7 @@ export default function TaskGroup(props) {
     }
   }
 
-  const render = (group, i) => {
+  const renderGroup = (group, i) => {
     const {
       _id,
       name,
@@ -112,18 +112,20 @@ export default function TaskGroup(props) {
   }
 
   return (
-    <div className="group-container" style={{ overflow: expandTaskList ? 'unset' : 'auto' }}>
-      {groups.map((group, i) => {
-        const { _id } = group;
-        if (expandTaskList || expandTaskPanel) {
-          if (openGroupId === _id) {
-            return render(group, i);
+    <div className="group-container">
+      <div className="group-inner-container" style={{ overflow: expandTaskList ? 'unset' : 'auto' }}>
+        {groups.map((group, i) => {
+          const { _id } = group;
+          if (expandTaskList || expandTaskPanel) {
+            if (openGroupId === _id) {
+              return renderGroup(group, i);
+            }
+            return;
           }
-          return;
-        }
-        
-        return render(group, i);
-      })}
+          
+          return renderGroup(group, i);
+        })}
+      </div>
     </div>
   );
 }

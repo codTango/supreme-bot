@@ -17,122 +17,129 @@
 }
 
 .group-container {
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
   height: inherit;
   overflow: auto;
 
-  .group-box {
-    height: 190px;
-    background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
-    background-image: url(#{$backgroundImgPath});
-    background-size: cover;
-    border: 1px solid #444450;
-    border-radius: 14px;
-    margin-top: 15px;
+  .group-inner-container {
+    padding-left: 12px;
+    padding-right: 12px;
+    height: inherit;
+    overflow: auto;
 
-    .group-title {
-      height: 35px;
-      background-color: #000;
-      border-top-right-radius: 14px;
-      border-top-left-radius: 14px;
+    .group-box {
+      height: 190px;
+      background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
+      background-image: url(#{$backgroundImgPath});
+      background-size: cover;
+      border: 1px solid #444450;
+      border-radius: 14px;
+      margin-top: 15px;
 
-      .name-status {
-        display: inline-block;
-        // height: 35px;
-        margin-left: 24px;
-        font-size: 14px;
-        padding-top: 10px;
+      .group-title {
+        height: 35px;
+        background-color: #000;
+        border-top-right-radius: 14px;
+        border-top-left-radius: 14px;
 
-        .status {
+        .name-status {
           display: inline-block;
+          // height: 35px;
+          margin-left: 24px;
+          font-size: 14px;
+          padding-top: 10px;
 
-          .status-node {
+          .status {
             display: inline-block;
-            position: relative;
-            top: -1px;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
+
+            .status-node {
+              display: inline-block;
+              position: relative;
+              top: -1px;
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+            }
+          }
+
+          .group-name {
+            display: inline-block;
+            margin-left: 10px;
           }
         }
 
-        .group-name {
-          display: inline-block;
-          margin-left: 10px;
+        .icon-group {
+          float: right;
+          margin-right: 24px;
         }
       }
 
-      .icon-group {
-        float: right;
-        margin-right: 24px;
-      }
-    }
-
-    .group-content {
-      height: 120px;
-      margin: 0 24px;
-      padding: 6px 0 24px 0;
-      display: flex;
-
-      .product-img {
-        display: inline-block;
-        width: 100px;
-        height: 100%;
-
-        img {
-          border-radius: 10px;
-          width: 100px;
-          height: 100px;
-          margin-top: 20px;
-        }
-      }
-
-      .half-form-container {
-        display: inline-block;
-        width: calc(100% - 124px);
-        position: relative;
-        top: -46px;
-        margin-left: 12px;
-        margin-right: 12px;
-      }
-
-      .full-form-container {
-        display: inline-block;
-        width: calc(50% - 6px);
-        margin-top: 12px;
-
-        &:nth-child(2) {
-          margin-left: 12px;
-        }
-      }
-
-      .status-group {
-        margin-top: 22px;
-        margin-left: 30px;
+      .group-content {
+        height: 120px;
+        margin: 0 24px;
+        padding: 6px 0 24px 0;
         display: flex;
 
-        @import '../status/Status.scss';
+        .product-img {
+          display: inline-block;
+          width: 100px;
+          height: 100%;
+
+          img {
+            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+          }
+        }
+
+        .half-form-container {
+          display: inline-block;
+          width: calc(100% - 124px);
+          position: relative;
+          top: -46px;
+          margin-left: 12px;
+          margin-right: 12px;
+        }
+
+        .full-form-container {
+          display: inline-block;
+          width: calc(50% - 6px);
+          margin-top: 12px;
+
+          &:nth-child(2) {
+            margin-left: 12px;
+          }
+        }
+
+        .status-group {
+          margin-top: 22px;
+          margin-left: 30px;
+          display: flex;
+
+          @import '../status/Status.scss';
+        }
+
+        .group-actions {
+          margin-left: 30px;
+          margin-top: 17px;
+
+          @import '../groupActionButton/GroupActionButton.scss';
+        }
+
+        // override input label
+        .MuiFormLabel-root {
+          font-size: 10px;
+        }
+        .MuiInputLabel-shrink {
+          transform: translate(0, 1.5px) scale(1);
+        }
       }
 
-      .group-actions {
-        margin-left: 30px;
-        margin-top: 17px;
-
-        @import '../groupActionButton/GroupActionButton.scss';
-      }
-
-      // override input label
-      .MuiFormLabel-root {
-        font-size: 10px;
-      }
-      .MuiInputLabel-shrink {
-        transform: translate(0, 1.5px) scale(1);
-      }
+      @import '../addTaskPanel/AddTaskPanel.scss';
     }
-
-    @import '../addTaskPanel/AddTaskPanel.scss';
   }
 }
