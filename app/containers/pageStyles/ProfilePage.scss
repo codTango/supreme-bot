@@ -1,0 +1,6 @@
+.profile-page {
+  display: flex;
+
+  @import '../../components/profileList/ProfileList.scss';
+  @import '../../components//profileContent/ProfileContent.scss';
+}

@@ -7,6 +7,7 @@
 $logoPath: './assets/logo.png';
 $backgroundImgPath: './assets/full-bg.png';
 $notificationBgPath: './assets/notifs-logo.png';
+$creditCardBgPath: './assets/creditcard-bg.png';
 
 // colors
 $color-C1C1C1: #c1c1c1;
@@ -29,6 +30,7 @@ $color-0C0D11: #0c0d11;
 
 // import page styles
 @import 'containers/pageStyles/TaskGroupPage.scss';
+@import 'containers/pageStyles/ProfilePage.scss';
 
 body {
   position: relative;
@@ -99,6 +101,13 @@ a:hover {
   left: 100px;
   bottom: 0;
   width: calc(84% - 164px);
+
+  & > div {
+    position: relative;
+    padding-left: 32px;
+    padding-bottom: 32px;
+    height: calc(100% - 32px);
+  }
 }
 
 .window-title {
@@ -143,21 +152,25 @@ a:hover {
 // override input
 .MuiFormLabel-root {
   color: #787878 !important;
+  font-size: 11px !important;
 }
 .MuiInputBase-root {
-  color: #C1C1C1 !important;
+  color: #c1c1c1 !important;
 
-  &:before {
+  &::before {
     border-color: #787878 !important;
   }
-  &:after {
-    border-color: #F05458 !important;
+  &::after {
+    border-color: #f05458 !important;
   }
+}
+.MuiInputLabel-shrink {
+  transform: translate(0, 1.5px) scale(1) !important;
 }
 
 // override button
 .MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
-  border: 1px solid #F05458;
-  color: #C1C1C1;
+  border: 1px solid #f05458;
+  color: #c1c1c1;
   text-transform: none;
 }

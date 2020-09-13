@@ -7,7 +7,8 @@ module.exports = {
     'prettier/prettier': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-nested-ternary": 'off'
+    "no-nested-ternary": 'off',
+    "react/jsx-curly-brace-presence": 'off'
   },
   parserOptions: {
     ecmaVersion: 2020,
