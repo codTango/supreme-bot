@@ -66,18 +66,18 @@ export default function TaskGroupPage() {
   }, []);
   
   const handleAddGroup = async (groupInfo) => {
-    const data = { ...groupInfo, taskList: [] };
+    const data = { ...groupInfo, taskList: [], detail: {}, status: { tasks: 0, checkouts: 0, declines: 0} };
     const res = await db.insert('taskGroups', data);
     setGroups([ ...groups, res ]);
   }
 
-  const handleSaveUpdate = (groupInfo, index) => {
+  const handleSaveUpdate = (groupInfo) => {
     const { _id } = groupInfo;
 
     const res = db.update('taskGroups', { _id }, groupInfo, { returnUpdatedDocs: true });
 
     const newGroups = groups.map((item, i) => {
-      if (i !== index) {
+      if (item._id !== _id) {
         // This isn't the item we care about - keep it as-is
         return item
       }
@@ -91,9 +91,9 @@ export default function TaskGroupPage() {
     setGroups(newGroups);
   }
 
-  const handleDeleteGroup = (index) => {
-    const groupInfo = groups[index];
-    db.remove('taskGroups', groupInfo);
+  const handleDeleteGroup = (id) => {
+    const index = groups.findIndex(group => group._id === id);
+    db.remove('taskGroups', { _id: id });
     setGroups([
       ...groups.slice(0, index),
       ...groups.slice(index + 1)
@@ -102,7 +102,6 @@ export default function TaskGroupPage() {
 
   const handleAddTasks = (taskInfo) => {
     const {
-      index,
       groupId,
       mode,
       size,
@@ -125,7 +124,16 @@ export default function TaskGroupPage() {
       })
     }
 
-    handleSaveUpdate(selectedGroup, index);
+    selectedGroup.status.tasks += Number(taskQuantity);
+
+    handleSaveUpdate(selectedGroup);
+  }
+
+  const handleClearTaskList = (groupId) => {
+    const [ selectedGroup ] = groups.filter(group => group._id === groupId);
+    selectedGroup.taskList = [];
+    selectedGroup.status.tasks = 0;
+    handleSaveUpdate(selectedGroup);
   }
   
   return (
@@ -137,6 +145,7 @@ export default function TaskGroupPage() {
           onSave={handleSaveUpdate}
           onDeleteGroup={handleDeleteGroup}
           onAddTasks={handleAddTasks}
+          onClearTaskList={handleClearTaskList}
         />
       </div>
     </div>

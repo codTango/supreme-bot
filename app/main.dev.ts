@@ -75,7 +75,7 @@ ipcMain.on('insert', async (event, fileName, data) => {
 
 ipcMain.on('find', async (event, fileName, query) => {
   console.log('find: ', query);
-  const result = await db[fileName].find(query);
+  const result = await db[fileName].find(query).sort({ createdAt: 1 });
   event.returnValue = result;
 });
 

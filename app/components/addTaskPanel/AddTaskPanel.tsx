@@ -8,7 +8,7 @@ import { sizeList, modeList } from '../../constants/listValue';
 import AntSwitch from '../antSwitch/AntSwitch';
 
 export default function AddTaskPanel(props) {
-  const { index, groupId, name, onClose, onAddTasks, expandTaskList } = props;
+  const { groupId, name, onClose, onAddTasks, expandTaskList } = props;
 
   const [ taskInfo, setTaskInfo ] = useState({
     mode: '',
@@ -34,7 +34,7 @@ export default function AddTaskPanel(props) {
     <div className="task-panel">
       <div className="title">
         <div className="group-name">
-          ADD TASKS TO {name}
+          {`ADD TASKS TO ${name}`}
         </div>
         <div className="close-btn">
           <IconButton size="small" onClick={onClose}>
@@ -136,7 +136,7 @@ export default function AddTaskPanel(props) {
           </div>
           <div className="form-container" style={{ width: '130px', verticalAlign: 'bottom' }}>
             <FormControl fullWidth>
-              <Button variant="outlined" onClick={() => { onAddTasks({ ...taskInfo, index, groupId }); expandTaskList(); }}>
+              <Button variant="outlined" onClick={() => { onAddTasks({ ...taskInfo, groupId }); expandTaskList(); }}>
                 + Add Tasks
               </Button>
             </FormControl>

@@ -15,7 +15,8 @@ export default function TaskGroup(props) {
     groups = [],
     onSave,
     onDeleteGroup,
-    onAddTasks
+    onAddTasks,
+    onClearTaskList
   } = props;
 
   // group expandTaskList state
@@ -24,10 +25,10 @@ export default function TaskGroup(props) {
   const [ expandTaskPanel, setExpandTaskPanel ] = useState(false);
 
   const handleExpandTaskList = (open, id, taskList) => {
-    if (taskList.length > 0) {
+    // if (taskList.length > 0) {
       setExpandTaskList(!open);
       setOpenGroupId((!open || expandTaskPanel) ? id : -1);
-    }
+    // }
   }
 
   const handleExpandTaskPanel = (open, id) => {
@@ -35,8 +36,8 @@ export default function TaskGroup(props) {
     setOpenGroupId((open || expandTaskList) ? id : -1);
   }
 
-  const handleDeleteGroup = (index) => {
-    onDeleteGroup(index);
+  const handleDeleteGroup = (id) => {
+    onDeleteGroup(id);
     setExpandTaskList(false);
     setExpandTaskPanel(false);
     setOpenGroupId(-1);
@@ -51,11 +52,10 @@ export default function TaskGroup(props) {
     );
   }
 
-  const renderContent = (index, id, name, taskList) => {
+  const renderContent = (id, name, taskList) => {
     if (expandTaskPanel) {
       return (
         <AddTaskPanel
-          index={index}
           groupId={id}
           name={name}
           onClose={() => { handleExpandTaskPanel(false, id) }}
@@ -93,7 +93,7 @@ export default function TaskGroup(props) {
             <IconButton size="small" onClick={() => { handleExpandTaskList(expandTaskList, _id, taskList) }}>
               <KeyboardArrowDown style={{ color: '#DE3E3E' }} />
             </IconButton>
-            <IconButton size="small" onClick={() => { handleDeleteGroup(i) }}>
+            <IconButton size="small" onClick={() => { handleDeleteGroup(_id) }}>
               <Close style={{ color: '#DE3E3E' }} />
             </IconButton>
           </div>
@@ -102,11 +102,12 @@ export default function TaskGroup(props) {
         <GroupContent
           key={i}
           group={group}
-          onSave={(groupInfo) => { onSave(groupInfo, i) }}
-          onAddTask={() => { handleExpandTaskPanel(true, _id) }}
+          onSave={onSave}
+          onAddTask={() => { handleExpandTaskPanel(true, _id); }}
+          onClearTaskList={() => { onClearTaskList(_id); }}
         />
 
-        {renderContent(i, _id, name, taskList)}
+        {renderContent(_id, name, taskList)}
       </div>
     );
   }

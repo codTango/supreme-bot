@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { FormControl, TextField, Select, MenuItem, InputLabel, Grid } from '@material-ui/core';
@@ -9,7 +9,7 @@ import { categoryList } from '../../constants/listValue';
 import shoe from '../../assets/shoe.png';
 
 export default function GroupContent(props) {
-  const { group, onSave, onAddTask } = props;
+  const { group, onSave, onAddTask, onClearTaskList } = props;
   
   // state of group
   const [ groupInfo, setGroupInfo ] = useState(group);
@@ -29,6 +29,10 @@ export default function GroupContent(props) {
     } = {}
   } = groupInfo;
 
+  useEffect(() => {
+    setGroupInfo(group);
+  }, [group]);
+
   const handleGroupInfoChange = (event, key) => {
     const { detail = {} } = groupInfo;
     detail[key] = event.target.value;
@@ -45,7 +49,7 @@ export default function GroupContent(props) {
 
         <Grid item xs={3}>
           <div className="product-img">
-            <img alt="product-image" src={shoe} />
+            <img alt="product-img" src={shoe} />
           </div>
           <div className="half-form-container">
             <FormControl fullWidth>
@@ -131,7 +135,7 @@ export default function GroupContent(props) {
           </div>
           <div className="group-actions">
             <GroupActionButton icon="save" actionHandler={handleSave} />
-            <GroupActionButton icon="trash" actionHandler={() => {console.log('trash action');}} />
+            <GroupActionButton icon="trash" actionHandler={onClearTaskList} />
             <GroupActionButton icon="play" actionHandler={() => {console.log('play action');}} />
             <GroupActionButton icon="plus" actionHandler={onAddTask} />
           </div>
