@@ -76,7 +76,7 @@ export default function TaskGroupPage() {
 
     const res = db.update('taskGroups', { _id }, groupInfo, { returnUpdatedDocs: true });
 
-    groups.map((item, i) => {
+    const newGroups = groups.map((item, i) => {
       if (i !== index) {
         // This isn't the item we care about - keep it as-is
         return item
@@ -88,7 +88,7 @@ export default function TaskGroupPage() {
         ...res
       }
     });
-    setGroups(groups);
+    setGroups(newGroups);
   }
 
   const handleDeleteGroup = (index) => {
