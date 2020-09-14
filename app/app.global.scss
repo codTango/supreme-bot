@@ -21,9 +21,8 @@ $color-DE2E31: #de2e31;
 $color-444450: #444450;
 $color-0C0D11: #0c0d11;
 
-// import component styles
+// import App component styles
 @import '~@fortawesome/fontawesome-free/css/all.css';
-@import 'components/home/Home.scss';
 @import 'components/navbar/Navbar.scss';
 @import 'components/titleBar/Titlebar.scss';
 @import 'components/notification/Notification.scss';

@@ -96,9 +96,9 @@ export default function Navbar(): JSX.Element {
       </div>
       <div className="menu">
         <div className="menu-item">
-          <NavLink to="/home" activeClassName="selected">
+          <NavLink to="/analytics" activeClassName="selected">
             <IconButton>
-              <HomeIcon className="menu-item-icon" />
+              <AnalyticsIcon className="menu-item-icon" />
             </IconButton>
             <SelectionBarIcon className="selectionBar" />
           </NavLink>
@@ -131,14 +131,6 @@ export default function Navbar(): JSX.Element {
           <NavLink to="/captcha" activeClassName="selected">
             <IconButton>
               <CaptchaIcon className="menu-item-icon" />
-            </IconButton>
-            <SelectionBarIcon className="selectionBar" />
-          </NavLink>
-        </div>
-        <div className="menu-item">
-          <NavLink to="/analytics" activeClassName="selected">
-            <IconButton>
-              <AnalyticsIcon className="menu-item-icon" />
             </IconButton>
             <SelectionBarIcon className="selectionBar" />
           </NavLink>

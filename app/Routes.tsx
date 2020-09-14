@@ -20,7 +20,7 @@ export default function Routes() {
   return (
     <App>
       <Switch>
-        <Redirect exact from="/" to="/home" />
+        <Redirect exact from="/" to="/analytics" />
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}

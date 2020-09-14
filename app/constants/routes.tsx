@@ -1,26 +1,34 @@
 import React from 'react';
-import HomePage from '../containers/HomePage';
 import ProfilePage from '../containers/ProfilePage';
-import ProxyPage from '../containers/ProxyPage';
 import CaptchaPage from '../containers/CaptchaPage';
 import AnalyticsPage from '../containers/AnalyticsPage';
 import SettingPage from '../containers/SettingPage';
 
-// Lazily load routes and code split with webpack
-const LazyCounterPage = React.lazy(() =>
-  import(/* webpackChunkName: "CounterPage" */ '../containers/TaskPage')
+// Lazy load task page
+const LazyTaskPage = React.lazy(() =>
+  import(/* webpackChunkName: "TaskPage" */ '../containers/TaskPage')
 );
-
 const TaskPage = (props: Record<string, any>) => (
   <React.Suspense fallback={<h1>Loading...</h1>}>
-    <LazyCounterPage {...props} />
+    <LazyTaskPage {...props} />
+  </React.Suspense>
+);
+
+// Lazy load proxy page
+const LazyProxyPage = React.lazy(() =>
+  import(/* webpackChunkName: "ProxyPage" */ '../containers/ProxyPage')
+);
+
+const ProxyPage = (props: Record<string, any>) => (
+  <React.Suspense fallback={<h1>Loading...</h1>}>
+    <LazyProxyPage {...props} />
   </React.Suspense>
 );
 
 const routes = [
   {
-    path: "/home",
-    component: HomePage
+    path: "/analytics",
+    component: AnalyticsPage
   },
   {
     path: "/task",
@@ -37,10 +45,6 @@ const routes = [
   {
     path: "/captcha",
     component: CaptchaPage
-  },
-  {
-    path: "/analytics",
-    component: AnalyticsPage
   },
   {
     path: "/setting",
