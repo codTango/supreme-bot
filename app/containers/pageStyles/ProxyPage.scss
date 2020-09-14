@@ -1,0 +1,6 @@
+.proxy-page {
+  display: flex;
+
+  @import '../../components/proxyList/ProxyList.scss';
+  @import '../../components/proxyContent/ProxyContent.scss';
+}

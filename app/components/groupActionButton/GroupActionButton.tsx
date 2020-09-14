@@ -6,7 +6,7 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 import Add from '@material-ui/icons/Add';
 
 export default function GroupActionButton(props) {
-  const { icon, actionHandler } = props;
+  const { icon, actionHandler, text } = props;
   let Icon;
 
   switch (icon) {
@@ -27,8 +27,9 @@ export default function GroupActionButton(props) {
   }
   
   return (
-    <IconButton size="small" onClick={actionHandler}>
-      <Icon />
+    <IconButton size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px' }} onClick={actionHandler}>
+      <Icon style={{ fontSize: text ? 12 : 24 }} />
+      {text && <span className='text'>{text}</span>}
     </IconButton>
   );
 }

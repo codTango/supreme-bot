@@ -1,0 +1,146 @@
+.proxy-region {
+  width: 78%;
+  margin-left: 32px;
+
+  .gradient-box {
+    height: 100%;
+
+    .proxy-title {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      text-align: left;
+      align-items: center;
+      padding-left: 24px;
+
+      span {
+        position: relative;
+        top: 10px;
+      }
+    }
+
+    .group-box {
+      // height: 190px;
+      background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
+      background-image: url(#{$backgroundImgPath});
+      background-size: cover;
+      border: 1px solid #444450;
+      border-radius: 14px;
+      margin-top: 15px;
+      margin-left: 25px;
+      margin-right: 25px;
+      @import 'components/groupActionButton/GroupActionButton.scss';
+
+      .MuiGrid-container {
+        margin: 0;
+      }
+
+      &.region-1 {
+        height: 90px;
+
+        .form-container {
+          margin-top: 8px;
+          padding-left: 24px;
+        }
+      }
+
+      &.region-2 {
+        height: 220px;
+        padding-left: 24px;
+
+        .MuiGrid-container {
+          margin-top: 16px;
+
+          .form-container {
+            padding-right: 24px;
+          }
+        }
+      }
+
+      &.region-3 {
+        height: 237px;
+        padding: 0 24px;
+
+        .input-area {
+          display: inline-block;
+          width: calc(100% - 350px);
+          height: 100%;
+
+          .form-container {
+            margin-top: 20px;
+          }
+        }
+
+        .credit-card {
+          display: inline-block;
+          float: right;
+          width: 300px;
+          height: 189px;
+          background: radial-gradient(
+            circle at top,
+            $color-24242B 0%,
+            $color-000000 100%
+          );
+          background-image: url(#{$creditCardBgPath});
+          background-size: cover;
+          margin-top: 24px;
+          margin-bottom: 24px;
+
+          .number-label {
+            color: #c63034;
+            font-size: 8px;
+            margin-top: 77px;
+            margin-left: 21px;
+          }
+
+          .number {
+            margin-left: 21px;
+            margin-top: 9px;
+            font-size: 18px;
+          }
+
+          .name-label {
+            display: inline-block;
+            color: #c63034;
+            font-size: 8px;
+            margin-top: 21px;
+            margin-left: 21px;
+          }
+
+          .name {
+            margin-top: 9px;
+            margin-left: 21px;
+            font-size: 13px;
+          }
+
+          .expiration-label {
+            display: inline-block;
+            color: #c63034;
+            font-size: 8px;
+            margin-top: 21px;
+            margin-left: 21px;
+          }
+
+          .expiration {
+            margin-top: 9px;
+            margin-left: 21px;
+            font-size: 13px;
+          }
+
+          .cvv-label {
+            display: inline-block;
+            color: #c63034;
+            font-size: 8px;
+            margin-top: 21px;
+            margin-left: 21px;
+          }
+
+          .cvv {
+            margin-top: 9px;
+            margin-left: 21px;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
