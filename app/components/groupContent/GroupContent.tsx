@@ -58,7 +58,6 @@ export default function GroupContent(props) {
                 label="MONITOR DELAY (MS)"
                 value={monitorDelay}
                 onChange={(event) => { handleGroupInfoChange(event, 'monitorDelay') }}
-                multiline
               />
             </FormControl>
             <FormControl fullWidth style={{ marginTop: '10px' }}>
@@ -67,7 +66,6 @@ export default function GroupContent(props) {
                 label="CHECKOUT DELAY (MS)"
                 value={checkoutDelay}
                 onChange={(event) => { handleGroupInfoChange(event, 'checkoutDelay') }}
-                multiline
               />
             </FormControl>
           </div>
@@ -81,7 +79,6 @@ export default function GroupContent(props) {
                 label="KEYWORDS"
                 value={keywords}
                 onChange={(event) => { handleGroupInfoChange(event, 'keywords') }}
-                multiline
               />
             </FormControl>
             <FormControl fullWidth style={{ marginTop: '10px' }}>

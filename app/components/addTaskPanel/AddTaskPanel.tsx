@@ -79,7 +79,6 @@ export default function AddTaskPanel(props) {
                 label="COLOR"
                 value={color}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, color: event.target.value }) }}
-                multiline
               />
             </FormControl>
           </div>
@@ -109,7 +108,6 @@ export default function AddTaskPanel(props) {
                 type="number"
                 value={taskQuantity}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, taskQuantity: event.target.value }) }}
-                multiline
               />
             </FormControl>
           </div>
@@ -121,7 +119,6 @@ export default function AddTaskPanel(props) {
                 type="number"
                 value={itemQuantity}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, itemQuantity: event.target.value }) }}
-                multiline
               />
             </FormControl>
           </div>

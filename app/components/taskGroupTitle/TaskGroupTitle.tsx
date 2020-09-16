@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
@@ -53,7 +54,6 @@ export default function TaskGroupTitle(props): JSX.Element {
                 placeholder="Enter a name"
                 value={name}
                 onChange={handleNameChange}
-                multiline
               />
             </FormControl>
           </div>

@@ -21,7 +21,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="PROFILE NAME"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -56,7 +55,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="FIRST NAME"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -69,7 +67,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="LAST NAME"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -86,7 +83,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="ADDRESS 1"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -99,7 +95,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="ADDRESS 2"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -112,7 +107,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="ADDRESS 3"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -128,7 +122,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="CITY"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -158,7 +151,6 @@ export default function ProfileContent(props): JSX.Element {
                     label="ZIP"
                     value={''}
                     onChange={(event) => { }}
-                    multiline
                   />
                 </FormControl>
               </div>
@@ -191,7 +183,6 @@ export default function ProfileContent(props): JSX.Element {
                   label="CARDHOLDER NAME"
                   value={''}
                   onChange={(event) => { }}
-                  multiline
                 />
               </FormControl>
             </div>
@@ -202,7 +193,6 @@ export default function ProfileContent(props): JSX.Element {
                   label="CARDHOLDER NAME"
                   value={''}
                   onChange={(event) => { }}
-                  multiline
                 />
               </FormControl>
             </div>
@@ -250,7 +240,6 @@ export default function ProfileContent(props): JSX.Element {
                         label="CVV"
                         value={''}
                         onChange={(event) => { }}
-                        multiline
                       />
                     </FormControl>
                   </div>
