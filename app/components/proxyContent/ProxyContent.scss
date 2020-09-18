@@ -4,6 +4,7 @@
 
   .gradient-box {
     height: 100%;
+    @import 'components/groupActionButton/GroupActionButton.scss';
 
     .proxy-title {
       border-top-left-radius: inherit;
@@ -28,7 +29,6 @@
       margin-top: 15px;
       margin-left: 25px;
       margin-right: 25px;
-      @import 'components/groupActionButton/GroupActionButton.scss';
 
       .MuiGrid-container {
         margin: 0;
@@ -53,8 +53,7 @@
         // display: inline-block;
         flex: 1 1 auto;
         width: 33%;
-        height: calc(100% - 90px);
-        margin-bottom: 75px;
+        height: calc(100% - 15px);
         margin-right: 8px;
 
         .form-container {
@@ -80,14 +79,100 @@
         // display: inline-block;
         flex: 1 1 auto;
         width: 67%;
-        height: calc(100% - 90px);
-        padding: 0 24px;
+        height: calc(100% - 15px);
         margin-left: 8px;
+
+        .proxy-test-list {
+          width: calc(100% - 32px);
+          height: calc(100% - 60px);
+          padding: 24px 16px 0;
+
+          .MuiListItem-root {
+            padding-left: 0;
+            padding-right: 8px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+
+            .list-item {
+              display: flex;
+              width: 100%;
+              height: 100%;
+              background-color: #000;
+
+              #proxy-status {
+                transform: rotate(180deg);
+              }
+
+              .status {
+                margin: auto;
+                margin-left: 0;
+              }
+
+              .proxy-ip {
+                margin: auto;
+                margin-left: 0;
+                font-size: 13px;
+              }
+
+              .latency {
+                margin: auto;
+                font-size: 13px;
+              }
+
+              .actions {
+                margin-right: 18px;
+                .MuiIconButton-root {
+                  border: none;
+                  border-radius: 5px;
+                  padding: 5px;
+                  margin: 5px 0 5px 8px;
+                  // color: #C1C1C1;
+                  // font-size: 11pt;
+
+                  svg {
+                    color: #c1c1c1;
+                  }
+                  // .text {
+                  //   margin-left: 10px;
+                  // }
+                }
+              }
+            }
+          }
+        }
       }
     }
 
     .region-content {
       display: flex;
+    }
+
+    .buttons {
+      margin-top: 16px;
+      padding-left: 25px;
+      padding-right: 25px;
+
+      .btn-left {
+        display: inline-block;
+        width: 33%;
+      }
+
+      .btn-right {
+        width: 67%;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-1 {
+        margin: 0 auto;
+        display: block;
+        width: 170px;
+      }
+
+      .btn-2,
+      .btn-3 {
+        display: inline-block;
+      }
     }
   }
 }

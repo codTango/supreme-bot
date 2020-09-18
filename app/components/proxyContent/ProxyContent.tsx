@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { FormControl, TextField, Grid, IconButton } from '@material-ui/core';
 import GroupActionButton from '../groupActionButton/GroupActionButton';
+import VirtualizedList from '../virtualizedList/VirtualizedList';
 
 export default function ProxyContent(props): JSX.Element {
+  const { proxy } = props;
+
+  const [ name, setName ] = useState(proxy.name);
+  const [ proxyList, setProxyList ] = useState(proxy.proxyList);
 
   const [ rows, setRows ] = useState(20);
   const [ windowHeight, setWindowHeight ] = useState(0);
@@ -21,6 +27,10 @@ export default function ProxyContent(props): JSX.Element {
     window.addEventListener('resize', _.debounce(handleResize, 500));
   }, [windowHeight])
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  }
+
   return (
     <div className="proxy-region">
       <div className="gradient-box">
@@ -35,8 +45,8 @@ export default function ProxyContent(props): JSX.Element {
                   <TextField
                     id="profile-name-input"
                     label="PROFILE NAME"
-                    value={''}
-                    onChange={(event) => { }}
+                    value={name}
+                    onChange={handleNameChange}
                   />
                 </FormControl>
               </div>
@@ -45,9 +55,6 @@ export default function ProxyContent(props): JSX.Element {
               <div className="form-container btn-container">
                 <FormControl fullWidth>
                   <GroupActionButton icon="save" text="Save Proxy Group" actionHandler={() => {}} />
-                  {/* <IconButton variant="outlined" onClick={() => {}}>
-                    <SaveIcon /> Save Proxy Group
-                  </IconButton> */}
                 </FormControl>
               </div>
             </Grid>
@@ -74,7 +81,30 @@ export default function ProxyContent(props): JSX.Element {
             <div className="window-title proxy-title">
               <span>PROXY TESTING</span>
             </div>
-            proxy test list
+            <div className="proxy-test-list">
+              <VirtualizedList list={proxyList} />
+            </div>
+          </div>
+        </div>
+        <div className="buttons">
+          <div className="btn-left">
+            <div className="btn-1">
+              <FormControl fullWidth>
+                <GroupActionButton icon="trash" text="Delete All" actionHandler={() => {}} />
+              </FormControl>
+            </div>
+          </div>
+          <div className="btn-right">
+            <div className="form-container btn-2">
+              <FormControl fullWidth>
+                <GroupActionButton icon="flash" text="Test Speed" actionHandler={() => {}} />
+              </FormControl>
+            </div>
+            <div className="form-container btn-3">
+              <FormControl fullWidth>
+                <GroupActionButton icon="trash" text="Delete Banned" actionHandler={() => {}} />
+              </FormControl>
+            </div>
           </div>
         </div>
       </div>

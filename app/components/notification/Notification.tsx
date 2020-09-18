@@ -94,6 +94,7 @@ export default function Notification(): JSX.Element {
               })}
             </List>
           )}
+          <div className="clear-all">CLEAR ALL</div>
         </div>
       </div>
     </div>

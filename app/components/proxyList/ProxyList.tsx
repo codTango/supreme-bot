@@ -73,6 +73,7 @@ export default function ProxyList(props): JSX.Element {
             </List>
           )}
         </div>
+        <div className="clear-all">CLEAR ALL</div>
       </div>
     </div>
   );
