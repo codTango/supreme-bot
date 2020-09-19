@@ -2,20 +2,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import { createStyles, withStyles } from '@material-ui/core/styles';
-import { TableCell, SvgIcon, IconButton } from '@material-ui/core';
+import { TableCell, IconButton } from '@material-ui/core';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import CloseIcon from '@material-ui/icons/Close';
 import AntSwitch from '../antSwitch/AntSwitch';
-
-const StatusIcon = (props) => {
-  return (
-    <SvgIcon {...props}>
-      <path id="path-1" d="m 24 0 c -2 0 -4 2 -4 4 l 0 16 c 0 2 2 4 4 4" />
-    </SvgIcon>
-  );
-}
+import { StatusIcon } from '../svgIcons/SvgIcons';
 
 const styles = (theme) =>
   createStyles({

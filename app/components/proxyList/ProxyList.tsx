@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import { List, IconButton, SvgIcon, Snackbar } from '@material-ui/core';
+import { List, IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { DateTime } from 'luxon';
 

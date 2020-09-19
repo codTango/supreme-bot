@@ -2,17 +2,10 @@
 import React from 'react';
 import Refresh from '@material-ui/icons/Refresh';
 import Delete from '@material-ui/icons/Delete';
-import { ListItem, ListItemText, SvgIcon, IconButton } from '@material-ui/core';
+import { ListItem, IconButton } from '@material-ui/core';
 import { AutoSizer } from 'react-virtualized';
 import { FixedSizeList as List, ListChildComponentProps } from 'react-window';
-
-const StatusIcon = (props) => {
-  return (
-    <SvgIcon {...props}>
-      <path id="path-1" d="m 24 0 c -2 0 -4 2 -4 4 l 0 16 c 0 2 2 4 4 4" />
-    </SvgIcon>
-  );
-}
+import { StatusIcon } from '../svgIcons/SvgIcons';
 
 function renderRow(props: ListChildComponentProps) {
   const { index, style, data } = props;
