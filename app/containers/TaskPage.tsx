@@ -4,54 +4,6 @@ import TaskGroupTitle from '../components/taskGroupTitle/TaskGroupTitle';
 import TaskGroup from '../components/taskGroup/TaskGroup';
 import db from '../database/database';
 
-// fake task list
-const taskList = [];
-Array.from(Array(Math.floor(Math.random() * 100) + 1)).forEach((x, i) => {
-  taskList.push({ mode: 'Super', size: 'Random', color: 'Random', profile: 'test', itemQuantity: 10, bypass: true });
-});
-const fakeGroups = [
-  {
-    id: 10,
-    name: 'test',
-    store: 'testStore',
-    status: {
-      summary: true,
-      tasks: 1000,
-      checkouts: 5,
-      declines: 3
-    },
-    detail: {
-      monitorDelay: '12',
-      checkoutDelay: '100',
-      keywords: 'test keyword',
-      category: 'New',
-      monitor: 'tshirt',
-      proxy: 'shoes'
-    },
-    taskList: []
-  },
-  {
-    id: 11,
-    name: 'test2',
-    store: 'testStore',
-    status: {
-      summary: false,
-      tasks: 500,
-      checkouts: 5,
-      declines: 3
-    },
-    detail: {
-      monitorDelay: '12',
-      checkoutDelay: '100',
-      keywords: 'test keyword',
-      category: 'Hats',
-      monitor: 'tshirt',
-      proxy: 'shoes'
-    },
-    taskList
-  }
-];
-
 export default function TaskGroupPage() {
   // group list state
   const [ groups, setGroups ] = useState([]);
@@ -60,6 +12,7 @@ export default function TaskGroupPage() {
     const fetchData = async () => {
       const groupsData = await db.find('taskGroups', {});
       setGroups(groupsData);
+      console.log('task: fetch data on task');
     }
     
     fetchData();

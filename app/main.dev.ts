@@ -60,11 +60,15 @@ const dbFactory = (fileName) => {
 };
 
 const db = {
-  taskGroups: null
+  taskGroups: null,
+  profiles: null,
+  profileGroups: null,
 };
 
 const initDb = () => {
   db.taskGroups = dbFactory('taskGroups.db');
+  db.profiles = dbFactory('profiles.db');
+  db.profileGroups = dbFactory('profileGroups.db');
 };
 
 ipcMain.on('insert', async (event, fileName, data) => {
@@ -76,6 +80,12 @@ ipcMain.on('insert', async (event, fileName, data) => {
 ipcMain.on('find', async (event, fileName, query) => {
   console.log('find: ', query);
   const result = await db[fileName].find(query).sort({ createdAt: 1 });
+  event.returnValue = result;
+});
+
+ipcMain.on('findOne', async (event, fileName, query) => {
+  console.log('findOne: ', query);
+  const result = await db[fileName].findOne(query);
   event.returnValue = result;
 });
 
