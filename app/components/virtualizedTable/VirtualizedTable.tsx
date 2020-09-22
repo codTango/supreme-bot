@@ -100,6 +100,9 @@ class MuiVirtualizedTable extends React.PureComponent {
     if (dataKey === 'bypass') {
       return (<AntSwitch checked={cellData} />);
     }
+    if (dataKey === 'profile') {
+      return cellData.name;
+    }
 
     return cellData;
   };

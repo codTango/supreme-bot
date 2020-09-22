@@ -7,12 +7,15 @@ import db from '../database/database';
 export default function TaskGroupPage() {
   // group list state
   const [ groups, setGroups ] = useState([]);
+  const [ profileList, setProfileList ] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const groupsData = await db.find('taskGroups', {});
+      const profilesData = await db.find('profiles', {});
+      const profileGroupData = await db.find('profileGroups', {});
       setGroups(groupsData);
-      console.log('task: fetch data on task');
+      setProfileList(profileGroupData.concat(profilesData));
     }
     
     fetchData();
@@ -66,15 +69,22 @@ export default function TaskGroupPage() {
     } = taskInfo;
     const [ selectedGroup ] = groups.filter(group => group._id === groupId);
 
+    let profileData = [ profile ];
+    if (profile.type === 'profileGroup') {
+      const { profiles } = profile;
+      profileData = profileList.filter(p => profiles.indexOf(p._id) > -1);
+    }
     for (let i = 0; i < Number(taskQuantity); i++) {
-      selectedGroup.taskList.push({
-        mode,
-        size,
-        color,
-        profile,
-        itemQuantity,
-        bypass
-      })
+      for (let j = 0; j < profileData.length; j++) {
+        selectedGroup.taskList.push({
+          mode,
+          size,
+          color,
+          profile: profileData[j],
+          itemQuantity,
+          bypass
+        });
+      }
     }
 
     selectedGroup.status.tasks += Number(taskQuantity);
@@ -95,6 +105,7 @@ export default function TaskGroupPage() {
         <TaskGroupTitle onAddGroup={handleAddGroup} />
         <TaskGroup
           groups={groups}
+          profileList={profileList}
           onSave={handleSaveUpdate}
           onDeleteGroup={handleDeleteGroup}
           onAddTasks={handleAddTasks}

@@ -8,7 +8,7 @@ import { sizeList, modeList } from '../../constants/listValue';
 import AntSwitch from '../antSwitch/AntSwitch';
 
 export default function AddTaskPanel(props) {
-  const { groupId, name, onClose, onAddTasks, expandTaskList } = props;
+  const { groupId, name, onClose, onAddTasks, expandTaskList, profileList } = props;
 
   const [ taskInfo, setTaskInfo ] = useState({
     mode: '',
@@ -89,12 +89,16 @@ export default function AddTaskPanel(props) {
                 labelId="profile-select-label"
                 id="profile-select"
                 value={profile}
+                renderValue={select => select.name}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, profile: event.target.value }) }}
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
-                <MenuItem value={'task mode 1'}>task mode 1</MenuItem>
-                <MenuItem value={'task mode 2'}>task mode 2</MenuItem>
-                <MenuItem value={'task mode 3'}>task mode 3</MenuItem>
+                {profileList.map(p => {
+                  const { _id: id, name: profileName } = p;
+                  return (
+                    <MenuItem key={id} value={p}>{profileName}</MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </div>

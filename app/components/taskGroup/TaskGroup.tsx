@@ -13,6 +13,7 @@ import TaskList from '../taskList/taskList';
 export default function TaskGroup(props) {
   const {
     groups = [],
+    profileList = [],
     onSave,
     onDeleteGroup,
     onAddTasks,
@@ -57,6 +58,7 @@ export default function TaskGroup(props) {
       return (
         <AddTaskPanel
           groupId={id}
+          profileList={profileList}
           name={name}
           onClose={() => { handleExpandTaskPanel(false, id) }}
           onAddTasks={onAddTasks}
