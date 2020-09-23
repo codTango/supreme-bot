@@ -6,7 +6,7 @@ import { FormControl, TextField, Select, MenuItem, InputLabel, Grid, Checkbox, L
 import GroupActionButton from '../groupActionButton/GroupActionButton';
 
 export default function ProfileContent(props): JSX.Element {
-  const { profileList = [], profileInfo, onSaveProfile, onRemoveProfileGroup } = props;
+  const { profileList = [], profileInfo, onSaveProfile, onRemoveProfile, onRemoveProfileGroup } = props;
   const [ profile, setProfile ] = useState(profileInfo);
 
   useEffect(() => {
@@ -73,7 +73,20 @@ export default function ProfileContent(props): JSX.Element {
                   </FormControl>
                 </div>
               </Grid>
-              <Grid item xs={4} />
+              <Grid item xs={4}>
+                <div className="profile-group-actions">
+                  <div className="save-btn">
+                    <FormControl fullWidth>
+                      <GroupActionButton icon="save" actionHandler={() => { onSaveProfile(profile, false); }} />
+                    </FormControl>
+                  </div>
+                  <div className="remove-btn">
+                    <FormControl fullWidth>
+                      <GroupActionButton icon="trash" actionHandler={() => { onRemoveProfile(profile._id); }} />
+                    </FormControl>
+                  </div>
+                </div>
+              </Grid>
             </Grid>
           </div>
           <div className="group-box region-2">
@@ -295,11 +308,6 @@ export default function ProfileContent(props): JSX.Element {
                   <div className="cvv">{'123'}</div>
                 </div>
               </div>
-            </div>
-            <div className="save-btn">
-              <FormControl fullWidth>
-                <GroupActionButton icon="save" text="Save Profile" actionHandler={() => { onSaveProfile(profile, false); }} />
-              </FormControl>
             </div>
           </div>
         </>

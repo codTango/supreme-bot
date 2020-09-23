@@ -133,6 +133,7 @@ export default function ProfilePage() {
         profileList={profiles}
         profileInfo={selectedProfile}
         onSaveProfile={handleSaveProfile}
+        onRemoveProfile={handleRemoveProfile}
         onRemoveProfileGroup={handleRemoveProfileGroup}
       />
     </div>
