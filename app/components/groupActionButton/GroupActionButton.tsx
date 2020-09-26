@@ -8,7 +8,7 @@ import Add from '@material-ui/icons/Add';
 import { Flash } from '../svgIcons/SvgIcons';
 
 export default function GroupActionButton(props) {
-  const { icon, actionHandler, text } = props;
+  const { icon, actionHandler, text, style = {} } = props;
   let Icon;
 
   switch (icon) {
@@ -32,9 +32,9 @@ export default function GroupActionButton(props) {
   }
   
   return (
-    <IconButton size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px' }} onClick={actionHandler}>
-      <Icon style={{ fontSize: text ? 12 : 24 }} />
-      {text && <span className='text'>{text}</span>}
+    <IconButton size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px', ...style }} onClick={actionHandler}>
+      {icon && <Icon style={{ fontSize: text ? 12 : 24 }} />}
+      {text && <span style={{ marginLeft: icon ? '10px' : '0' }}>{text}</span>}
     </IconButton>
   );
 }

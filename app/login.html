@@ -27,7 +27,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <div id="root"></div>
+    <div id="login-root"></div>
     <script>
       if (typeof process === 'object') {
         const scripts = [];
@@ -40,9 +40,9 @@
         if (process.env.START_HOT) {
           // Dynamically insert the bundled app script in the renderer process
           const port = process.env.PORT || 1212;
-          scripts.push(`http://localhost:${port}/dist/main.renderer.dev.js`);
+          scripts.push(`http://localhost:${port}/dist/login.renderer.dev.js`);
         } else {
-          scripts.push('./dist/main.renderer.prod.js');
+          scripts.push('./dist/login.renderer.prod.js');
         }
 
         if (scripts.length) {

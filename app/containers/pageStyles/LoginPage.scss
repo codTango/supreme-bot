@@ -1,0 +1,71 @@
+.login-page {
+  height: 500px;
+  background: radial-gradient(
+    circle at top,
+    #363640 0%,
+    #131318 50%,
+    #000 100%
+  );
+
+  .title {
+    height: 23px;
+    background-color: #141619;
+    text-align: center;
+    margin: auto;
+    font-size: 11px;
+    padding-top: 12px;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+
+    .MuiButtonBase-root {
+      color: #c1c1c1;
+      float: right;
+      margin-right: 10px;
+      transform: translateY(-5px);
+    }
+  }
+
+  .login-form {
+    width: 328px;
+    height: 366px;
+    background: radial-gradient(circle at top, #23232a 0%, #111214 100%);
+    margin-top: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #444450;
+    border-radius: 10px;
+
+    .logo {
+      text-align: center;
+      z-index: 10;
+      transform: translateY(-40px);
+
+      img {
+        width: 110px;
+      }
+    }
+
+    .content {
+      padding-left: 24px;
+      padding-right: 24px;
+      transform: translateY(-30px);
+
+      .form-container {
+        margin-bottom: 10px;
+      }
+
+      .login-btn {
+        text-align: center;
+        margin-top: 25px;
+      }
+    }
+
+    @import 'components/groupActionButton/GroupActionButton.scss';
+  }
+
+  .dashboard {
+    margin-top: 10px;
+    font-size: 10px;
+    text-align: center;
+  }
+}

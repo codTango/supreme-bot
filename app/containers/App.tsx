@@ -1,14 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { useState, useEffect  } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Titlebar from '../components/titleBar/TitleBar';
 import Notification from '../components/notification/Notification';
-
-type Props = {
-  children: ReactNode;
-};
+import loading from '../assets/loading-logo.gif';
 
 export default function App(props: Props) {
   const { children } = props;
+
+  const [ isLoading, setIsLoading ] = useState(true);
+console.log('app ready');
+  useEffect(() => {
+    console.log('loading passed');
+    setTimeout(() => { setIsLoading(false); }, 2000);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="app-loading">
+        <img src={loading} alt="loading..." />
+      </div>
+    );
+  }
+
   return (
     <>
       <Navbar />

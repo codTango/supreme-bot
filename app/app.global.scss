@@ -28,6 +28,7 @@ $color-0C0D11: #0c0d11;
 @import 'components/notification/Notification.scss';
 
 // import page styles
+@import 'containers/pageStyles/LoginPage.scss';
 @import 'containers/pageStyles/TaskGroupPage.scss';
 @import 'containers/pageStyles/ProfilePage.scss';
 @import 'containers/pageStyles/ProxyPage.scss';
@@ -46,6 +47,14 @@ body {
   font-family: Arial, Helvetica, Helvetica Neue, serif;
   overflow-y: hidden;
   margin: 0;
+
+  .app-loading {
+    text-align: center;
+
+    img {
+      transform: translateY(100%);
+    }
+  }
 }
 
 h2 {

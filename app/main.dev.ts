@@ -26,8 +26,10 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let loginWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
+  require('electron-debug')();
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
@@ -107,6 +109,17 @@ ipcMain.on('remove', async (event, fileName, query, options = {}) => {
   event.returnValue = result;
 });
 
+ipcMain.on('entry-accepted', (event, arg) => {
+  if(arg === 'ping'){
+    console.log('pinged');
+    loginWindow.hide();
+    mainWindow.show();
+    mainWindow.focus();
+  }
+
+  event.returnValue = true;
+});
+
 /**
  * create the main window
  */
@@ -125,6 +138,25 @@ const createWindow = async () => {
     minWidth: 1450,
     minHeight: 800,
     frame: false,
+    // webPreferences: { nodeIntegration: true }
+    webPreferences: (process.env.NODE_ENV === 'development' ||
+        process.env.E2E_BUILD === 'true') &&
+      process.env.ERB_SECURE !== 'true'
+        ? {
+            nodeIntegration: true,
+          }
+        : {
+            preload: path.join(__dirname, 'dist/main.renderer.prod.js'),
+          },
+  });
+
+  loginWindow = new BrowserWindow({
+    show: false,
+    width: 400,
+    height: 500,
+    minWidth: 400,
+    minHeight: 500,
+    frame: false,
     webPreferences:
       (process.env.NODE_ENV === 'development' ||
         process.env.E2E_BUILD === 'true') &&
@@ -133,11 +165,12 @@ const createWindow = async () => {
             nodeIntegration: true,
           }
         : {
-            preload: path.join(__dirname, 'dist/renderer.prod.js'),
+            preload: path.join(__dirname, 'dist/login.renderer.prod.js'),
           },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
+  loginWindow.loadURL(`file://${__dirname}/login.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -145,20 +178,41 @@ const createWindow = async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    if (process.env.START_MINIMIZED) {
-      mainWindow.minimize();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
+    // if (process.env.START_MINIMIZED) {
+    //   mainWindow.minimize();
+    // } else {
+    //   // mainWindow.show();
+    //   // mainWindow.focus();
+    //   loginWindow.show();
+    //   loginWindow.focus();
+    // }
+  });
+
+    // @TODO: Use 'ready-to-show' event
+  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
+  loginWindow.webContents.on('did-finish-load', () => {
+    if (!loginWindow) {
+      throw new Error('"loginWindow" is not defined');
     }
+
+    loginWindow.show();
+    loginWindow.focus();
+
   });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+  
+  loginWindow.on('closed', () => {
+    loginWindow = null;
+    mainWindow = null;
+  });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  const mainMenuBuilder = new MenuBuilder(mainWindow);
+  const loginMenuBuilder = new MenuBuilder(loginWindow);
+  mainMenuBuilder.buildMenu();
+  loginMenuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
