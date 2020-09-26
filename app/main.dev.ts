@@ -62,12 +62,14 @@ const dbFactory = (fileName) => {
 };
 
 const db = {
+  account: null,
   taskGroups: null,
   profiles: null,
   profileGroups: null,
 };
 
 const initDb = () => {
+  db.account = dbFactory('account.db');
   db.taskGroups = dbFactory('taskGroups.db');
   db.profiles = dbFactory('profiles.db');
   db.profileGroups = dbFactory('profileGroups.db');
@@ -109,10 +111,28 @@ ipcMain.on('remove', async (event, fileName, query, options = {}) => {
   event.returnValue = result;
 });
 
-ipcMain.on('login', (event, arg) => {
-  if(arg === 'ping'){
-    console.log('pinged');
+ipcMain.on('login', async (event, arg) => {
+  const account = await db.account.findOne({});
+  let daysPast = 0;
+  let firstTime = false;
+  let msPast = 0;
 
+  if (account) {
+    const { date } = account;
+    const currentDate = new Date();
+    const diffTime = currentDate - date;
+    daysPast = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    msPast = Math.abs(diffTime);
+    console.log('days past: ', daysPast);
+    console.log('ms past: ', msPast);
+  } else {
+    firstTime = true;
+    db.account.insert({ date: new Date() });
+  }
+
+  if (true || firstTime || daysPast < 4){
+    console.log('pinged');
+    firstTime = false;
     loginWindow.hide();
     mainWindow.show();
     mainWindow.focus();
