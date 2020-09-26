@@ -29,7 +29,7 @@ let mainWindow: BrowserWindow | null = null;
 let loginWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
-  require('electron-debug')();
+  // require('electron-debug')();
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
@@ -109,12 +109,15 @@ ipcMain.on('remove', async (event, fileName, query, options = {}) => {
   event.returnValue = result;
 });
 
-ipcMain.on('entry-accepted', (event, arg) => {
+ipcMain.on('login', (event, arg) => {
   if(arg === 'ping'){
     console.log('pinged');
+
     loginWindow.hide();
     mainWindow.show();
     mainWindow.focus();
+
+    mainWindow.webContents.send('login success', { msg:'hello from main process' });
   }
 
   event.returnValue = true;

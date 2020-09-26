@@ -61,7 +61,7 @@ export default function LoginPage() {
             </FormControl>
           </div>
           <div className="login-btn">
-            <GroupActionButton style={{ width: '150px', height: '35px' }} text="Activate" actionHandler={() => { ipcRenderer.sendSync('entry-accepted', 'ping'); }} />
+            <GroupActionButton style={{ width: '150px', height: '35px' }} text="Activate" actionHandler={() => { ipcRenderer.sendSync('login', 'ping'); }} />
           </div>
         </div>
       </div>
