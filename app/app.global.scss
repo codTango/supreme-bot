@@ -33,6 +33,7 @@ $color-0C0D11: #0c0d11;
 @import 'containers/pageStyles/ProfilePage.scss';
 @import 'containers/pageStyles/ProxyPage.scss';
 @import 'containers/pageStyles/CaptchaPage.scss';
+@import 'containers/pageStyles/SettingPage.scss';
 
 body {
   position: relative;
@@ -118,6 +119,14 @@ a:hover {
     padding-bottom: 32px;
     height: calc(100% - 32px);
   }
+}
+
+.group-box {
+  background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
+  background-image: url(#{$backgroundImgPath});
+  background-size: cover;
+  border: 1px solid #444450;
+  border-radius: 14px;
 }
 
 .window-title {

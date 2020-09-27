@@ -32,11 +32,6 @@
 
     .group-box {
       height: 190px;
-      background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
-      background-image: url(#{$backgroundImgPath});
-      background-size: cover;
-      border: 1px solid #444450;
-      border-radius: 14px;
       margin-top: 15px;
 
       .group-title {
