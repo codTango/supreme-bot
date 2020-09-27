@@ -30,7 +30,7 @@ export default function ProfileList(props): JSX.Element {
   return (
     <div className="profile-list">
       <div className="gradient-box">
-        <div className="window-title profile-title">
+        <div className="window-title icon-title">
           <span className="title-text">PROFILES</span>
           <IconButton size="small" onClick={onAddProfile}>
             <AddIcon style={{color: '#de2e31'}} />

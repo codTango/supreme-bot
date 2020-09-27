@@ -32,7 +32,7 @@ export default function ProxyList(props): JSX.Element {
   return (
     <div className="proxy-list">
       <div className="gradient-box">
-        <div className="window-title proxy-title">
+        <div className="window-title icon-title">
           <span className="title-text">PROXY GROUPS</span>
           <IconButton size="small" onClick={() => {}}>
             <AddIcon style={{color: '#de2e31'}} />

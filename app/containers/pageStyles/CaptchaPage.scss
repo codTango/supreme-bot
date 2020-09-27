@@ -1,0 +1,57 @@
+.captcha-region {
+  .gradient-box {
+    height: 100%;
+
+    .captcha-container {
+      overflow: auto;
+      margin-top: 16px;
+      margin-left: 16px;
+      margin-right: 16px;
+
+      .MuiGrid-container {
+        width: 100%;
+        margin: 0;
+
+        .group-box {
+          height: 280px;
+          background: radial-gradient(circle at top, #212328 0%, #0a0b0d 100%);
+          background-image: url(#{$backgroundImgPath});
+          background-size: cover;
+          border: 1px solid #444450;
+          border-radius: 14px;
+
+          .window-title.icon-title {
+            button {
+              transform: translateX(10vw);
+            }
+          }
+
+          .content-container {
+            margin-left: 24px;
+            margin-right: 24px;
+
+            .form-container {
+              margin-top: 18px;
+            }
+
+            .button-group {
+              margin-top: 24px;
+              text-align: center;
+              @import 'components/groupActionButton/GroupActionButton.scss';
+
+              .MuiIconButton-root {
+                margin: 0 12px;
+              }
+            }
+
+            .clear-cookies {
+              margin-top: 16px;
+              text-align: center;
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

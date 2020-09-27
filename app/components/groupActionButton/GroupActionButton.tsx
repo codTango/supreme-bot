@@ -5,6 +5,8 @@ import Save from '@material-ui/icons/Save';
 import Delete from '@material-ui/icons/Delete';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Add from '@material-ui/icons/Add';
+import Email from '@material-ui/icons/Email';
+import CallMade from '@material-ui/icons/CallMade';
 import { Flash } from '../svgIcons/SvgIcons';
 
 export default function GroupActionButton(props) {
@@ -26,6 +28,12 @@ export default function GroupActionButton(props) {
       break;
     case 'flash':
       Icon = Flash;
+      break;
+    case 'email':
+      Icon = Email;
+      break;
+    case 'callMade':
+      Icon = CallMade;
       break;
     default:
       break;

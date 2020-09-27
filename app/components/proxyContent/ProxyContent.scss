@@ -12,11 +12,6 @@
       text-align: left;
       align-items: center;
       padding-left: 24px;
-
-      span {
-        position: relative;
-        top: 10px;
-      }
     }
 
     .group-box {
@@ -84,7 +79,7 @@
 
         .proxy-test-list {
           width: calc(100% - 32px);
-          height: calc(100% - 60px);
+          height: calc(100% - 65px);
           padding: 24px 16px 0;
 
           .MuiListItem-root {

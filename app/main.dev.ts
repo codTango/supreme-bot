@@ -201,17 +201,14 @@ const createWindow = async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    // if (process.env.START_MINIMIZED) {
-    //   mainWindow.minimize();
-    // } else {
-    //   // mainWindow.show();
-    //   // mainWindow.focus();
-    //   loginWindow.show();
-    //   loginWindow.focus();
-    // }
+    if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+      mainWindow.show();
+      mainWindow.focus();
+      mainWindow.webContents.send('login success', { msg:'hello from main process' });
+    }
   });
 
-    // @TODO: Use 'ready-to-show' event
+  // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   loginWindow.webContents.on('did-finish-load', () => {
     if (!loginWindow) {

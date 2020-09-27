@@ -32,6 +32,7 @@ $color-0C0D11: #0c0d11;
 @import 'containers/pageStyles/TaskGroupPage.scss';
 @import 'containers/pageStyles/ProfilePage.scss';
 @import 'containers/pageStyles/ProxyPage.scss';
+@import 'containers/pageStyles/CaptchaPage.scss';
 
 body {
   position: relative;
@@ -120,10 +121,22 @@ a:hover {
 }
 
 .window-title {
-  font-size: 11px;
-  height: 35px;
+  padding-left: 16px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+  font-size: 10px;
+  height: 15px;
   background: #141619;
   border-bottom: 1px solid $color-23232A;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  text-align: left;
+  align-items: center;
+
+  &.icon-title {
+    padding-top: 4px;
+    height: 23px;
+  }
 }
 
 .gradient-box {
