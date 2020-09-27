@@ -7,10 +7,13 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 import Add from '@material-ui/icons/Add';
 import Email from '@material-ui/icons/Email';
 import CallMade from '@material-ui/icons/CallMade';
+import Refresh from '@material-ui/icons/Refresh';
+import Close from '@material-ui/icons/Close';
+import Key from '@material-ui/icons/VpnKey';
 import { Flash } from '../svgIcons/SvgIcons';
 
 export default function GroupActionButton(props) {
-  const { icon, actionHandler, text, style = {} } = props;
+  const { id, icon, actionHandler, text, style = {} } = props;
   let Icon;
 
   switch (icon) {
@@ -35,12 +38,21 @@ export default function GroupActionButton(props) {
     case 'callMade':
       Icon = CallMade;
       break;
+    case 'refresh':
+      Icon = Refresh;
+      break;
+    case 'close':
+      Icon = Close;
+      break;
+    case 'key':
+      Icon = Key;
+      break;
     default:
       break;
   }
   
   return (
-    <IconButton size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px', ...style }} onClick={actionHandler}>
+    <IconButton id={id} size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px', ...style }} onClick={actionHandler}>
       {icon && <Icon style={{ fontSize: text ? 12 : 24 }} />}
       {text && <span style={{ marginLeft: icon ? '10px' : '0' }}>{text}</span>}
     </IconButton>
