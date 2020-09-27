@@ -130,7 +130,7 @@ ipcMain.on('login', async (event, arg) => {
     db.account.insert({ date: new Date() });
   }
 
-  if (true || firstTime || daysPast < 4){
+  if (process.env.NODE_ENV === 'development' || firstTime || daysPast < 4){
     console.log('pinged');
     firstTime = false;
     loginWindow.hide();
