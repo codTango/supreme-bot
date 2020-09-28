@@ -1,0 +1,117 @@
+.checkout-list {
+  width: 22%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  overflow-x: hidden;
+
+  .user-info {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 9pt;
+
+    .info {
+      flex: 0 1 auto;
+      margin-right: 10px;
+      text-align: right;
+      padding-top: 5px;
+    }
+  }
+
+  .gradient-box {
+    height: 100%;
+
+    .info-area {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 32px;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+      overflow-y: scroll;
+
+      .no-data {
+        position: relative;
+        top: 40%;
+        color: $color-4E4E4E;
+        text-align: center;
+
+        h3 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 12px;
+          margin-top: 16px;
+        }
+      }
+
+      // override material ui snackbar
+      .MuiList-padding {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .MuiSnackbar-root.MuiSnackbar-anchorOriginBottomCenter {
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        position: relative !important;
+        padding-top: 10px;
+
+        .MuiPaper-root.MuiSnackbarContent-root {
+          max-width: 80% !important;
+          min-width: 80% !important;
+          box-shadow: none !important;
+          border-radius: 10px !important;
+          border: 1px solid $color-444450 !important;
+          background-color: $color-23232A !important;
+          margin-left: 8px;
+          margin-right: 8px;
+          cursor: pointer;
+
+          .MuiSnackbarContent-message {
+            width: 84%;
+
+            .message {
+              display: flex;
+              flex-direction: row;
+              line-height: 1;
+
+              .message-icon {
+                // flex: 1 1 auto;
+                margin-right: 8px;
+                display: flex;
+                align-items: center;
+
+                svg {
+                  display: block;
+                  margin: 0 auto;
+                }
+              }
+              .message-text {
+                flex: 1 1 auto;
+
+                .message-main {
+                  font-size: 11pt;
+                }
+                .message-secondary {
+                  margin-top: 5px;
+                  font-size: 7pt;
+                }
+              }
+            }
+          }
+        }
+
+        &.selected .MuiPaper-root {
+          border-color: #d9343e !important;
+        }
+
+        .MuiSnackbarContent-action {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
