@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { LineChart } from 'react-chartkick'
+import 'chart.js'
 import NumberFormat from 'react-number-format';
 import WarningIcon from '@material-ui/icons/Warning';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -65,7 +67,15 @@ export default function CheckoutContent(props): JSX.Element {
           <div className="window-title">
             <span>WEEKLY CHECKOUTS</span>
           </div>
-          box 3
+          <div className="chart-area">
+            <LineChart
+              height="100%"
+              colors={["#DE3E3E"]}
+              curve
+              data={{ "2020-01-01": 11, "2020-01-02": 6, "2020-02-02": 10, "2020-05-02": 16, "2020-05-05": 1 }}
+              library={{tooltips: { backgroundColor: '#D8D8D8', titleFontColor: '#17171B', bodyFontColor: '#17171B' }}}
+            />
+          </div>
         </div>
 
       </div>
