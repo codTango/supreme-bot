@@ -130,7 +130,7 @@ ipcMain.on('login', async (event, arg) => {
     db.account.insert({ date: new Date() });
   }
 
-  if (process.env.NODE_ENV === 'development' || firstTime || daysPast < 4){
+  if (process.env.NODE_ENV === 'development' || firstTime || daysPast < 6){
     console.log('pinged');
     firstTime = false;
     loginWindow.hide();
@@ -138,6 +138,8 @@ ipcMain.on('login', async (event, arg) => {
     mainWindow.focus();
 
     mainWindow.webContents.send('login success', { msg:'hello from main process' });
+  } else {
+    mainWindow.webContents.send('login failed', { msg:'expired!' });
   }
 
   event.returnValue = true;

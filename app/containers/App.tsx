@@ -14,6 +14,10 @@ export default function App(props: Props) {
     setTimeout(() => { setIsLoading(false); }, 3000);
   });
 
+  ipcRenderer.on('login failed', (event, data) => {
+    alert(data.msg);
+  });
+
   if (isLoading) {
     return (
       <div className="app-loading">
