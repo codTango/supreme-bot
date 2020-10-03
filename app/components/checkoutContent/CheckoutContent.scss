@@ -1,0 +1,79 @@
+.analytics-region {
+  width: 78%;
+  margin-left: 32px;
+
+  .gradient-box {
+    height: 100%;
+
+    .group-box {
+      margin-top: 15px;
+      margin-left: 25px;
+      margin-right: 25px;
+
+      &.update-info {
+        height: 56px;
+        background: linear-gradient(to right, #7d211f, #de3e3e, #772020);
+        display: flex;
+
+        svg {
+          margin: auto 24px;
+        }
+
+        .content-area {
+          flex: auto;
+          color: #fff;
+
+          .title {
+            margin-top: 12px;
+            font-size: 14px;
+          }
+
+          .content {
+            margin-top: 4px;
+            margin-bottom: 12px;
+            font-size: 10px;
+          }
+        }
+      }
+
+      &.region-1 {
+        height: 220px;
+
+        .overview-content {
+          margin-top: 24px;
+          margin-left: 16px;
+          margin-right: 16px;
+          display: flex;
+
+          .content-box {
+            flex: 1 1 0;
+            margin-left: 8px;
+            margin-right: 8px;
+            .title {
+              font-size: 10px;
+              color: #787878;
+            }
+
+            .status-box {
+              margin-top: 12px;
+              height: 68px;
+              border: 1px solid #8a8a8a;
+              border-radius: 12px;
+              padding: 16px;
+
+              .number {
+                margin-top: 8px;
+                font-size: 32px;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
+      &.region-2 {
+        height: 348px;
+      }
+    }
+  }
+}

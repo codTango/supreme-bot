@@ -51,7 +51,7 @@ export default function CheckoutList(props): JSX.Element {
                     open
                     autoHideDuration={null}
                     message={<MessageContent name={name} message={cardNum} />}
-                    onClick={() => {onSelect(id, false);}}
+                    onClick={() => {onSelect(id);}}
                     action={(
                       <IconButton
                         aria-label="close"
