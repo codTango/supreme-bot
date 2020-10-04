@@ -45,5 +45,9 @@
     margin-top: 17px;
 
     @import '../groupActionButton/GroupActionButton.scss';
+
+    .MuiIconButton-root {
+      margin: 0 13px;
+    }
   }
 }

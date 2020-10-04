@@ -12,8 +12,12 @@
       height: 280px;
 
       .window-title.icon-title {
+        .title {
+          display: inline-block;
+          margin-top: 10px;
+        }
         button {
-          transform: translateX(9vw);
+          float: right;
         }
       }
 
@@ -31,7 +35,7 @@
           @import 'components/groupActionButton/GroupActionButton.scss';
 
           .MuiIconButton-root {
-            margin: 0 12px;
+            margin: 0 9px;
           }
         }
 

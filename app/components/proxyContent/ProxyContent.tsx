@@ -51,14 +51,14 @@ export default function ProxyContent(props): JSX.Element {
                 </FormControl>
               </div>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={6}>
               <div className="form-container btn-container">
                 <FormControl fullWidth>
                   <GroupActionButton icon="save" text="Save Proxy Group" actionHandler={() => {}} />
                 </FormControl>
               </div>
             </Grid>
-            <Grid item xs={3} />
+            <Grid item xs={2} />
           </Grid>
         </div>
         <div className="region-content">

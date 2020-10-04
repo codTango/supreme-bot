@@ -158,10 +158,10 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1499,
-    height: 900,
-    minWidth: 1450,
-    minHeight: 800,
+    width: 1366,
+    height: 768,
+    minWidth: 1366,
+    minHeight: 768,
     frame: false,
     // webPreferences: { nodeIntegration: true }
     webPreferences: (process.env.NODE_ENV === 'development' ||

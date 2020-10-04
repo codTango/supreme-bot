@@ -11,7 +11,7 @@ export default function CaptchaContent(props) {
   return (
     <div className="group-box">
       <div className="window-title icon-title">
-        <span>CAPTCHA 1</span>
+        <div className="title">CAPTCHA 1</div>
         <IconButton size="small" onClick={() => { }}>
           <CloseIcon style={{color: '#de2e31', fontSize: 20}} />
         </IconButton>
