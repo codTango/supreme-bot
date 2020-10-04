@@ -60,6 +60,7 @@
       "dist/",
       "node_modules/",
       "app.html",
+      "login.html",
       "main.prod.js",
       "main.prod.js.map",
       "package.json"
@@ -97,7 +98,7 @@
       "output": "release"
     },
     "publish": {
-      "provider": "Connor Tang",
+      "provider": "github",
       "owner": "Connor Tang",
       "repo": "supreme-bot",
       "private": true
