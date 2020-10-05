@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
@@ -6,10 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { DateTime } from 'luxon';
 
 export default function ProxyList(props): JSX.Element {
-  const { proxies } = props;
-
-  const entries = proxies.map(n => ([ n.id, true ]));
-  const [open, setOpen] = useState(Object.fromEntries(entries));
+  const { selectedId, proxies, onClearAll, onSelect, onAddProxy, onRemoveProxy } = props;
 
   const hasProxy = () => {
     return proxies.length > 0;
@@ -34,7 +32,7 @@ export default function ProxyList(props): JSX.Element {
       <div className="gradient-box">
         <div className="window-title icon-title">
           <span className="title-text">PROXY GROUPS</span>
-          <IconButton size="small" onClick={() => {}}>
+          <IconButton size="small" onClick={onAddProxy}>
             <AddIcon style={{color: '#de2e31'}} />
           </IconButton>
         </div>
@@ -48,21 +46,21 @@ export default function ProxyList(props): JSX.Element {
           {hasProxy() && (
             <List>
               {proxies.map(n => {
-                const { id, name = '', proxyList = [], createdAt } = n;
+                const { _id: id, name = '', proxyList = [], createdAt } = n;
                 return (
                   <Snackbar
                     key={id}
-                    open={open[id]}
+                    open
                     autoHideDuration={null}
+                    className={id === selectedId ? 'selected' : ''}
                     message={<MessageContent name={name} count={proxyList.length} createdAt={createdAt} />}
+                    onClick={() => { onSelect(id); }}
                     action={(
                       <IconButton
                         aria-label="close"
                         color="inherit"
                         size="small"
-                        onClick={() => {
-                          setOpen({ ...open, [id]: false });
-                        }}
+                        onClick={() => { onRemoveProxy(id); }}
                       >
                         <CloseIcon fontSize="inherit" />
                       </IconButton>
@@ -73,7 +71,7 @@ export default function ProxyList(props): JSX.Element {
             </List>
           )}
         </div>
-        <div className="clear-all">CLEAR ALL</div>
+        <div className="clear-all" role="button" onClick={onClearAll}>CLEAR ALL</div>
       </div>
     </div>
   );

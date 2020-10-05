@@ -66,6 +66,7 @@ const db = {
   taskGroups: null,
   profiles: null,
   profileGroups: null,
+  proxy: null,
 };
 
 const initDb = () => {
@@ -73,6 +74,7 @@ const initDb = () => {
   db.taskGroups = dbFactory('taskGroups.db');
   db.profiles = dbFactory('profiles.db');
   db.profileGroups = dbFactory('profileGroups.db');
+  db.proxy = dbFactory('proxy.db');
 };
 
 ipcMain.on('insert', async (event, fileName, data) => {
