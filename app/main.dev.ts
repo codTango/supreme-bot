@@ -114,6 +114,7 @@ ipcMain.on('remove', async (event, fileName, query, options = {}) => {
 });
 
 ipcMain.on('login', async (event, arg) => {
+  // db.account.remove({}, { multi: true });
   const account = await db.account.findOne({});
   let daysPast = 0;
   let firstTime = false;

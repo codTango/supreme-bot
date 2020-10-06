@@ -80,7 +80,7 @@ export default function ProxyPage() {
         onRemoveProxy={handleRemoveProxy}
       />
       <ProxyContent
-        proxy={selectedProxy}
+        selectedProxy={selectedProxy}
         onSaveProxy={handleSaveProxy}
       />
     </div>

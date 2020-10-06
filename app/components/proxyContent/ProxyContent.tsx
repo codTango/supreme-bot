@@ -6,30 +6,41 @@ import GroupActionButton from '../groupActionButton/GroupActionButton';
 import VirtualizedList from '../virtualizedList/VirtualizedList';
 
 export default function ProxyContent(props): JSX.Element {
-  const { proxy } = props;
-
-  const [ name, setName ] = useState(proxy.name);
-  const [ proxyList, setProxyList ] = useState(proxy.proxyList);
-
+  // set proxy text area height
   const [ rows, setRows ] = useState(20);
   const [ windowHeight, setWindowHeight ] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
-      console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
+      // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
       const h = window.innerHeight;
       const rowN = Math.floor((h - 490) / 19);
-      console.log({ height: h, rows: rowN });
+      // console.log({ height: h, rows: rowN });
       setWindowHeight(h);
       setRows(rowN);
     };
     handleResize();
     window.addEventListener('resize', _.debounce(handleResize, 500));
-  }, [windowHeight])
+  }, [windowHeight]);
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  }
+  // set default state
+  const { selectedProxy, onSaveProxy } = props;
+  const [ proxy, setProxy ] = useState(selectedProxy);
+
+  useEffect(() => {
+    setProxy(selectedProxy);
+  }, [selectedProxy]);
+
+  const { name, proxyList } = proxy;
+  const handleChange = (key, value) => {
+    setProxy({ ...proxy, [key]: value });
+  };
+
+  // const handleSave = (value) => {
+  //   const list = proxyList.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
+  //   console.log(list);
+  //   setProxy({ ...proxy, list });
+  // }
 
   return (
     <div className="proxy-region">
@@ -43,10 +54,11 @@ export default function ProxyContent(props): JSX.Element {
               <div className="form-container">
                 <FormControl fullWidth>
                   <TextField
-                    id="profile-name-input"
-                    label="PROFILE NAME"
+                    id="proxy-name-input"
+                    label="PROXY NAME"
+                    InputLabelProps={{ shrink: name && name !== '' }}
                     value={name}
-                    onChange={handleNameChange}
+                    onChange={(event) => { handleChange('name', event.target.value); }}
                   />
                 </FormControl>
               </div>
@@ -54,7 +66,7 @@ export default function ProxyContent(props): JSX.Element {
             <Grid item xs={6}>
               <div className="form-container btn-container">
                 <FormControl fullWidth>
-                  <GroupActionButton icon="save" text="Save Proxy Group" actionHandler={() => {}} />
+                  <GroupActionButton icon="save" text="Save Proxy Group" actionHandler={() => { onSaveProxy(proxy); }} />
                 </FormControl>
               </div>
             </Grid>
@@ -73,6 +85,8 @@ export default function ProxyContent(props): JSX.Element {
                   multiline
                   variant="filled"
                   rows={rows}
+                  value={proxyList}
+                  onChange={(event) => { handleChange('proxyList', event.target.value); }}
                 />
               </FormControl>
             </div>
@@ -82,7 +96,7 @@ export default function ProxyContent(props): JSX.Element {
               <span>PROXY TESTING</span>
             </div>
             <div className="proxy-test-list">
-              <VirtualizedList list={proxyList} />
+              <VirtualizedList list={[]} />
             </div>
           </div>
         </div>
@@ -90,7 +104,7 @@ export default function ProxyContent(props): JSX.Element {
           <div className="btn-left">
             <div className="btn-1">
               <FormControl fullWidth>
-                <GroupActionButton icon="trash" text="Delete All" actionHandler={() => {}} />
+                <GroupActionButton icon="trash" text="Delete All" actionHandler={() => { handleChange('proxyList', ''); }} />
               </FormControl>
             </div>
           </div>
