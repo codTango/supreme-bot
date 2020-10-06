@@ -26,6 +26,7 @@ export default function ProxyContent(props): JSX.Element {
   // set default state
   const { selectedProxy, onSaveProxy } = props;
   const [ proxy, setProxy ] = useState(selectedProxy);
+  const [ testProxy, setTestProxy ] = useState([]);
 
   useEffect(() => {
     setProxy(selectedProxy);
@@ -36,11 +37,10 @@ export default function ProxyContent(props): JSX.Element {
     setProxy({ ...proxy, [key]: value });
   };
 
-  // const handleSave = (value) => {
-  //   const list = proxyList.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
-  //   console.log(list);
-  //   setProxy({ ...proxy, list });
-  // }
+  const handleTestSpeed = () => {
+    const list = proxyList.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
+    setTestProxy(list);
+  }
 
   return (
     <div className="proxy-region">
@@ -96,7 +96,7 @@ export default function ProxyContent(props): JSX.Element {
               <span>PROXY TESTING</span>
             </div>
             <div className="proxy-test-list">
-              <VirtualizedList list={[]} />
+              <VirtualizedList list={testProxy} />
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function ProxyContent(props): JSX.Element {
           <div className="btn-right">
             <div className="form-container btn-2">
               <FormControl fullWidth>
-                <GroupActionButton icon="flash" text="Test Speed" actionHandler={() => {}} />
+                <GroupActionButton icon="flash" text="Test Speed" actionHandler={handleTestSpeed} />
               </FormControl>
             </div>
             <div className="form-container btn-3">
