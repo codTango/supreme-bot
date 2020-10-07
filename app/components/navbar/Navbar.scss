@@ -5,7 +5,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #000000;
+  background-color: #000;
   overflow-x: hidden;
 
   .browser-buttons {
@@ -17,7 +17,9 @@
       visibility: visible;
     }
 
-    .close, .minimize, .zoom {
+    .close,
+    .minimize,
+    .zoom {
       font-size: 11px;
       line-height: 10px;
       margin-left: 14px;
@@ -28,7 +30,9 @@
       text-align: center;
     }
 
-    .closeButton, .minimizeButton, .zoomButton {
+    .closeButton,
+    .minimizeButton,
+    .zoomButton {
       visibility: hidden;
       cursor: default;
     }
@@ -50,7 +54,7 @@
         }
       }
     }
-    
+
     .minimize {
       background: #ffbd4c;
       border: 1px solid #e09e3e;
@@ -68,7 +72,7 @@
         }
       }
     }
-    
+
     .zoom {
       background: #00ca56;
       border: 1px solid #14ae46;
@@ -89,14 +93,14 @@
   }
 
   .menu {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 28px;
 
     .menu-item {
       margin-bottom: 30px;
 
       .menu-item-icon {
-        color: #444A58;
+        color: #444a58;
       }
 
       .selectionBar {
@@ -104,15 +108,58 @@
         display: none;
       }
 
-      .selected, .selected .menu-item-icon {
-        color: #DE3E3E;
+      .selected,
+      .selected .menu-item-icon {
+        color: #de3e3e;
 
         .selectionBar {
           display: inline-block;
         }
       }
-
     }
   }
 
+  .status {
+    position: absolute;
+    bottom: 80px;
+    margin-left: 19px;
+    margin-right: 19px;
+
+    .status-box {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #444a58;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 8px;
+      margin-bottom: 15px;
+
+      .dot {
+        margin: 15px auto 10px auto;
+        width: 5px;
+        height: 5px;
+        border: 1px solid #444a58;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .nav-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+
+    .social-icons {
+      margin-bottom: 10px;
+      svg {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+    .version {
+      color: #de3e3e;
+      font-size: 10px;
+    }
+  }
 }
