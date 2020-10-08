@@ -14,6 +14,7 @@ export default function TaskGroup(props) {
   const {
     groups = [],
     profileList = [],
+    proxyList = [],
     onSave,
     onDeleteGroup,
     onAddTasks,
@@ -104,6 +105,7 @@ export default function TaskGroup(props) {
         <GroupContent
           key={i}
           group={group}
+          proxyList={proxyList}
           onSave={onSave}
           onAddTask={() => { handleExpandTaskPanel(true, _id); }}
           onClearTaskList={() => { onClearTaskList(_id); }}

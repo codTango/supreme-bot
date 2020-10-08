@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
@@ -9,8 +10,8 @@ import { categoryList } from '../../constants/listValue';
 import shoe from '../../assets/shoe.png';
 
 export default function GroupContent(props) {
-  const { group, onSave, onAddTask, onClearTaskList } = props;
-  
+  const { group, proxyList, onSave, onAddTask, onClearTaskList } = props;
+
   // state of group
   const [ groupInfo, setGroupInfo ] = useState(group);
   const {
@@ -117,8 +118,12 @@ export default function GroupContent(props) {
                 onChange={(event) => { handleGroupInfoChange(event, 'proxy') }}
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
-                <MenuItem value={'shoes'}>Shoes</MenuItem>
-                <MenuItem value={'tshirt'}>T-shirt</MenuItem>
+                {proxyList.map((p) => {
+                  const { _id, name } = p;
+                  return (
+                    <MenuItem key={_id} value={name}>{name}</MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </div>

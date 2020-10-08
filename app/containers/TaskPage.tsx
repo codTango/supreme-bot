@@ -8,14 +8,17 @@ export default function TaskGroupPage() {
   // group list state
   const [ groups, setGroups ] = useState([]);
   const [ profileList, setProfileList ] = useState([]);
+  const [ proxyList, setProxyList ] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const groupsData = await db.find('taskGroups', {});
       const profilesData = await db.find('profiles', {});
       const profileGroupData = await db.find('profileGroups', {});
+      const proxyData = await db.find('proxy', {});
       setGroups(groupsData);
       setProfileList(profileGroupData.concat(profilesData));
+      setProxyList(proxyData);
     }
     
     fetchData();
@@ -106,6 +109,7 @@ export default function TaskGroupPage() {
         <TaskGroup
           groups={groups}
           profileList={profileList}
+          proxyList={proxyList}
           onSave={handleSaveUpdate}
           onDeleteGroup={handleDeleteGroup}
           onAddTasks={handleAddTasks}

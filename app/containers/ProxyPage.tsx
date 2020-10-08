@@ -11,8 +11,8 @@ export default function ProxyPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const profilesData = await db.find('proxy', {});
-      setProxies(profilesData);
+      const proxyData = await db.find('proxy', {});
+      setProxies(proxyData);
     }
     
     fetchData();
