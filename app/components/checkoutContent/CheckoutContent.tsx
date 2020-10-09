@@ -13,13 +13,14 @@ import { FormControl, TextField, Select, MenuItem, InputLabel, Grid, Checkbox, I
 import GroupActionButton from '../groupActionButton/GroupActionButton';
 
 export default function CheckoutContent(props): JSX.Element {
-  const { profileList = [], profileInfo, onSaveProfile, onRemoveProfile, onRemoveProfileGroup } = props;
-  const [ profile, setProfile ] = useState(profileInfo);
+  const { selectedCheckout } = props;
+  const [ checkout, setCheckout ] = useState(selectedCheckout);
 
+  useEffect(() => {
+    setCheckout(selectedCheckout);
+  }, [selectedCheckout]);
 
-  const handleChange = (key, value) => {
-    setProfile({ ...profile, [key]: value });
-  };
+  const { totalSpent, totalCheckouts, totalDeclines, checkoutList } = checkout;
 
   return (
     <div className="analytics-region">
@@ -44,21 +45,21 @@ export default function CheckoutContent(props): JSX.Element {
               <div className="title">TOTAL SPENT</div>
               <div className="status-box">
                 <AttachMoneyIcon style={{ fontSize: 16, color: '#8A8A8A' }} />
-                <div className="number"><NumberFormat thousandSeparator displayType={'text'} prefix={'$'} value={1123.45} /></div>
+                <div className="number"><NumberFormat thousandSeparator displayType={'text'} prefix={'$'} value={totalSpent} /></div>
               </div>
             </div>
             <div className="content-box">
               <div className="title">TOTAL CHECKOUTS</div>
               <div className="status-box" style={{ borderColor: '#00FFCF' }}>
                 <EmojiEmotionsIcon style={{ fontSize: 16, color: '#00FFCF' }} />
-                <div className="number">123</div>
+                <div className="number">{totalCheckouts}</div>
               </div>
             </div>
             <div className="content-box">
               <div className="title">TOTAL DECLINES</div>
               <div className="status-box" style={{ borderColor: '#DE3E3E' }}>
                 <BlockIcon style={{ fontSize: 16, color: '#DE3E3E' }} />
-                <div className="number">123</div>
+                <div className="number">{totalDeclines}</div>
               </div>
             </div>
           </div>
@@ -72,7 +73,7 @@ export default function CheckoutContent(props): JSX.Element {
               height="100%"
               colors={["#DE3E3E"]}
               curve
-              data={{ "2020-01-01": 11, "2020-01-02": 6, "2020-02-02": 10, "2020-05-02": 16, "2020-05-05": 1 }}
+              data={checkoutList}
               library={{tooltips: { backgroundColor: '#D8D8D8', titleFontColor: '#17171B', bodyFontColor: '#17171B' }}}
             />
           </div>

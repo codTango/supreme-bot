@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, IconButton, Snackbar } from '@material-ui/core';
@@ -16,6 +17,10 @@ export default function Notification(): JSX.Element {
 
   const hasNotification = () => {
     return notificatins.length > 0;
+  }
+
+  const handleClearAll = () => {
+    setNotification([]);
   }
 
   const MessageContent = (props) => {
@@ -78,7 +83,7 @@ export default function Notification(): JSX.Element {
               })}
             </List>
           )}
-          <div className="clear-all">CLEAR ALL</div>
+          <div className="clear-all" role="button" onClick={handleClearAll}>CLEAR ALL</div>
         </div>
       </div>
     </div>
