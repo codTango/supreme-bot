@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ipcRenderer, remote } from 'electron';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
@@ -8,6 +8,7 @@ import GroupActionButton from '../components/groupActionButton/GroupActionButton
 import LoginLogoIcon from '../assets/login-logo.png';
 
 export default function LoginPage() {
+  const [ key, setKey ] = useState('');
 
   const handleClose = () => {
     const win = remote.getCurrentWindow();
@@ -30,8 +31,8 @@ export default function LoginPage() {
               <TextField
                 id="activation-key-input"
                 label="ACTIVATION KEY"
-                value={''}
-                onChange={() => {}}
+                value={key}
+                onChange={(event) => { setKey(event.target.value) }}
               />
             </FormControl>
           </div>
@@ -61,7 +62,7 @@ export default function LoginPage() {
             </FormControl>
           </div>
           <div className="login-btn">
-            <GroupActionButton style={{ width: '150px', height: '35px' }} text="Activate" actionHandler={() => { ipcRenderer.sendSync('login', 'ping'); }} />
+            <GroupActionButton style={{ width: '150px', height: '35px' }} text="Activate" actionHandler={() => { ipcRenderer.sendSync('login', key); }} />
           </div>
         </div>
       </div>

@@ -115,33 +115,30 @@ ipcMain.on('remove', async (event, fileName, query, options = {}) => {
 
 ipcMain.on('login', async (event, arg) => {
   // db.account.remove({}, { multi: true });
-  const account = await db.account.findOne({});
+  const { date, key } = await db.account.findOne({});
   let daysPast = 0;
-  let firstTime = false;
   let msPast = 0;
 
-  if (account) {
-    const { date } = account;
-    const currentDate = new Date();
-    const diffTime = currentDate - date;
-    daysPast = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    msPast = Math.abs(diffTime);
-    console.log('days past: ', daysPast);
-    console.log('ms past: ', msPast);
+  if (key) {
+    if (date && key === arg) {
+      const currentDate = new Date();
+      const diffTime = currentDate - date;
+      daysPast = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      msPast = Math.abs(diffTime);
+      console.log('days past: ', daysPast);
+      console.log('ms past: ', msPast);
+    }
   } else {
-    firstTime = true;
-    db.account.insert({ date: new Date() });
+    db.account.insert({ date: new Date(), key: '4b1f4f61-fff0-484e-9d6d-e904488827f3' });
   }
 
-  if (process.env.NODE_ENV === 'development' || firstTime || daysPast < 6){
-    console.log('pinged');
-    firstTime = false;
+  if (process.env.NODE_ENV === 'development' || (daysPast < 6 && key === arg)){
     loginWindow.hide();
     mainWindow.show();
     mainWindow.focus();
 
     mainWindow.webContents.send('login success', { msg:'hello from main process' });
-  } else {
+  } else if (daysPast >= 6 && key === arg) {
     mainWindow.webContents.send('login failed', { msg:'expired!' });
   }
 
