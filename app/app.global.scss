@@ -216,3 +216,16 @@ a:hover {
   color: #c1c1c1;
   text-transform: none;
 }
+
+// override select menu
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-rounded {
+  background: #23232a;
+}
+
+.MuiList-root.MuiMenu-list {
+  background: #23232a;
+}
+
+.MuiListItem-root.MuiMenuItem-root {
+  color: #c1c1c1;
+}

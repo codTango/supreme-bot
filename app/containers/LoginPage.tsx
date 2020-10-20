@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { ipcRenderer, remote } from 'electron';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
@@ -18,7 +19,7 @@ export default function LoginPage() {
   return (
     <div className="login-page">
       <div className="title">
-        WELCOME TO MEKPREME
+        <div>WELCOME TO MEKPREME</div>
         <IconButton size="small" onClick={handleClose}>
           <CloseIcon style={{ fontSize: 18 }} />
         </IconButton>
@@ -66,7 +67,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <div className="dashboard">DASHBOARD</div>
+      <a href="#"><div className="dashboard">DASHBOARD</div></a>
     </div>
   );
 }

@@ -182,6 +182,7 @@ const createWindow = async () => {
     minWidth: 400,
     minHeight: 500,
     frame: false,
+    resizable: false,
     webPreferences:
       (process.env.NODE_ENV === 'development' ||
         process.env.E2E_BUILD === 'true') &&
