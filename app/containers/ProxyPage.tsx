@@ -44,10 +44,10 @@ export default function ProxyPage() {
     setSelectedProxy({});
   }
 
-  const handleClearAll = () => {
-    db.remove('proxy', {}, { multi: true });
-    setProxies([]);
-  }
+  // const handleClearAll = () => {
+  //   db.remove('proxy', {}, { multi: true });
+  //   setProxies([]);
+  // }
 
   const handleSaveProxy = async (proxy) => {
     const { _id } = proxy;
@@ -74,7 +74,6 @@ export default function ProxyPage() {
       <ProxyList
         selectedId={selectedId}
         proxies={proxies}
-        onClearAll={handleClearAll}
         onSelect={handleSelect}
         onAddProxy={handleAddProxy}
         onRemoveProxy={handleRemoveProxy}

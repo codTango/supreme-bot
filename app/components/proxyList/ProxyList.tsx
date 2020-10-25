@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { List, IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { DateTime } from 'luxon';
 
 export default function ProxyList(props): JSX.Element {
-  const { selectedId, proxies, onClearAll, onSelect, onAddProxy, onRemoveProxy } = props;
+  const { selectedId, proxies, onSelect, onAddProxy, onRemoveProxy } = props;
 
   const hasProxy = () => {
     return proxies.length > 0;
@@ -71,7 +71,6 @@ export default function ProxyList(props): JSX.Element {
             </List>
           )}
         </div>
-        <div className="clear-all" role="button" onClick={onClearAll}>CLEAR ALL</div>
       </div>
     </div>
   );

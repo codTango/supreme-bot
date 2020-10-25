@@ -26,19 +26,31 @@ export default function ProxyContent(props): JSX.Element {
   // set default state
   const { selectedProxy, onSaveProxy } = props;
   const [ proxy, setProxy ] = useState(selectedProxy);
+  const [ localList, setLocalList ] = useState('');
   const [ testProxy, setTestProxy ] = useState([]);
 
   useEffect(() => {
+    const { proxyList = [] } = selectedProxy;
+    const list = proxyList.join(',\n');
     setProxy(selectedProxy);
+    setLocalList(list);
+    setTestProxy([]);
   }, [selectedProxy]);
 
-  const { name, proxyList } = proxy;
+  const { name = '' } = proxy;
   const handleChange = (key, value) => {
     setProxy({ ...proxy, [key]: value });
   };
 
+  const handleListChange = (value) => {
+    const list = value.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
+
+    setLocalList(value);
+    setProxy({ ...proxy, proxyList: list });
+  }
+
   const handleTestSpeed = () => {
-    const list = proxyList.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
+    const list = localList.split(/[\n,]/).filter(v => v !== '').map(v => v.trim());
     setTestProxy(list);
   }
 
@@ -56,7 +68,7 @@ export default function ProxyContent(props): JSX.Element {
                   <TextField
                     id="proxy-name-input"
                     label="PROXY NAME"
-                    InputLabelProps={{ shrink: name && name !== '' }}
+                    InputLabelProps={{ shrink: name !== '' }}
                     value={name}
                     onChange={(event) => { handleChange('name', event.target.value); }}
                   />
@@ -85,8 +97,8 @@ export default function ProxyContent(props): JSX.Element {
                   multiline
                   variant="filled"
                   rows={rows}
-                  value={proxyList}
-                  onChange={(event) => { handleChange('proxyList', event.target.value); }}
+                  value={localList}
+                  onChange={(event) => { handleListChange(event.target.value); }}
                 />
               </FormControl>
             </div>
@@ -116,7 +128,7 @@ export default function ProxyContent(props): JSX.Element {
             </div>
             <div className="form-container btn-3">
               <FormControl fullWidth>
-                <GroupActionButton icon="trash" text="Delete Banned" actionHandler={() => {}} />
+                <GroupActionButton icon="trash" text="Delete Banned" actionHandler={() => { console.log('delete banned'); }} />
               </FormControl>
             </div>
           </div>
