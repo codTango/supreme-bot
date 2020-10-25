@@ -75,11 +75,12 @@
 
             .message {
               display: flex;
+              flex-wrap: wrap;
               flex-direction: row;
               line-height: 1;
 
               .message-icon {
-                // flex: 1 1 auto;
+                height: 30px;
                 margin-right: 8px;
                 display: flex;
                 align-items: center;
@@ -90,6 +91,7 @@
                 }
               }
               .message-text {
+                height: 30px;
                 flex: 1 1 auto;
 
                 .message-main {
@@ -98,6 +100,22 @@
                 .message-secondary {
                   margin-top: 5px;
                   font-size: 7pt;
+                }
+              }
+              .expand-text {
+                flex-basis: 100%;
+                height: 100px;
+
+                .message-detail {
+                  margin-top: 8px;
+                  font-size: 13px;
+                  color: #c1c1c1;
+
+                  .label {
+                    font-size: 11px;
+                    color: #787878;
+                    margin-right: 10px;
+                  }
                 }
               }
             }

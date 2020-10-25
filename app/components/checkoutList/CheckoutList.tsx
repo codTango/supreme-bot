@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { List, IconButton, Snackbar } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import visaIcon from '../../assets/visa-icon.png';
 
 export default function CheckoutList(props): JSX.Element {
@@ -13,16 +14,36 @@ export default function CheckoutList(props): JSX.Element {
   }
 
   const MessageContent = (prop) => {
-    const { name, message } = prop;
+    const { expand, name, date, mode, delay, color, size } = prop;
     return (
-      <div className="message">
+      <div className="message" style={{height: expand ? '120px' : 'inherit'}}>
         <div className="message-icon">
           <img alt="visa-icon" src={visaIcon} />
         </div>
         <div className="message-text">
           <div className="message-main">{name}</div>
-          <div className="message-secondary">{message}</div>
+          <div className="message-secondary">{date}</div>
         </div>
+        {expand && (
+          <div className="expand-text">
+            <div className="message-detail">
+              <span className="label">MODE:</span>
+              {mode}
+            </div>
+            <div className="message-detail">
+              <span className="label">CHECKOUT DELAY:</span>
+              {delay}
+            </div>
+            <div className="message-detail">
+              <span className="label">COLOR:</span>
+              {color}
+            </div>
+            <div className="message-detail">
+              <span className="label">SIZE:</span>
+              {size}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -43,14 +64,14 @@ export default function CheckoutList(props): JSX.Element {
           {hasCheckout() && (
             <List>
               {checkoutList.map(n => {
-                const { _id: id, name = '', cardNum = '' } = n;
+                const { _id: id, name = '', date = '', mode = '', checkoutDelay = '', color = '', size = '' } = n;
                 return (
                   <Snackbar
                     key={id}
                     className={id === selectedId ? 'selected' : ''}
                     open
                     autoHideDuration={null}
-                    message={<MessageContent name={name} message={cardNum} />}
+                    message={<MessageContent expand={id === selectedId} name={name} date={date} mode={mode} delay={checkoutDelay} color={color} size={size} />}
                     onClick={() => {onSelect(id);}}
                     action={(
                       <IconButton
@@ -59,7 +80,7 @@ export default function CheckoutList(props): JSX.Element {
                         size="small"
                         onClick={() => { onRemoveCheckout(id); }}
                       >
-                        <CloseIcon fontSize="inherit" />
+                        {id === selectedId ? <KeyboardArrowUp fontSize="inherit" /> : <KeyboardArrowDown fontSize="inherit" />}
                       </IconButton>
                     )}
                   />

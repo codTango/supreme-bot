@@ -7,20 +7,33 @@ import WarningIcon from '@material-ui/icons/Warning';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import BlockIcon from '@material-ui/icons/Block';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import { FormControl, TextField, Select, MenuItem, InputLabel, Grid, Checkbox, Icon } from '@material-ui/core';
-import GroupActionButton from '../groupActionButton/GroupActionButton';
+import { FormControl, Select, MenuItem } from '@material-ui/core';
 
 export default function CheckoutContent(props): JSX.Element {
-  const { selectedCheckout } = props;
-  const [ checkout, setCheckout ] = useState(selectedCheckout);
+  const { seasonList, upToDate = true } = props;
+  const [ seasonData, setSeasonData ] = useState(seasonList[0]);
+  const [ filterList, setFilterList ] = useState([]);
+  const [ filterValue, setFilterValue ] = useState('ALL');
 
   useEffect(() => {
-    setCheckout(selectedCheckout);
-  }, [selectedCheckout]);
+    const list = [];
+    seasonList.forEach(data => {
+      list.push(data.season);
+    });
+    setSeasonData(seasonList[0]);
+    setFilterList(list);
+  }, [seasonList]);
 
-  const { totalSpent, totalCheckouts, totalDeclines, checkoutList } = checkout;
+  const handleFilterChange = (event) => {
+    setFilterValue(event.target.value);
+    const selectedSeason = seasonList.find(d => d.season === event.target.value);
+    setSeasonData(selectedSeason);
+  }
+
+  const { totalSpent, totalCheckouts, totalDeclines, checkoutList } = seasonData;
 
   return (
     <div className="analytics-region">
@@ -29,16 +42,45 @@ export default function CheckoutContent(props): JSX.Element {
           <span>ANALYTICS</span>
         </div>
 
-        <div className="group-box update-info">
-          <WarningIcon style={{ fontSize: 18, color: '#FFFFFF' }} />
-          <div className="content-area">
-            <div className="title">MEKPreme update is available now</div>
-            <div className="content">CLICK HERE TO UPDATE TO V 1.1</div>
-          </div>
+        <div className="group-box update-info" style={{ background: upToDate ? '' : 'linear-gradient(to right, #7d211f, #de3e3e, #772020)' }}>
+          {upToDate ?
+            (
+              <>
+                <CheckCircleIcon style={{ fontSize: 18, color: '#00A4FF' }} />
+                <div className="content-area">
+                  <div className="title">MEKPreme is up-to-date</div>
+                  <div className="content">YOU ARE RUNNING THE LATEST VERSION OF MEKPREME (V1.0.0)</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <WarningIcon style={{ fontSize: 18, color: '#FFFFFF' }} />
+                <div className="content-area">
+                  <div className="title">MEKPreme update is available now</div>
+                  <div className="content">CLICK HERE TO UPDATE TO V 1.1</div>
+                </div>
+              </>
+          )}
         </div>
         <div className="group-box region-1">
           <div className="window-title">
-            <span>PERFORMANCE OVERVIEW</span>
+            <div className="title-label">PERFORMANCE OVERVIEW</div>
+            <div className="filter">
+              <FormControl fullWidth>
+                <Select
+                  disableUnderline
+                  id="store-select"
+                  displayEmpty
+                  value={filterValue}
+                  onChange={handleFilterChange}
+                  IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#DE3E3E'}} /> : <KeyboardArrowDown style={{color: '#DE3E3E'}} />)}
+                >
+                  {filterList.map(filter => (
+                    <MenuItem key={filter} value={filter}>{filter}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
           </div>
           <div className="overview-content">
             <div className="content-box">

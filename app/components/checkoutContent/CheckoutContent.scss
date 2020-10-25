@@ -12,7 +12,6 @@
 
       &.update-info {
         height: 56px;
-        background: linear-gradient(to right, #7d211f, #de3e3e, #772020);
         display: flex;
 
         svg {
@@ -38,6 +37,26 @@
 
       &.region-1 {
         height: 30%;
+
+        .window-title {
+          padding-top: 0;
+          height: 27px;
+
+          .title-label {
+            margin-top: 12px;
+            display: inline-block;
+          }
+
+          .filter {
+            float: right;
+            margin-right: 10px;
+            margin-top: 4px;
+
+            #store-select {
+              font-size: 12px;
+            }
+          }
+        }
 
         .overview-content {
           margin-top: 16px;
