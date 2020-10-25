@@ -27,6 +27,12 @@
           .switch-container {
             margin-top: 24px;
 
+            &.toogle {
+              .MuiSwitch-root {
+                margin: 0;
+              }
+            }
+
             .MuiFormControlLabel-root {
               margin-left: 0;
               .MuiTypography-root.MuiFormControlLabel-label {

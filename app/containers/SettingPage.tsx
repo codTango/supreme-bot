@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Grid, FormControl, TextField, FormControlLabel } from '@material-ui/core';
+import { Grid, FormControl, TextField, FormControlLabel, Typography } from '@material-ui/core';
 import GroupActionButton from '../components/groupActionButton/GroupActionButton';
 import { AntSwitchRed } from '../components/antSwitch/AntSwitch';
 
 export default function SettingPage() {
   const [ successOnly, setSuccessOnly ] = useState(true);
-  const [ autoRenew, setAutoRenew ] = useState(true);
+  const [ aycdToggle, setAycdToggle ] = useState(true);
 
   return (
     <div className="setting-region">
@@ -59,7 +59,7 @@ export default function SettingPage() {
                     <FormControl style={{ width: '60%', marginRight: '24px' }}>
                       <TextField
                         id="auth-key-input"
-                        label="AUTHORIZATION KEY"
+                        label="KEY TYPE"
                         value={''}
                         onChange={(event) => { }}
                       />
@@ -71,20 +71,14 @@ export default function SettingPage() {
                     </div>
                   </div>
                   <div className="button-group">
-                    <GroupActionButton id="renew-key" icon="key" text="Renew Key" actionHandler={() => {console.log('save webhook');}} />
+                    <GroupActionButton id="deactive-key" icon="key" text="Deactive Key" actionHandler={() => {console.log('deactive key');}} />
+                    <GroupActionButton id="renew-key" icon="key" text="Renew Key" actionHandler={() => {console.log('renew key');}} />
+                  </div>
+                  <div className="switch-container">
                     <div className="double-line-text">
                       <div>$60.00 USD</div>
                       <div>/6 MONTHS</div>
                     </div>
-                  </div>
-                  <div className="switch-container">
-                    <FormControl fullWidth>
-                      <FormControlLabel
-                        control={<AntSwitchRed checked={autoRenew} onChange={(event) => { setAutoRenew(event.target.checked) }} />}
-                        label="AUTO RENEW"
-                        labelPlacement="end"
-                      />
-                    </FormControl>
                   </div>
                 </div>
               </div>
@@ -115,8 +109,21 @@ export default function SettingPage() {
                       />
                     </FormControl>
                   </div>
-                  <div className="button-group">
+                  <div className="button-group" style={{ display: 'inline-block' }}>
                     <GroupActionButton icon="save" text="Save" actionHandler={() => {console.log('save');}} />
+                  </div>
+                  <div className="switch-container toogle" style={{ display: 'inline-block', marginTop: 0 }}>
+                    <FormControl>
+                      <Typography component="div">
+                        <Grid component="label" container alignItems="center" spacing={1}>
+                          <Grid item>Off</Grid>
+                          <Grid item>
+                            <AntSwitchRed checked={aycdToggle} onChange={(event) => { setAycdToggle(event.target.checked) }} />
+                          </Grid>
+                          <Grid item>On</Grid>
+                        </Grid>
+                      </Typography>
+                    </FormControl>
                   </div>
                 </div>
               </div>
@@ -129,6 +136,7 @@ export default function SettingPage() {
                 <div className="content-container">
                   <div className="button-group">
                     <GroupActionButton icon="close" text="Clear Logs" actionHandler={() => {console.log('clear logs');}} />
+                    <GroupActionButton icon="close" text="Logs Location" actionHandler={() => {console.log('logs location');}} />
                   </div>
                 </div>
               </div>
