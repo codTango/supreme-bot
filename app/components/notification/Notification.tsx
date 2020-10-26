@@ -7,17 +7,18 @@ import { CheckIcon } from '../svgIcons/SvgIcons';
 
 export default function Notification(props): JSX.Element {
   const { notificationProp = [] } = props;
-  const [ notificatins, setNotifications ] = useState(notificationProp);
-
-  useEffect(() => {
-    setNotifications(notificationProp);
-  }, [notificationProp]);
-
-  const entries = notificatins.map(n => ([ n.id, true ]));
+  const [ notifications, setNotifications ] = useState(notificationProp);
+  const entries = notificationProp.map(n => ([ n.id, true ]));
   const [open, setOpen] = useState(Object.fromEntries(entries));
 
+  useEffect(() => {
+    const newEntries = notificationProp.map(n => ([ n.id, true ]));
+    setNotifications(notificationProp);
+    setOpen(Object.fromEntries(newEntries));
+  }, [notificationProp]);
+
   const hasNotification = () => {
-    return notificatins.length > 0;
+    return notifications.length > 0;
   }
 
   const handleClearAll = () => {
@@ -36,7 +37,7 @@ export default function Notification(props): JSX.Element {
       </div>
     );
   }
-
+console.log(open);
   return (
     <div className="notification">
       <div className="user-info">
@@ -59,7 +60,7 @@ export default function Notification(props): JSX.Element {
           )}
           {hasNotification() && (
             <List>
-              {notificatins.map(n => {
+              {notifications.map(n => {
                 const { id, mainText = '', secondaryText = '' } = n;
                 return (
                   <Snackbar
@@ -90,3 +91,7 @@ export default function Notification(props): JSX.Element {
     </div>
   );
 }
+
+export const NotificationContext = React.createContext({
+  setNotification: (value) => {},
+});

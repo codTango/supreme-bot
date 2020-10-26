@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { ipcRenderer } from 'electron';
 import Navbar from '../components/navbar/Navbar';
 import Titlebar from '../components/titleBar/TitleBar';
-import Notification from '../components/notification/Notification';
+import Notification, { NotificationContext } from '../components/notification/Notification';
 import loading from '../assets/loading-logo.gif';
 
 const fakeNotification = [
@@ -11,10 +12,10 @@ const fakeNotification = [
   { id: 3, mainText: 'new', secondaryText: 'Successful order!' },
 ];
 
-export default function App(props: Props) {
+export default function App(props) {
   const { children } = props;
-
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ notification, setNotification ] = useState(fakeNotification);
 
   ipcRenderer.on('login success', (event, data) => {
     setTimeout(() => { setIsLoading(false); }, 3000);
@@ -23,6 +24,11 @@ export default function App(props: Props) {
   ipcRenderer.on('login failed', (event, data) => {
     alert(data.msg);
   });
+
+  const handleSetNotification = (value) => {
+    fakeNotification.push(value);
+    setNotification([...fakeNotification]);
+  }
 
   if (isLoading) {
     return (
@@ -36,10 +42,12 @@ export default function App(props: Props) {
     <>
       <Navbar />
       <Titlebar />
-      <Notification notificationProp={fakeNotification} />
-      <div className="main-region">
-        {children}
-      </div>
+      <Notification notificationProp={notification} />
+      <NotificationContext.Provider value={{ setNotification: handleSetNotification }}>
+        <div className="main-region">
+          {children}
+        </div>
+      </NotificationContext.Provider>
     </>
   );
 }

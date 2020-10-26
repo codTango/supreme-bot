@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import TaskGroupTitle from '../components/taskGroupTitle/TaskGroupTitle';
 import TaskGroup from '../components/taskGroup/TaskGroup';
+import { NotificationContext } from '../components/notification/Notification';
 import db from '../database/database';
 
 export default function TaskGroupPage() {
@@ -103,19 +104,26 @@ export default function TaskGroupPage() {
   }
   
   return (
-    <div className="task-group-region">
-      <div className="gradient-box">
-        <TaskGroupTitle onAddGroup={handleAddGroup} />
-        <TaskGroup
-          groups={groups}
-          profileList={profileList}
-          proxyList={proxyList}
-          onSave={handleSaveUpdate}
-          onDeleteGroup={handleDeleteGroup}
-          onAddTasks={handleAddTasks}
-          onClearTaskList={handleClearTaskList}
-        />
-      </div>
-    </div>
+    <NotificationContext.Consumer>
+      {({setNotification}) => (
+        <div className="task-group-region">
+          <div className="gradient-box">
+            <TaskGroupTitle onAddGroup={handleAddGroup} />
+            <TaskGroup
+              groups={groups}
+              profileList={profileList}
+              proxyList={proxyList}
+              onSave={(groupInfo) => {
+                handleSaveUpdate(groupInfo);
+                setNotification({ id: 4, mainText: 'Task Group Saved', secondaryText: 'Successful saved task group!' });
+              }}
+              onDeleteGroup={handleDeleteGroup}
+              onAddTasks={handleAddTasks}
+              onClearTaskList={handleClearTaskList}
+            />
+          </div>
+        </div>
+      )}
+    </NotificationContext.Consumer>
   );
 }
