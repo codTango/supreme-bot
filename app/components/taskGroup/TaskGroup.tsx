@@ -69,7 +69,7 @@ export default function TaskGroup(props) {
     }
 
     if (taskList.length > 0 && expandTaskList) {
-        return (<TaskList taskList={taskList} />);
+      return (<TaskList taskList={taskList} />);
     }
   }
 

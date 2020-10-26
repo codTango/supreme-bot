@@ -5,6 +5,12 @@ import Titlebar from '../components/titleBar/TitleBar';
 import Notification from '../components/notification/Notification';
 import loading from '../assets/loading-logo.gif';
 
+const fakeNotification = [
+  { id: 1, mainText: 'Check Email', secondaryText: 'Successful order completed!' },
+  { id: 2, mainText: 'Check Email', secondaryText: 'Successful order completed!Successful order completed!' },
+  { id: 3, mainText: 'new', secondaryText: 'Successful order!' },
+];
+
 export default function App(props: Props) {
   const { children } = props;
 
@@ -30,7 +36,7 @@ export default function App(props: Props) {
     <>
       <Navbar />
       <Titlebar />
-      <Notification />
+      <Notification notificationProp={fakeNotification} />
       <div className="main-region">
         {children}
       </div>

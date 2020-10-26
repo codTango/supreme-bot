@@ -5,12 +5,13 @@ import { Avatar, List, IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { CheckIcon } from '../svgIcons/SvgIcons';
 
-export default function Notification(): JSX.Element {
-  const [ notificatins, setNotification ] = useState([
-    { id: 1, mainText: 'Check Email', secondaryText: 'Successful order completed!' },
-    { id: 2, mainText: 'Check Email', secondaryText: 'Successful order completed!Successful order completed!' },
-    { id: 3, mainText: 'new', secondaryText: 'Successful order!' },
-  ]);
+export default function Notification(props): JSX.Element {
+  const { notificationProp = [] } = props;
+  const [ notificatins, setNotifications ] = useState(notificationProp);
+
+  useEffect(() => {
+    setNotifications(notificationProp);
+  }, [notificationProp]);
 
   const entries = notificatins.map(n => ([ n.id, true ]));
   const [open, setOpen] = useState(Object.fromEntries(entries));
@@ -20,11 +21,11 @@ export default function Notification(): JSX.Element {
   }
 
   const handleClearAll = () => {
-    setNotification([]);
+    setNotifications([]);
   }
 
-  const MessageContent = (props) => {
-    const { mainText, secondaryText } = props;
+  const MessageContent = (prop) => {
+    const { mainText, secondaryText } = prop;
     return (
       <div className="message">
         <div className="message-icon"><CheckIcon /></div>
