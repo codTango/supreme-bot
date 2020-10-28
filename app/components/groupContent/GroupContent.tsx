@@ -10,11 +10,12 @@ import { categoryList } from '../../constants/listValue';
 import shoe from '../../assets/shoe.png';
 
 export default function GroupContent(props) {
-  const { group, proxyList, onSave, onAddTask, onClearTaskList } = props;
+  const { group, proxyList, onSave, onAddTask, onClearTaskList, onDuplicate } = props;
 
   // state of group
   const [ groupInfo, setGroupInfo ] = useState(group);
   const {
+    _id,
     detail: {
       monitorDelay = '',
       checkoutDelay = '',
@@ -119,9 +120,9 @@ export default function GroupContent(props) {
                 IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
               >
                 {proxyList.map((p) => {
-                  const { _id, name } = p;
+                  const { _id: id, name } = p;
                   return (
-                    <MenuItem key={_id} value={name}>{name}</MenuItem>
+                    <MenuItem key={id} value={name}>{name}</MenuItem>
                   );
                 })}
               </Select>
@@ -140,6 +141,7 @@ export default function GroupContent(props) {
             <GroupActionButton icon="trash" actionHandler={onClearTaskList} />
             <GroupActionButton icon="play" actionHandler={() => {console.log('play action');}} />
             <GroupActionButton icon="plus" actionHandler={onAddTask} />
+            <GroupActionButton icon="duplicate" actionHandler={() => { onDuplicate(_id); }} />
           </div>
         </Grid>
       </Grid>

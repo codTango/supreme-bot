@@ -10,6 +10,7 @@ import CallMade from '@material-ui/icons/CallMade';
 import Refresh from '@material-ui/icons/Refresh';
 import Close from '@material-ui/icons/Close';
 import Key from '@material-ui/icons/VpnKey';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import { Flash } from '../svgIcons/SvgIcons';
 
 export default function GroupActionButton(props) {
@@ -46,6 +47,9 @@ export default function GroupActionButton(props) {
       break;
     case 'key':
       Icon = Key;
+      break;
+    case 'duplicate':
+      Icon = FileCopyIcon;
       break;
     default:
       break;

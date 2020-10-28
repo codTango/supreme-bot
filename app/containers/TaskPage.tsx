@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 import TaskGroupTitle from '../components/taskGroupTitle/TaskGroupTitle';
 import TaskGroup from '../components/taskGroup/TaskGroup';
 import { NotificationContext } from '../components/notification/Notification';
@@ -96,6 +97,13 @@ export default function TaskGroupPage() {
     handleSaveUpdate(selectedGroup);
   }
 
+  const handleDuplicate = async (id) => {
+    const data = await db.findOne('taskGroups', { _id: id });
+    delete data._id;
+    const res = await db.insert('taskGroups', { ...data });
+    setGroups([ ...groups, res ]);
+  }
+
   const handleClearTaskList = (groupId) => {
     const [ selectedGroup ] = groups.filter(group => group._id === groupId);
     selectedGroup.taskList = [];
@@ -115,10 +123,14 @@ export default function TaskGroupPage() {
               proxyList={proxyList}
               onSave={(groupInfo) => {
                 handleSaveUpdate(groupInfo);
-                setNotification({ id: 4, mainText: 'Task Group Saved', secondaryText: 'Successful saved task group!' });
+                setNotification({ id: uuid(), mainText: 'Task Group Saved', secondaryText: 'Successful saved task group!' });
               }}
               onDeleteGroup={handleDeleteGroup}
               onAddTasks={handleAddTasks}
+              onDuplicate={(id) => {
+                handleDuplicate(id);
+                setNotification({ id: uuid(), mainText: 'Task Group Duplicated', secondaryText: 'Successful duplicated task group!' });
+              }}
               onClearTaskList={handleClearTaskList}
             />
           </div>

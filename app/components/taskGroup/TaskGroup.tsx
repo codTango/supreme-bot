@@ -18,7 +18,8 @@ export default function TaskGroup(props) {
     onSave,
     onDeleteGroup,
     onAddTasks,
-    onClearTaskList
+    onClearTaskList,
+    onDuplicate
   } = props;
 
   // group expandTaskList state
@@ -109,6 +110,7 @@ export default function TaskGroup(props) {
           onSave={onSave}
           onAddTask={() => { handleExpandTaskPanel(true, _id); }}
           onClearTaskList={() => { onClearTaskList(_id); }}
+          onDuplicate={onDuplicate}
         />
 
         {renderContent(_id, name, taskList)}

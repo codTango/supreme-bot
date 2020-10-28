@@ -37,7 +37,7 @@ export default function Notification(props): JSX.Element {
       </div>
     );
   }
-console.log(open);
+
   return (
     <div className="notification">
       <div className="user-info">
