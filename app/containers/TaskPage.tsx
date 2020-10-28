@@ -91,7 +91,7 @@ export default function TaskGroupPage() {
       }
     }
 
-    selectedGroup.status.tasks += Number(taskQuantity);
+    selectedGroup.status.tasks += Number(taskQuantity * profileData.length);
 
     handleSaveUpdate(selectedGroup);
   }
