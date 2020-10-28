@@ -1,5 +1,5 @@
 .task-panel {
-  background: #000000;
+  background: #000;
   margin: 0 24px;
   width: auto;
   height: 200px;
@@ -24,7 +24,8 @@
     padding-top: 15px;
     height: 155px;
 
-    .row-1, .row-2 {
+    .row-1,
+    .row-2 {
       height: 70px;
     }
 
@@ -52,12 +53,16 @@
       .MuiTypography-root.MuiFormControlLabel-label {
         color: #787878;
         font-size: 12px;
-        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
         font-weight: 400;
         line-height: 1;
         letter-spacing: 0.00938em;
       }
-    }
 
+      .MuiButton-root:hover {
+        border-color: #db2626;
+        box-shadow: 0 4px 4px -1px rgba(219, 38, 38, 0.5);
+      }
+    }
   }
 }
