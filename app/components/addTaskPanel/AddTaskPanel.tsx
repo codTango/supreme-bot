@@ -15,8 +15,8 @@ export default function AddTaskPanel(props) {
     size: '',
     color: '',
     profile: '',
-    taskQuantity: 0,
-    itemQuantity: 0,
+    taskQuantity: 1,
+    itemQuantity: 1,
     bypass: false
   });
 
@@ -110,6 +110,7 @@ export default function AddTaskPanel(props) {
                 id="task-quantity-input"
                 label="TASK QUANTITY"
                 type="number"
+                InputProps={{ inputProps: { min: 1 } }}
                 value={taskQuantity}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, taskQuantity: event.target.value }) }}
               />
@@ -121,6 +122,7 @@ export default function AddTaskPanel(props) {
                 id="item-quantity-input"
                 label="ITEM QUANTITY"
                 type="number"
+                InputProps={{ inputProps: { min: 1 } }}
                 value={itemQuantity}
                 onChange={(event) => { setTaskInfo({ ...taskInfo, itemQuantity: event.target.value }) }}
               />
