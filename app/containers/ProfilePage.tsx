@@ -22,7 +22,7 @@ export default function ProfilePage() {
   }, []);
 
   const handleAddProfile = async () => {
-    const profile = { type: 'profile', name: '', cardNum: '', region: '', firstName: '', lastName: '', address1: '', address2: '', address3: '', city: '', state: '', zip: '', country: '', cardHolder: '', expMonth: '', expYear: '', cvv: '' };
+    const profile = { type: 'profile', name: '', cardNum: '', region: '', firstName: '', lastName: '', address1: '', address2: '', address3: '', city: '', state: '', zip: '', country: '', cardType: '', cardHolder: '', expMonth: '', expYear: '', cvv: '' };
     const res = await db.insert('profiles', profile);
     setProfiles([ ...profiles, res ]);
     setSelectedId(res._id);

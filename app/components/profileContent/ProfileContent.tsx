@@ -27,6 +27,7 @@ export default function ProfileContent(props): JSX.Element {
     zip = '',
     country = '',
     cardHolder = '',
+    cardType = '',
     cardNum = '',
     expMonth = '',
     expYear = '',
@@ -220,15 +221,38 @@ export default function ProfileContent(props): JSX.Element {
           </div>
           <div className="group-box region-3">
             <div className="input-area">
-              <div className="form-container" style={{ width: '50%' }}>
-                <FormControl fullWidth>
-                  <TextField
-                    id="cardholder-name-input"
-                    label="CARDHOLDER NAME"
-                    value={cardHolder}
-                    onChange={(event) => { handleChange('cardHolder', event.target.value); }}
-                  />
-                </FormControl>
+              <div className="form-container">
+                <Grid container justify="center">
+                  <Grid item xs={6}>
+                    <div style={{ marginRight: '24px' }}>
+                      <FormControl fullWidth>
+                        <TextField
+                          id="cardholder-name-input"
+                          label="CARDHOLDER NAME"
+                          value={cardHolder}
+                          onChange={(event) => { handleChange('cardHolder', event.target.value); }}
+                        />
+                      </FormControl>
+                    </div>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <FormControl fullWidth>
+                      <InputLabel id="card-type-select-label">CARD TYPE</InputLabel>
+                      <Select
+                        labelId="card-type-select-label"
+                        id="card-type-select"
+                        value={cardType}
+                        onChange={(event) => { handleChange('cardType', event.target.value); }}
+                        IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
+                      >
+                        <MenuItem value={'Visa'}>Visa</MenuItem>
+                        <MenuItem value={'Mastercard'}>Mastercard</MenuItem>
+                        <MenuItem value={'American Express'}>American Express</MenuItem>
+                        <MenuItem value={'Discover'}>Discover</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
               </div>
               <div className="form-container">
                 <FormControl fullWidth>
