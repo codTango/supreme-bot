@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import clsx from 'clsx';
@@ -74,6 +75,8 @@ class MuiVirtualizedTable extends React.PureComponent {
   };
 
   contentRenderer = (rowIndex, dataKey, cellData) => {
+    const { onBypassToggle } = this.props;
+
     if (dataKey === 'index') {
       return (
         <div className="index-row">
@@ -98,7 +101,7 @@ class MuiVirtualizedTable extends React.PureComponent {
       );
     }
     if (dataKey === 'bypass') {
-      return (<AntSwitch checked={cellData} />);
+      return (<AntSwitch checked={cellData} onChange={(event) => { onBypassToggle(rowIndex, event.target.checked); }} />);
     }
     if (dataKey === 'profile') {
       return cellData.name;
@@ -122,6 +125,17 @@ class MuiVirtualizedTable extends React.PureComponent {
     );
   };
 
+  headerCellRenderer = (label) => {
+    const { onBypassToggleBulk } = this.props;
+    if (label === 'BYPASS') {
+      return (
+        <span onClick={onBypassToggleBulk} style={{ cursor: 'pointer' }}>{label}</span>
+      );
+    }
+
+    return (<span>{label}</span>);
+  }
+
   headerRenderer = ({ label, columnIndex }) => {
     const { headerHeight, columns, classes } = this.props;
 
@@ -132,7 +146,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         variant="head"
         style={{ height: headerHeight }}
       >
-        <span>{label}</span>
+        {this.headerCellRenderer(label)}
       </TableCell>
     );
   };

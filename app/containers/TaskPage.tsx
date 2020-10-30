@@ -118,7 +118,7 @@ export default function TaskGroupPage() {
           <div className="gradient-box">
             <TaskGroupTitle onAddGroup={handleAddGroup} />
             <TaskGroup
-              groups={groups}
+              taskGroup={groups}
               profileList={profileList}
               proxyList={proxyList}
               onSave={(groupInfo) => {

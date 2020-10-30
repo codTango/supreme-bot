@@ -2,7 +2,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
@@ -12,7 +12,7 @@ import TaskList from '../taskList/taskList';
 
 export default function TaskGroup(props) {
   const {
-    groups = [],
+    taskGroup = [],
     profileList = [],
     proxyList = [],
     onSave,
@@ -22,16 +22,20 @@ export default function TaskGroup(props) {
     onDuplicate
   } = props;
 
+  const [ groups, setGroups ] = useState(taskGroup);
+
+  useEffect(() => {
+    setGroups(taskGroup);
+  }, [taskGroup]);
+
   // group expandTaskList state
   const [ expandTaskList, setExpandTaskList ] = useState(false);
   const [ openGroupId, setOpenGroupId ] = useState(-1);
   const [ expandTaskPanel, setExpandTaskPanel ] = useState(false);
 
   const handleExpandTaskList = (open, id, taskList) => {
-    // if (taskList.length > 0) {
-      setExpandTaskList(!open);
-      setOpenGroupId((!open || expandTaskPanel) ? id : -1);
-    // }
+    setExpandTaskList(!open);
+    setOpenGroupId((!open || expandTaskPanel) ? id : -1);
   }
 
   const handleExpandTaskPanel = (open, id) => {
@@ -46,6 +50,42 @@ export default function TaskGroup(props) {
     setOpenGroupId(-1);
   }
 
+  const handleBypassToggle = (id, index, value) => {
+    const group = groups.find(g => g._id === id);
+    const { taskList = [] } = group;
+    taskList[index].bypass = value;
+
+    setGroups([ ...groups, { ...group, taskList } ]);
+  }
+
+  const handleBypassToggleBulk = (id) => {
+    const group = groups.find(g => g._id === id);
+    const { taskList = [] } = group;
+    let isAllOn = true;
+    let newTaskList = [];
+    
+    for (let i = 0, len = taskList.length; i < len; i++) {
+      if (!taskList[i].bypass) {
+        isAllOn = false;
+        break;
+      }
+    }
+
+    if (isAllOn) {
+      newTaskList = taskList.map(l => {
+        l.bypass = false;
+        return l;
+      });
+    } else {
+      newTaskList = taskList.map(l => {
+        l.bypass = true;
+        return l;
+      });
+    }
+
+    setGroups([ ...groups, { ...group, taskList: newTaskList } ]);
+  }
+
   if (groups.length === 0) {
     return (
       <div className="no-data-container">
@@ -55,7 +95,8 @@ export default function TaskGroup(props) {
     );
   }
 
-  const renderContent = (id, name, taskList) => {
+  const renderContent = (group) => {
+    const { _id: id, name, taskList } = group;
     if (expandTaskPanel) {
       return (
         <AddTaskPanel
@@ -70,7 +111,13 @@ export default function TaskGroup(props) {
     }
 
     if (taskList.length > 0 && expandTaskList) {
-      return (<TaskList taskList={taskList} />);
+      return (
+        <TaskList
+          theGroup={group}
+          onBypassToggle={(index, value) => { handleBypassToggle(id, index, value); }}
+          onBypassToggleBulk={() => { handleBypassToggleBulk(id); }}
+        />
+      );
     }
   }
 
@@ -107,13 +154,13 @@ export default function TaskGroup(props) {
           key={i}
           group={group}
           proxyList={proxyList}
-          onSave={onSave}
+          onSave={(info) => { onSave(info); }}
           onAddTask={() => { handleExpandTaskPanel(true, _id); }}
           onClearTaskList={() => { onClearTaskList(_id); }}
           onDuplicate={onDuplicate}
         />
 
-        {renderContent(_id, name, taskList)}
+        {renderContent(group)}
       </div>
     );
   }

@@ -1,13 +1,17 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import VirtualizedTable from '../virtualizedTable/VirtualizedTable';
 
 export default function TaskList(props) {
-  const { taskList } = props;
+  const { theGroup, onBypassToggle, onBypassToggleBulk } = props;
+  const { taskList } = theGroup;
 
   return (
     <div className="task-list">
       <VirtualizedTable
+        onBypassToggle={onBypassToggle}
+        onBypassToggleBulk={onBypassToggleBulk}
         rowCount={taskList.length}
         rowGetter={({ index }) => taskList[index]}
         columns={[
