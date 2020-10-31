@@ -277,8 +277,18 @@ export default function ProfileContent(props): JSX.Element {
                           onChange={(event) => { handleChange('expMonth', event.target.value); }}
                           IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
                         >
-                          <MenuItem value={'region 1'}>region 1</MenuItem>
-                          <MenuItem value={'region 2'}>region 2</MenuItem>
+                          <MenuItem value={'01'}>01</MenuItem>
+                          <MenuItem value={'02'}>02</MenuItem>
+                          <MenuItem value={'03'}>03</MenuItem>
+                          <MenuItem value={'04'}>04</MenuItem>
+                          <MenuItem value={'05'}>05</MenuItem>
+                          <MenuItem value={'06'}>06</MenuItem>
+                          <MenuItem value={'07'}>07</MenuItem>
+                          <MenuItem value={'08'}>08</MenuItem>
+                          <MenuItem value={'09'}>09</MenuItem>
+                          <MenuItem value={'10'}>10</MenuItem>
+                          <MenuItem value={'11'}>11</MenuItem>
+                          <MenuItem value={'12'}>12</MenuItem>
                         </Select>
                       </FormControl>
                     </div>
@@ -294,8 +304,12 @@ export default function ProfileContent(props): JSX.Element {
                           onChange={(event) => { handleChange('expYear', event.target.value); }}
                           IconComponent={(prop) => (prop.className.includes('MuiSelect-iconOpen') ? <KeyboardArrowUp style={{color: '#787878'}} /> : <KeyboardArrowDown style={{color: '#787878'}} />)}
                         >
-                          <MenuItem value={'region 1'}>region 1</MenuItem>
-                          <MenuItem value={'region 2'}>region 2</MenuItem>
+                          <MenuItem value={'21'}>2021</MenuItem>
+                          <MenuItem value={'22'}>2022</MenuItem>
+                          <MenuItem value={'23'}>2023</MenuItem>
+                          <MenuItem value={'24'}>2024</MenuItem>
+                          <MenuItem value={'25'}>2025</MenuItem>
+                          <MenuItem value={'26'}>2026</MenuItem>
                         </Select>
                       </FormControl>
                     </div>
@@ -321,15 +335,15 @@ export default function ProfileContent(props): JSX.Element {
               <div style={{ display: 'flex' }}>
                 <div style={{ flex: '2 1 auto'}}>
                   <div className="name-label">CARD HOLDER</div>
-                  <div className="name">{'MIKE MEOW'}</div>
+                  <div className="name">{cardHolder}</div>
                 </div>
                 <div style={{ flex: '1 1 auto'}}>
                   <div className="expiration-label">VALID UNTIL</div>
-                  <div className="expiration">{'01/21'}</div>
+                  <div className="expiration">{(expMonth !== '' && expYear !== '') ? `${expMonth}/${expYear}` : ''}</div>
                 </div>
                 <div style={{ flex: '1 1 auto'}}>
                   <div className="cvv-label">CVV</div>
-                  <div className="cvv">{'123'}</div>
+                  <div className="cvv">{cvv}</div>
                 </div>
               </div>
             </div>
