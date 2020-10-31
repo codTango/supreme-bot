@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ProfileList from '../components/profileList/ProfileList';
 import ProfileContent from '../components/profileContent/ProfileContent';
+import ConfirmModal from '../components/confirmModal/ConfirmModal';
 import db from '../database/database';
 
 export default function ProfilePage() {
@@ -9,6 +10,8 @@ export default function ProfilePage() {
   const [ profileGroups, setProfileGroups ] = useState([]);
   const [ selectedId, setSelectedId ] = useState('');
   const [ selectedProfile, setSelectedProfile ] = useState({});
+
+  const [ confirmModalOpen, setConfirmModalOpen ] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,12 +62,23 @@ export default function ProfilePage() {
     setSelectedProfile({});
   }
 
-  const handleClearAll = () => {
+  const clearAll = () => {
     db.remove('profiles', {}, { multi: true });
     db.remove('profileGroups', {}, { multi: true });
     setProfiles([]);
     setProfileGroups([]);
   }
+
+  const handleClearAll = () => {
+    setConfirmModalOpen(true);
+  };
+
+  const handleConfirmationClose = (clear = false) => {
+    setConfirmModalOpen(false);
+    if (typeof clear === 'boolean' && clear) {
+      clearAll();
+    }
+  };
 
   const handleSelect = async (id, isGroup = false) => {
     let data = null;
@@ -135,6 +149,12 @@ export default function ProfilePage() {
         onSaveProfile={handleSaveProfile}
         onRemoveProfile={handleRemoveProfile}
         onRemoveProfileGroup={handleRemoveProfileGroup}
+      />
+      <ConfirmModal
+        modalOpen={confirmModalOpen}
+        title={'Are you sure?'}
+        content={'You\'ll lose all the profile and profile group content!'}
+        onModalClose={handleConfirmationClose}
       />
     </div>
   );
