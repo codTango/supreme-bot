@@ -27,7 +27,7 @@ export default function TaskGroupPage() {
   }, []);
   
   const handleAddGroup = async (groupInfo) => {
-    const data = { ...groupInfo, taskList: [], detail: {}, status: { tasks: 0, checkouts: 0, declines: 0} };
+    const data = { ...groupInfo, taskList: [], detail: {}, status: { tasks: 0, success: 0, carted: 0, queued: 0 } };
     const res = await db.insert('taskGroups', data);
     setGroups([ ...groups, res ]);
   }

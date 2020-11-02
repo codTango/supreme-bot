@@ -26,8 +26,9 @@ export default function GroupContent(props) {
     } = {},
     status: {
       tasks = 0,
-      checkouts = 0,
-      declines = 0
+      success = 0,
+      carted = 0,
+      queued = 0
     } = {}
   } = groupInfo;
 
@@ -133,8 +134,9 @@ export default function GroupContent(props) {
         <Grid item xs={4}>
           <div className="status-group">
             <Status label="TASKS" count={tasks} color="#C1C1C1" />
-            <Status label="CHECKOUTS" count={checkouts} color="#00FFCF" />
-            <Status label="DECLINES" count={declines} color="#DE3E3E" />
+            <Status label="CARTED" count={carted} color="#F3B81A" />
+            <Status label="QUEUED" count={queued} color="#B6A4FF" />
+            <Status label="SUCCESS" count={success} color="#00FFCF" />
           </div>
           <div className="group-actions">
             <GroupActionButton icon="save" actionHandler={handleSave} />
