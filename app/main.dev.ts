@@ -1,3 +1,6 @@
+/* eslint-disable promise/always-return */
+/* eslint-disable func-names */
+/* eslint-disable no-useless-return */
 /* eslint global-require: off, no-console: off */
 
 /**
@@ -11,7 +14,8 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import fs from 'fs';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import Datastore from 'nedb-promises';
@@ -143,6 +147,112 @@ ipcMain.on('login', async (event, arg) => {
   }
 
   event.returnValue = true;
+});
+
+ipcMain.on('import-profile', async (event) => {
+  let filepath = '';
+  let result;
+
+  if (process.platform !== 'darwin') {
+    dialog.showOpenDialog({
+      title: 'Select the File to be uploaded',
+      defaultPath: path.join(__dirname, '../'),
+      buttonLabel: 'Upload',
+      filters: [
+        {
+          name: 'Text Files',
+          extensions: ['json']
+        },
+      ],
+      properties: ['openFile']
+    }).then(file => {
+      if (!file.canceled) {
+        filepath = file.filePaths[0].toString();
+        if (filepath && filepath !== '') {
+          fs.readFile(filepath, 'utf-8', (err, data) => {
+            if(err){
+              console.error(`An error ocurred reading the file: ${err.message}`);
+              return;
+            }
+
+            result = data;
+            event.returnValue = result;
+          });
+        }
+      }
+    }).catch(err => {
+      console.log(err);
+      event.returnValue = false;
+    });
+  } else {
+    dialog.showOpenDialog({
+      title: 'Select the File to be uploaded',
+      defaultPath: path.join(__dirname, '../'),
+      buttonLabel: 'Upload',
+      filters: [
+        {
+          name: 'Text Files',
+          extensions: ['json']
+        },
+      ],
+      properties: ['openFile', 'openDirectory']
+    }).then(file => {
+      console.log(file.canceled);
+      if (!file.canceled) {
+        filepath = file.filePaths[0].toString();
+        if (filepath && filepath !== '') {
+          fs.readFile(filepath, 'utf-8', (err, data) => {
+            if(err){
+              console.error(`An error ocurred reading the file: ${err.message}`);
+              return;
+            }
+
+            result = data;
+            event.returnValue = result;
+          });
+        }
+      }
+    }).catch(err => {
+      console.log('error: ', err);
+      event.returnValue = false;
+    }); 
+  }
+
+});
+
+ipcMain.on('export-profile', async (event, content) => {
+  console.log('export profile');
+
+  dialog.showSaveDialog({
+    title: 'Select the File Path to save',
+    defaultPath: path.join(__dirname, '../assets/sample.json'),
+    buttonLabel: 'Save',
+    filters: [
+      {
+        name: 'Text Files',
+        extensions: ['json']
+      },
+    ],
+    properties: []
+  }).then(file => {
+    console.log(file.canceled);
+    if (!file.canceled) {
+      console.log(file.filePath.toString());
+
+      fs.writeFile(file.filePath.toString(),
+        content,
+        (err) => {
+          if (err) throw err;
+          console.log('Saved!');
+      });
+
+      return;
+    }
+  }).catch(err => { 
+    console.log(err);
+  }); 
+
+  event.returnValue = '';
 });
 
 /**

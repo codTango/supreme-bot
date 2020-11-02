@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
+import { ipcRenderer } from 'electron';
 import ProfileList from '../components/profileList/ProfileList';
 import ProfileContent from '../components/profileContent/ProfileContent';
 import ConfirmModal from '../components/confirmModal/ConfirmModal';
+import { NotificationContext } from '../components/notification/Notification';
 import db from '../database/database';
 
 export default function ProfilePage() {
@@ -130,32 +133,82 @@ export default function ProfilePage() {
     }
   }
 
+  const handleImportProfile = async (setNotification) => {
+    const content = ipcRenderer.sendSync('import-profile');
+
+    try {
+      if (content) {
+        const importContent = JSON.parse(content);
+        const profile = [];
+  
+        if (Array.isArray(importContent)) {
+          importContent.forEach(p => {
+            delete p._id;
+            if (p.type === 'profile') {
+              profile.push(p);
+            }
+          });
+        } else {
+          delete importContent._id;
+          profile.push(importContent);
+        }
+  
+  
+        const profileRes = await db.insert('profiles', profile);
+        if (profileRes) {
+          if (Array.isArray(profileRes)) {
+            setProfiles([ ...profiles, ...profileRes ]);
+          } else {
+            setProfiles([ ...profiles, profileRes ]);
+          }
+        }
+      }
+    } catch (error) {
+      setNotification({ id: uuid(), mainText: 'Error', secondaryText: error });
+    }
+
+  }
+
+  const handleExportProfile = async () => {
+    const profilesData = await db.find('profiles', {});
+    // const profileGroupData = await db.find('profileGroups', {});
+    // const content = profilesData.concat(profileGroupData);
+
+    ipcRenderer.sendSync('export-profile', JSON.stringify(profilesData));
+  }
+
   return (
-    <div className="profile-page">
-      <ProfileList
-        profiles={profiles}
-        profileGroup={profileGroups}
-        onAddProfile={handleAddProfile}
-        onAddProfileGroup={handleAddProfileGroup}
-        onRemoveProfile={handleRemoveProfile}
-        onRemoveProfileGroup={handleRemoveProfileGroup}
-        onClearAll={handleClearAll}
-        onSelect={handleSelect}
-        selectedId={selectedId}
-      />
-      <ProfileContent
-        profileList={profiles}
-        profileInfo={selectedProfile}
-        onSaveProfile={handleSaveProfile}
-        onRemoveProfile={handleRemoveProfile}
-        onRemoveProfileGroup={handleRemoveProfileGroup}
-      />
-      <ConfirmModal
-        modalOpen={confirmModalOpen}
-        title={'Are you sure?'}
-        content={'You\'ll lose all the profile and profile group content!'}
-        onModalClose={handleConfirmationClose}
-      />
-    </div>
+    <NotificationContext.Consumer>
+      {({setNotification}) => (
+        <div className="profile-page">
+          <ProfileList
+            profiles={profiles}
+            profileGroup={profileGroups}
+            onAddProfile={handleAddProfile}
+            onAddProfileGroup={handleAddProfileGroup}
+            onRemoveProfile={handleRemoveProfile}
+            onRemoveProfileGroup={handleRemoveProfileGroup}
+            onClearAll={handleClearAll}
+            onSelect={handleSelect}
+            selectedId={selectedId}
+            onImport={() => { handleImportProfile(setNotification); }}
+            onExport={handleExportProfile}
+          />
+          <ProfileContent
+            profileList={profiles}
+            profileInfo={selectedProfile}
+            onSaveProfile={handleSaveProfile}
+            onRemoveProfile={handleRemoveProfile}
+            onRemoveProfileGroup={handleRemoveProfileGroup}
+          />
+          <ConfirmModal
+            modalOpen={confirmModalOpen}
+            title={'Are you sure?'}
+            content={'You\'ll lose all the profile and profile group content!'}
+            onModalClose={handleConfirmationClose}
+          />
+        </div>
+      )}
+    </NotificationContext.Consumer>
   );
 }

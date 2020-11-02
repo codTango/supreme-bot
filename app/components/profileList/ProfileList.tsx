@@ -2,16 +2,28 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import { List, IconButton, Snackbar } from '@material-ui/core';
+import { List, IconButton, Snackbar, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import visaIcon from '../../assets/visa-icon.png';
-import { SquareStack } from '../svgIcons/SvgIcons';
+import { SquareStack, ImportIcon, ExportIcon } from '../svgIcons/SvgIcons';
 
 export default function ProfileList(props): JSX.Element {
-  const { profiles, profileGroup, onAddProfile, onAddProfileGroup, onRemoveProfile, onRemoveProfileGroup, onClearAll, onSelect, selectedId } = props;
+  const {
+    profiles,
+    profileGroup,
+    onAddProfile,
+    onAddProfileGroup,
+    onRemoveProfile,
+    onRemoveProfileGroup,
+    onClearAll,
+    onSelect,
+    selectedId,
+    onImport,
+    onExport
+  } = props;
 
   const hasProfile = () => {
-    return profiles.length > 0 || profileGroup.length > 0;
+    return (profiles && profiles.length > 0) || (profileGroup && profileGroup.length > 0);
   }
 
   const MessageContent = (prop) => {
@@ -32,12 +44,26 @@ export default function ProfileList(props): JSX.Element {
       <div className="gradient-box">
         <div className="window-title icon-title">
           <span className="title-text">PROFILES</span>
-          <IconButton size="small" onClick={onAddProfile}>
-            <AddIcon style={{color: '#de2e31'}} />
-          </IconButton>
-          <IconButton className="stack-btn" size="small" onClick={onAddProfileGroup}>
-            <SquareStack style={{ color: '#de2e31', fontSize: 14 }} />
-          </IconButton>
+          <Tooltip title="Add Profile">
+            <IconButton size="small" onClick={onAddProfile}>
+              <AddIcon style={{color: '#de2e31'}} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Add Profile Group">
+            <IconButton className="stack-btn" size="small" onClick={onAddProfileGroup}>
+              <SquareStack style={{ color: '#de2e31', fontSize: 14 }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Export Profile">
+            <IconButton className="export-btn" size="small" onClick={onExport}>
+              <ExportIcon style={{ color: '#de2e31' }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Import Profile">
+            <IconButton className="import-btn" size="small" onClick={onImport}>
+              <ImportIcon style={{ color: '#de2e31' }} />
+            </IconButton>
+          </Tooltip>
         </div>
         <div className="info-area">
           {!hasProfile() && (
@@ -56,7 +82,7 @@ export default function ProfileList(props): JSX.Element {
                     className={id === selectedId ? 'selected' : ''}
                     open
                     autoHideDuration={null}
-                    message={<MessageContent isGroup name={name} message={`${profileList.length} PROFILES`} />}
+                    message={<MessageContent isGroup name={name} message={`${profileList && profileList.length} PROFILES`} />}
                     onClick={() => {onSelect(id, true);}}
                     action={(
                       <IconButton
