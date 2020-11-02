@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import { List, IconButton, Snackbar, Tooltip } from '@material-ui/core';
+import { List, IconButton, Snackbar, Tooltip, Menu, MenuItem } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import visaIcon from '../../assets/visa-icon.png';
 import { SquareStack, ImportIcon, ExportIcon } from '../svgIcons/SvgIcons';
@@ -21,6 +21,26 @@ export default function ProfileList(props): JSX.Element {
     onImport,
     onExport
   } = props;
+
+  const [ menu, setMenu ] = useState({
+    mouseX: null,
+    mouseY: null,
+  });
+
+  const handleRightClick = (event) => {
+    event.preventDefault();
+    setMenu({
+      mouseX: event.clientX - 2,
+      mouseY: event.clientY - 4,
+    });
+  };
+
+  const handleMenuClose = () => {
+    setMenu({
+      mouseX: null,
+      mouseY: null,
+    });
+  };
 
   const hasProfile = () => {
     return (profiles && profiles.length > 0) || (profileGroup && profileGroup.length > 0);
@@ -107,22 +127,27 @@ export default function ProfileList(props): JSX.Element {
                     autoHideDuration={null}
                     message={<MessageContent name={name} message={cardNum} />}
                     onClick={() => {onSelect(id, false);}}
-                    action={(
-                      <IconButton
-                        aria-label="close"
-                        color="inherit"
-                        size="small"
-                        onClick={() => { onRemoveProfile(id); }}
-                      >
-                        <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    )}
+                    onContextMenu={handleRightClick}
                   />
                 );
               })}
             </List>
           )}
         </div>
+        <Menu
+          keepMounted
+          open={menu.mouseY !== null}
+          onClose={handleMenuClose}
+          anchorReference="anchorPosition"
+          anchorPosition={
+            menu.mouseY !== null && menu.mouseX !== null
+              ? { top: menu.mouseY, left: menu.mouseX }
+              : undefined
+          }
+        >
+          <MenuItem onClick={() => { console.log('duplicate'); handleMenuClose(); }}>Duplicate</MenuItem>
+          <MenuItem onClick={() => { console.log('delete'); handleMenuClose(); }}>Delete</MenuItem>
+        </Menu>
         <div className="clear-all" role="button" onClick={onClearAll}>CLEAR ALL</div>
       </div>
     </div>
