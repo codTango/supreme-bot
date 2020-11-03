@@ -11,7 +11,7 @@ import db from '../database/database';
 export default function ProfilePage() {
   const [ profiles, setProfiles ] = useState([]);
   const [ profileGroups, setProfileGroups ] = useState([]);
-  const [ selectedId, setSelectedId ] = useState('');
+  const [ selectedId, setSelectedId ] = useState([]);
   const [ selectedProfile, setSelectedProfile ] = useState({});
 
   const [ confirmModalOpen, setConfirmModalOpen ] = useState(false);
@@ -31,7 +31,7 @@ export default function ProfilePage() {
     const profile = { type: 'profile', name: '', cardNum: '', region: '', firstName: '', lastName: '', address1: '', address2: '', address3: '', city: '', state: '', zip: '', country: '', cardType: '', cardHolder: '', expMonth: '', expYear: '', cvv: '' };
     const res = await db.insert('profiles', profile);
     setProfiles([ ...profiles, res ]);
-    setSelectedId(res._id);
+    setSelectedId([ res._id ]);
     setSelectedProfile({ ...res });
   }
 
@@ -40,18 +40,15 @@ export default function ProfilePage() {
     if (profileGroups.length < 3) {
       const res = await db.insert('profileGroups', profileGroup);
       setProfileGroups([ ...profileGroups, res ]);
-      setSelectedId(res._id);
+      setSelectedId([ res._id ]);
       setSelectedProfile({ ...res });
     }
   }
 
-  const handleRemoveProfile = (id) => {
-    const index = profiles.findIndex(profile => profile._id === id);
-    db.remove('profiles', { _id: id });
-    setProfiles([
-      ...profiles.slice(0, index),
-      ...profiles.slice(index + 1)
-    ]);
+  const handleRemoveProfile = async (id) => {
+    const result = await db.remove('profiles', { _id: { $in: id } }, { multi: true });
+    const remainingProfiles = await db.find('profiles', {});
+    setProfiles(remainingProfiles);
     setSelectedProfile({});
   }
 
@@ -83,17 +80,23 @@ export default function ProfilePage() {
     }
   };
 
-  const handleSelect = async (id, isGroup = false) => {
+  const handleSelect = async (event, id, isGroup = false) => {
     let data = null;
-    if (isGroup) {
-      data = await db.findOne('profileGroups', { _id: id });
-    } else {
-      data = await db.findOne('profiles', { _id: id });
-    }
 
-    if (data) {
-      setSelectedId(id);
-      setSelectedProfile(data);
+    if (event.ctrlKey || event.metaKey) {
+      const ids = [ ...selectedId, id ];
+      setSelectedId(ids);
+    } else {
+      if (isGroup) {
+        data = await db.findOne('profileGroups', { _id: id });
+      } else {
+        data = await db.findOne('profiles', { _id: id });
+      }
+  
+      if (data) {
+        setSelectedId([ id ]);
+        setSelectedProfile(data);
+      }
     }
   }
 

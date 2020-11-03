@@ -42,6 +42,15 @@ export default function ProfileList(props): JSX.Element {
     });
   };
 
+  const handleDuplicate = () => {
+    handleMenuClose();
+  }
+
+  const handleDelete = () => {
+    onRemoveProfile(selectedId);
+    handleMenuClose();
+  }
+
   const hasProfile = () => {
     return (profiles && profiles.length > 0) || (profileGroup && profileGroup.length > 0);
   }
@@ -99,11 +108,11 @@ export default function ProfileList(props): JSX.Element {
                 return (
                   <Snackbar
                     key={`profile-group-${id}`}
-                    className={id === selectedId ? 'selected' : ''}
+                    className={selectedId.indexOf(id) > -1 ? 'selected' : ''}
                     open
                     autoHideDuration={null}
                     message={<MessageContent isGroup name={name} message={`${profileList && profileList.length} PROFILES`} />}
-                    onClick={() => {onSelect(id, true);}}
+                    onClick={(event) => {onSelect(event, id, true);}}
                     action={(
                       <IconButton
                         aria-label="close"
@@ -122,11 +131,11 @@ export default function ProfileList(props): JSX.Element {
                 return (
                   <Snackbar
                     key={`profile-${id}`}
-                    className={id === selectedId ? 'selected' : ''}
+                    className={selectedId.indexOf(id) > -1 ? 'selected' : ''}
                     open
                     autoHideDuration={null}
                     message={<MessageContent name={name} message={cardNum} />}
-                    onClick={() => {onSelect(id, false);}}
+                    onClick={(event) => {onSelect(event, id, false);}}
                     onContextMenu={handleRightClick}
                   />
                 );
@@ -145,8 +154,8 @@ export default function ProfileList(props): JSX.Element {
               : undefined
           }
         >
-          <MenuItem onClick={() => { console.log('duplicate'); handleMenuClose(); }}>Duplicate</MenuItem>
-          <MenuItem onClick={() => { console.log('delete'); handleMenuClose(); }}>Delete</MenuItem>
+          <MenuItem onClick={handleDuplicate}>Duplicate</MenuItem>
+          <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
         <div className="clear-all" role="button" onClick={onClearAll}>CLEAR ALL</div>
       </div>
