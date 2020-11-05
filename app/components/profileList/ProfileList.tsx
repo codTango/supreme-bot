@@ -13,6 +13,7 @@ export default function ProfileList(props): JSX.Element {
     profileGroup,
     onAddProfile,
     onAddProfileGroup,
+    onDuplicateProfile,
     onRemoveProfile,
     onRemoveProfileGroup,
     onClearAll,
@@ -43,6 +44,7 @@ export default function ProfileList(props): JSX.Element {
   };
 
   const handleDuplicate = () => {
+    onDuplicateProfile(selectedId);
     handleMenuClose();
   }
 

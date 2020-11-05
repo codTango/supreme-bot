@@ -45,6 +45,19 @@ export default function ProfilePage() {
     }
   }
 
+  const handleDuplicateProfile = async (id) => {
+    const selectedProfiles = profiles.filter(p => id.indexOf(p._id) > -1);
+    const duplicate = selectedProfiles.map(p => {
+      const { _id, ...dup } = p;
+      dup.name = `${dup.name} (copy)`;
+      return dup;
+    });
+
+    const res = await db.insert('profiles', duplicate);
+    setProfiles([ ...profiles, ...res ]);
+    setSelectedProfile({});
+  }
+
   const handleRemoveProfile = async (id) => {
     const result = await db.remove('profiles', { _id: { $in: id } }, { multi: true });
     const remainingProfiles = await db.find('profiles', {});
@@ -189,6 +202,7 @@ export default function ProfilePage() {
             profileGroup={profileGroups}
             onAddProfile={handleAddProfile}
             onAddProfileGroup={handleAddProfileGroup}
+            onDuplicateProfile={handleDuplicateProfile}
             onRemoveProfile={handleRemoveProfile}
             onRemoveProfileGroup={handleRemoveProfileGroup}
             onClearAll={handleClearAll}

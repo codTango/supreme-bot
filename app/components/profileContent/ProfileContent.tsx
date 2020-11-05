@@ -83,7 +83,7 @@ export default function ProfileContent(props): JSX.Element {
                   </div>
                   <div className="remove-btn">
                     <FormControl fullWidth>
-                      <GroupActionButton icon="trash" actionHandler={() => { onRemoveProfile(profile._id); }} />
+                      <GroupActionButton icon="trash" actionHandler={() => { onRemoveProfile([profile._id]); }} />
                     </FormControl>
                   </div>
                 </div>
