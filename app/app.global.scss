@@ -53,9 +53,13 @@ body {
 
   .app-loading {
     text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
 
     img {
       transform: translateY(100%);
+      -webkit-user-select: none;
+      user-select: none;
     }
   }
 }

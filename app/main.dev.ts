@@ -166,7 +166,9 @@ ipcMain.on('import-profile', async (event) => {
       ],
       properties: ['openFile']
     }).then(file => {
-      if (!file.canceled) {
+      if (file.canceled) {
+        event.returnValue = false;
+      } else {
         filepath = file.filePaths[0].toString();
         if (filepath && filepath !== '') {
           fs.readFile(filepath, 'utf-8', (err, data) => {
@@ -197,8 +199,9 @@ ipcMain.on('import-profile', async (event) => {
       ],
       properties: ['openFile', 'openDirectory']
     }).then(file => {
-      console.log(file.canceled);
-      if (!file.canceled) {
+      if (file.canceled) {
+        event.returnValue = false;
+      } else {
         filepath = file.filePaths[0].toString();
         if (filepath && filepath !== '') {
           fs.readFile(filepath, 'utf-8', (err, data) => {
@@ -235,8 +238,9 @@ ipcMain.on('export-profile', async (event, content) => {
     ],
     properties: []
   }).then(file => {
-    console.log(file.canceled);
-    if (!file.canceled) {
+    if (file.canceled) {
+      event.returnValue = 'canceled';
+    } else {
       console.log(file.filePath.toString());
 
       fs.writeFile(file.filePath.toString(),
