@@ -11,10 +11,11 @@ import Refresh from '@material-ui/icons/Refresh';
 import Close from '@material-ui/icons/Close';
 import Key from '@material-ui/icons/VpnKey';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import Tooltip from '../Tooltip/Tooltip';
 import { Flash } from '../svgIcons/SvgIcons';
 
 export default function GroupActionButton(props) {
-  const { id, icon, actionHandler, text, style = {} } = props;
+  const { id, icon, actionHandler, text, style = {}, tooltip = '' } = props;
   let Icon;
 
   switch (icon) {
@@ -55,6 +56,17 @@ export default function GroupActionButton(props) {
       break;
   }
   
+  if (tooltip !== '') {
+    return (
+      <Tooltip title={tooltip}>
+        <IconButton id={id} size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px', ...style }} onClick={actionHandler}>
+          {icon && <Icon style={{ fontSize: text ? 12 : 24 }} />}
+          {text && <span style={{ marginLeft: icon ? '10px' : '0' }}>{text}</span>}
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
   return (
     <IconButton id={id} size={text ? 'medium' : 'small'} style={{ padding: text ? '10px 24px' : '5px', ...style }} onClick={actionHandler}>
       {icon && <Icon style={{ fontSize: text ? 12 : 24 }} />}

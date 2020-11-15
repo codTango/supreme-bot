@@ -43,9 +43,9 @@ export default function CaptchaContent(props) {
           </FormControl>
         </div>
         <div className="button-group">
-          <GroupActionButton icon="email" actionHandler={() => {console.log('email');}} />
-          <GroupActionButton icon="save" actionHandler={() => {console.log('save');}} />
-          <GroupActionButton icon="callMade" actionHandler={() => {console.log('callMade');}} />
+          <GroupActionButton tooltip="Gmail" icon="email" actionHandler={() => {console.log('email');}} />
+          <GroupActionButton tooltip="Save" icon="save" actionHandler={() => {console.log('save');}} />
+          <GroupActionButton tooltip="Open" icon="callMade" actionHandler={() => {console.log('callMade');}} />
         </div>
         <div className="clear-cookies">CLEAR COOKIES</div>
       </div>

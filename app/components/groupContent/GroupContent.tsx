@@ -139,11 +139,11 @@ export default function GroupContent(props) {
             <Status label="SUCCESS" count={success} color="#00FFCF" />
           </div>
           <div className="group-actions">
-            <GroupActionButton icon="save" actionHandler={handleSave} />
-            <GroupActionButton icon="trash" actionHandler={onClearTaskList} />
-            <GroupActionButton icon="play" actionHandler={() => {console.log('play action');}} />
-            <GroupActionButton icon="plus" actionHandler={onAddTask} />
-            <GroupActionButton icon="duplicate" actionHandler={() => { onDuplicate(_id); }} />
+            <GroupActionButton tooltip="save" icon="save" actionHandler={handleSave} />
+            <GroupActionButton tooltip="clear all" icon="trash" actionHandler={onClearTaskList} />
+            <GroupActionButton tooltip="start" icon="play" actionHandler={() => {console.log('play action');}} />
+            <GroupActionButton tooltip="add task" icon="plus" actionHandler={onAddTask} />
+            <GroupActionButton tooltip="duplicate" icon="duplicate" actionHandler={() => { onDuplicate(_id); }} />
           </div>
         </Grid>
       </Grid>

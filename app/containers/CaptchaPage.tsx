@@ -2,6 +2,7 @@ import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { IconButton, Grid } from '@material-ui/core';
 import CaptchaContent from '../components/captchaContent/CaptchaContent';
+import Tooltip from '../components/Tooltip/Tooltip';
 
 export default function CaptchaPage() {
   return (
@@ -9,9 +10,11 @@ export default function CaptchaPage() {
       <div className="gradient-box">
         <div className="window-title icon-title">
           <span>CAPTCHA</span>
-          <IconButton size="small" onClick={() => { }}>
-            <AddIcon style={{color: '#de2e31'}} />
-          </IconButton>
+          <Tooltip title="add">
+            <IconButton size="small" onClick={() => { }}>
+              <AddIcon style={{color: '#de2e31'}} />
+            </IconButton>
+          </Tooltip>
         </div>
 
         <div className="captcha-container">

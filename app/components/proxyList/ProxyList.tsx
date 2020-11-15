@@ -5,6 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { List, IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { DateTime } from 'luxon';
+import Tooltip from '../Tooltip/Tooltip';
 
 export default function ProxyList(props): JSX.Element {
   const { selectedId, proxies, onSelect, onAddProxy, onRemoveProxy } = props;
@@ -32,9 +33,11 @@ export default function ProxyList(props): JSX.Element {
       <div className="gradient-box">
         <div className="window-title icon-title">
           <span className="title-text">PROXY GROUPS</span>
-          <IconButton size="small" onClick={onAddProxy}>
-            <AddIcon style={{color: '#de2e31'}} />
-          </IconButton>
+          <Tooltip title="add">
+            <IconButton size="small" onClick={onAddProxy}>
+              <AddIcon style={{color: '#de2e31'}} />
+            </IconButton>
+          </Tooltip>
         </div>
         <div className="info-area">
           {!hasProxy() && (

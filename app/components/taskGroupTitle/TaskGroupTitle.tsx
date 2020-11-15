@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { IconButton, FormControl, TextField, Select, MenuItem, InputLabel, Button } from '@material-ui/core';
+import Tooltip from '../Tooltip/Tooltip';
 
 export default function TaskGroupTitle(props): JSX.Element {
   const { onAddGroup } = props;
@@ -39,9 +40,11 @@ export default function TaskGroupTitle(props): JSX.Element {
     <div className="task-group-title-bar">
       <div className="title-area">
         <span className="title-text">TASK GROUPS</span>
-        <IconButton size="small" onClick={() => { handleExpandTitle(titleOpen) }}>
-          {titleOpen ? <KeyboardArrowUp style={{color: '#de2e31'}} /> : <AddIcon style={{color: '#de2e31'}} />}
-        </IconButton>
+        <Tooltip title="add">
+          <IconButton size="small" onClick={() => { handleExpandTitle(titleOpen) }}>
+            {titleOpen ? <KeyboardArrowUp style={{color: '#de2e31'}} /> : <AddIcon style={{color: '#de2e31'}} />}
+          </IconButton>
+        </Tooltip>
       </div>
 
       {titleOpen && (

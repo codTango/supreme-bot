@@ -26,8 +26,8 @@ export default function SettingPage() {
                   <div className="form-container">
                     <FormControl fullWidth>
                       <TextField
-                        id="proxy-group-name-input"
-                        label="PROXY GROUP NAME"
+                        id="Webhook"
+                        label="Webhook"
                         value={''}
                         onChange={(event) => { }}
                       />
@@ -60,7 +60,8 @@ export default function SettingPage() {
                       <TextField
                         id="auth-key-input"
                         label="KEY TYPE"
-                        value={''}
+                        value={'key type displays here'}
+                        disabled
                         onChange={(event) => { }}
                       />
                     </FormControl>
@@ -135,8 +136,8 @@ export default function SettingPage() {
                 </div>
                 <div className="content-container">
                   <div className="button-group">
-                    <GroupActionButton icon="close" text="Clear Logs" actionHandler={() => {console.log('clear logs');}} />
-                    <GroupActionButton icon="close" text="Logs Location" actionHandler={() => {console.log('logs location');}} />
+                    <GroupActionButton icon="close" text="Back up" actionHandler={() => {console.log('Back up');}} />
+                    <GroupActionButton icon="close" text="Restore" actionHandler={() => {console.log('restore');}} />
                   </div>
                 </div>
               </div>

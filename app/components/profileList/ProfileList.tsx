@@ -2,8 +2,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import { List, IconButton, Snackbar, Tooltip, Menu, MenuItem } from '@material-ui/core';
+import { List, IconButton, Snackbar, Menu, MenuItem } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import Tooltip from '../Tooltip/Tooltip';
 import visaIcon from '../../assets/visa-icon.png';
 import { SquareStack, ImportIcon, ExportIcon } from '../svgIcons/SvgIcons';
 
@@ -58,7 +59,7 @@ export default function ProfileList(props): JSX.Element {
   }
 
   const MessageContent = (prop) => {
-    const { isGroup = false, name, message } = prop;
+    const { isGroup = false, name, message = '' } = prop;
     return (
       <div className="message">
         <div className="message-icon">{isGroup ? <SquareStack style={{ color: '#de2e31', fontSize: 18 }} /> : <img alt="visa-icon" src={visaIcon} />}</div>
@@ -136,7 +137,7 @@ export default function ProfileList(props): JSX.Element {
                     className={selectedId.indexOf(id) > -1 ? 'selected' : ''}
                     open
                     autoHideDuration={null}
-                    message={<MessageContent name={name} message={cardNum} />}
+                    message={<MessageContent name={name} message={cardNum !== '' ? `****${cardNum.substring(cardNum.length - 4)}` : ''} />}
                     onClick={(event) => {onSelect(event, id, false);}}
                     onContextMenu={handleRightClick}
                   />

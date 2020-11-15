@@ -78,12 +78,12 @@ export default function ProfileContent(props): JSX.Element {
                 <div className="profile-group-actions">
                   <div className="save-btn">
                     <FormControl fullWidth>
-                      <GroupActionButton icon="save" actionHandler={() => { onSaveProfile(profile, false); }} />
+                      <GroupActionButton tooltip="save" icon="save" actionHandler={() => { onSaveProfile(profile, false); }} />
                     </FormControl>
                   </div>
                   <div className="remove-btn">
                     <FormControl fullWidth>
-                      <GroupActionButton icon="trash" actionHandler={() => { onRemoveProfile([profile._id]); }} />
+                      <GroupActionButton tooltip="delete" icon="trash" actionHandler={() => { onRemoveProfile([profile._id]); }} />
                     </FormControl>
                   </div>
                 </div>
