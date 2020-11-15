@@ -71,6 +71,7 @@ const db = {
   profiles: null,
   profileGroups: null,
   proxy: null,
+  harvester: null
 };
 
 const initDb = () => {
@@ -79,6 +80,7 @@ const initDb = () => {
   db.profiles = dbFactory('profiles.db');
   db.profileGroups = dbFactory('profileGroups.db');
   db.proxy = dbFactory('proxy.db');
+  db.harvester = dbFactory('harvester.db');
 };
 
 ipcMain.on('insert', async (event, fileName, data) => {

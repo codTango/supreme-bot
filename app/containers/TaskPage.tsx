@@ -32,10 +32,10 @@ export default function TaskGroupPage() {
     setGroups([ ...groups, res ]);
   }
 
-  const handleSaveUpdate = (groupInfo) => {
+  const handleSaveUpdate = async (groupInfo) => {
     const { _id } = groupInfo;
 
-    const res = db.update('taskGroups', { _id }, groupInfo, { returnUpdatedDocs: true });
+    const res = await db.update('taskGroups', { _id }, groupInfo, { returnUpdatedDocs: true });
 
     const newGroups = groups.map((item, i) => {
       if (item._id !== _id) {
