@@ -17,7 +17,8 @@ export default function AddTaskPanel(props) {
     profile: '',
     taskQuantity: 1,
     itemQuantity: 1,
-    bypass: false
+    bypass: false,
+    status: 'Adding to Cart'
   });
 
   const {

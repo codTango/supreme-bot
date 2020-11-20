@@ -70,7 +70,8 @@ export default function TaskGroupPage() {
       profile,
       taskQuantity,
       itemQuantity,
-      bypass
+      bypass,
+      status
     } = taskInfo;
     const [ selectedGroup ] = groups.filter(group => group._id === groupId);
 
@@ -87,7 +88,8 @@ export default function TaskGroupPage() {
           color,
           profile: profileData[j],
           itemQuantity,
-          bypass
+          bypass,
+          status
         });
       }
     }

@@ -42,29 +42,28 @@ const styles = (theme) =>
     },
   });
 
-const getStatusColor = (status) => {
-  let color;
-  switch (String(status).toLocaleLowerCase()) {
-    case 'check email':
-      color = '#30C9AC';
-      break;
-    case 'processing':
-      color = '#B6A4FF';
-      break;
-    case 'adding to cart':
-      color = '#F3B81A';
-      break;
-    case 'declined':
-      color = '#DA2C12';
-      break;
-    default:
-      break;
-  }
-
-  return color;
-}
-
 class MuiVirtualizedTable extends React.PureComponent {
+  addStatusColor = (status) => {
+    let color;
+    switch (String(status).toLocaleLowerCase()) {
+      case 'check email':
+        color = '#30C9AC';
+        break;
+      case 'processing':
+        color = '#B6A4FF';
+        break;
+      case 'adding to cart':
+        color = '#F3B81A';
+        break;
+      case 'declined':
+        color = '#DA2C12';
+        break;
+      default:
+        break;
+    }
+  
+    return (<span style={{ color }}>{status}</span>);
+  };
 
   getRowClassName = ({ index }) => {
     const { classes, onRowClick } = this.props;
@@ -76,38 +75,51 @@ class MuiVirtualizedTable extends React.PureComponent {
 
   contentRenderer = (rowIndex, dataKey, cellData) => {
     const { onBypassToggle } = this.props;
+    let cellContent = cellData;
 
-    if (dataKey === 'index') {
-      return (
-        <div className="index-row">
-          <StatusIcon style={{ color: 'red' }} />
-          <span>{rowIndex}</span>
-        </div>
-      );
-    }
-    if (dataKey === 'action') {
-      return (
-        <div>
-          <IconButton size="small">
-            <PlayArrowIcon style={{ fontSize: 18 }} />
-          </IconButton>
-          <IconButton size="small">
-            <CloseIcon style={{ fontSize: 18 }} />
-          </IconButton>
-          <IconButton size="small">
-            <StopIcon style={{ fontSize: 18 }} />
-          </IconButton>
-        </div>
-      );
-    }
-    if (dataKey === 'bypass') {
-      return (<AntSwitch checked={cellData} onChange={(event) => { onBypassToggle(rowIndex, event.target.checked); }} />);
-    }
-    if (dataKey === 'profile') {
-      return cellData.name;
+    switch (dataKey) {
+      case 'index':
+        cellContent = (
+          <div className="index-row">
+            <StatusIcon style={{ color: 'red' }} />
+            <span>{rowIndex}</span>
+          </div>
+        );
+        break;
+      case 'action':
+        cellContent = (
+          <div>
+            <IconButton size="small">
+              <PlayArrowIcon style={{ fontSize: 18 }} />
+            </IconButton>
+            <IconButton size="small">
+              <CloseIcon style={{ fontSize: 18 }} />
+            </IconButton>
+            <IconButton size="small">
+              <StopIcon style={{ fontSize: 18 }} />
+            </IconButton>
+          </div>
+        );
+        break;
+      case 'bypass':
+        cellContent = (
+          <AntSwitch
+            checked={cellData}
+            onChange={(event) => { onBypassToggle(rowIndex, event.target.checked); }}
+          />
+        );
+        break;
+      case 'profile':
+        cellContent = cellData.name;
+        break;
+      case 'status':
+        cellContent = this.addStatusColor(cellData);
+        break;
+      default:
+        break;
     }
 
-    return cellData;
+    return cellContent;
   };
 
   cellRenderer = (cell) => {
